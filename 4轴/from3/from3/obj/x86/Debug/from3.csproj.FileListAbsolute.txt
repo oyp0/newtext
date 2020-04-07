@@ -1,0 +1,8 @@
+C:\Users\Administrator\Desktop\C#\4轴\from3\from3\obj\x86\Debug\from3.Form1.resources
+C:\Users\Administrator\Desktop\C#\4轴\from3\from3\obj\x86\Debug\from3.Form2.resources
+C:\Users\Administrator\Desktop\C#\4轴\from3\from3\obj\x86\Debug\from3.Properties.Resources.resources
+C:\Users\Administrator\Desktop\C#\4轴\from3\from3\obj\x86\Debug\from3.csproj.GenerateResource.Cache
+C:\Users\Administrator\Desktop\C#\4轴\from3\from3\bin\Debug\from3.exe
+C:\Users\Administrator\Desktop\C#\4轴\from3\from3\bin\Debug\from3.pdb
+C:\Users\Administrator\Desktop\C#\4轴\from3\from3\obj\x86\Debug\from3.exe
+C:\Users\Administrator\Desktop\C#\4轴\from3\from3\obj\x86\Debug\from3.pdb
