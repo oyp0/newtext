@@ -17,9 +17,11 @@ namespace four_axis
         public float[] paratemp = new float[150];   //临时存储，用于不保存时还原参数
         public int  flag_returnwindow=0;
 
-        public _50未保存提示()
+        private _13参数设置 return_13参数设置 = null;
+        public _50未保存提示(_13参数设置 F13)
         {
             InitializeComponent();
+            this.return_13参数设置 = F13;
         }
 
 
@@ -40,19 +42,16 @@ namespace four_axis
                 }
                
                 //DMCPY vr(0),paratemp(0),PARANUM  '还原修改,用了vr就不能dmcpy
-                //返回参数设置      
-                //_13参数设置 f13 = new _13参数设置();
-                //f13.g_handle = g_handle;  //句柄
-                //f13.vr = vr;              //数组
-                //f13.PARANUM = PARANUM;    //轴参数空间
-                //f13.Show();
+                //返回参数设置  
+                this.Close();
+                this.return_13参数设置.Visible = true;
+                
             }
             else if (flag_returnwindow == 14) //文件
             {
                 // deal_fileflash(0);
             }
-            flag_returnwindow = 0;
-            this.Hide();           
+            flag_returnwindow = 0;         
         }
 
         //否

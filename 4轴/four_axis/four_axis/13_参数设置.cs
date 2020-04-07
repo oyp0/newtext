@@ -43,27 +43,12 @@ namespace four_axis
         //机械参数
         private void button2_Click(object sender, EventArgs e)
         {
-            panel1.Visible = true;
-
-
-            //新建一个修改密码的窗体
-            _16_机械参数设置 frm = new _16_机械参数设置();
-            //将窗体的TopLevel属性设为false，即窗体显示不是顶级窗口
-            frm.TopLevel = false;
-            //清空panel控件的内容
-            this.panel1.Controls.Clear();
-
-            frm.g_handle = g_handle;
-            frm.vr = vr;
-            frm.PARANUM = PARANUM;
-
-            //给Form去边框
-            frm.FormBorderStyle = FormBorderStyle.None;
-            //向panel控件中添加修改密码的窗体
-            this.panel1.Controls.Add(frm);
-            frm.WindowState = FormWindowState.Maximized;//如果windowState设置为最大化，添加到tabPage中时，winform不会显示出来
-            //panel控件内显示窗体
-            frm.Show();
+            _16_机械参数设置 f16 = new _16_机械参数设置(this);
+            f16.g_handle = g_handle;
+            f16.vr = vr;
+            f16.PARANUM = PARANUM;
+            this.Hide();//隐藏现在这个窗口
+            f16.Show();//新窗口显现    
         }
 
         //返回

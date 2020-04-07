@@ -27,9 +27,12 @@ namespace four_axis
         public int  flag_returnwindow=0;
         public int flag_change;
 
-        public _16_机械参数设置()
+
+        private _13参数设置 return_13参数设置 = null;
+        public _16_机械参数设置(_13参数设置 F13)
         {
             InitializeComponent();
+            this.return_13参数设置 = F13;
         }
 
         private void _16_机械参数设置_Load(object sender, EventArgs e)
@@ -358,12 +361,17 @@ namespace four_axis
             if (flag_change == 123)   //有改动
             {
                 //进入提示窗口
-                _50未保存提示 f50 = new _50未保存提示();
+                _50未保存提示 f50 = new _50未保存提示(return_13参数设置);
                 f50.g_handle = g_handle;   //句柄
                 f50.vr = vr;               //存放数组
                 f50.paratemp = paratemp;   //临时数组
                 f50.flag_returnwindow = flag_returnwindow;  //窗口选择
                 f50.ShowDialog();
+            }
+            else
+            {
+                this.Close();
+                this.return_13参数设置.Visible = true;
             }
         }
 
