@@ -62,12 +62,25 @@ namespace four_axis
 
         }
 
+        //回零设置
+        private void button4_Click(object sender, EventArgs e)
+        {
+            _31_复位设置 f31 = new _31_复位设置(this);
+            f31.g_handle = g_handle;
+            f31.vr = vr;
+            f31.PARANUM = PARANUM;
+            this.Hide();//隐藏现在这个窗口
+            f31.Show();//新窗口显现    
+        }
+
         //返回
         private void button6_Click(object sender, EventArgs e)
         {
             this.Close();
             this.return_10Start.Visible = true;     
         }
+
+       
 
   
 

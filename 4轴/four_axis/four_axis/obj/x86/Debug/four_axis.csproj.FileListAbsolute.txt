@@ -54,3 +54,4 @@ E:\Git\4轴\four_axis\four_axis\obj\x86\Debug\four_axis.csproj.GenerateResource.
 E:\Git\4轴\four_axis\four_axis\bin\Debug\four_axis.exe
 E:\Git\4轴\four_axis\four_axis\bin\Debug\four_axis.pdb
 E:\Git\4轴\four_axis\four_axis\obj\x86\Debug\four_axis._18_IO映射.resources
+E:\Git\4轴\four_axis\four_axis\obj\x86\Debug\four_axis._31_复位设置.resources

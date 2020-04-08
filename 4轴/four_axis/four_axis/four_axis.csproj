@@ -94,6 +94,12 @@
     <Compile Include="18_IO映射.Designer.cs">
       <DependentUpon>18_IO映射.cs</DependentUpon>
     </Compile>
+    <Compile Include="31_复位设置.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="31_复位设置.Designer.cs">
+      <DependentUpon>31_复位设置.cs</DependentUpon>
+    </Compile>
     <Compile Include="50_未保存提示.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -151,6 +157,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="18_IO映射.resx">
       <DependentUpon>18_IO映射.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="31_复位设置.resx">
+      <DependentUpon>31_复位设置.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="50_未保存提示.resx">
       <DependentUpon>50_未保存提示.cs</DependentUpon>

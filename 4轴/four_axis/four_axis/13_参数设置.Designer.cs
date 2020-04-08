@@ -78,6 +78,7 @@
             this.button4.TabIndex = 59;
             this.button4.Text = "回零设置";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button5
             // 
