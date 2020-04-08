@@ -26,7 +26,6 @@ namespace four_axis
 
         private void _13参数设置_Load(object sender, EventArgs e)
         {
-            panel1.Visible = false;
         }
 
         //轴参数

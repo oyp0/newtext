@@ -29,7 +29,7 @@ namespace four_axis
    
         public int flag_state = 0;    //运动状态
         public int flag_home  = 0;     //回零状态
-        public int filetempnum;    //文件数
+        public int filetempnum = 0;    //文件数
         public int runlinenum = 0;  //运行行号
 
         public int filelinepara = 0;   //总行
@@ -371,6 +371,7 @@ namespace four_axis
         {
             if (g_handle != (IntPtr)0)
             {
+                textBox3.Text = filetempnum.ToString();
                 textBox5.Text = (runlinenum - 1).ToString();
                 textBox6.Text = filelinepara.ToString();
                 textBox7.Text = yield.ToString();
