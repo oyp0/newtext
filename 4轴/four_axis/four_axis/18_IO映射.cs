@@ -11,7 +11,7 @@ using cszmcaux;
 
 namespace four_axis
 {
-    public partial class _15_轴参数设置 : Form
+    public partial class _18_IO映射 : Form
     {
         public IntPtr g_handle;         //链接返回的句柄，可以作为卡号
         public float[] vr = new float[500]; //数组
@@ -21,20 +21,20 @@ namespace four_axis
         public float[] paratemp = new float[150];   //临时存储，用于不保存时还原参数
 
         public int fileflag;        //读写判断
-        public int  firstflag=0;
+        public int firstflag = 0;
 
-        public int flag_setchange=0;     //参数修改标志
-        public int  flag_returnwindow=0;
+        public int flag_setchange = 0;     //参数修改标志
+        public int flag_returnwindow = 0;
         public int flag_change;
 
         private _13参数设置 return_13参数设置 = null;
-        public _15_轴参数设置(_13参数设置 F13)
+        public _18_IO映射(_13参数设置 F13)
         {
             InitializeComponent();
             this.return_13参数设置 = F13;
         }
 
-        private void _15_轴参数设置_Load(object sender, EventArgs e)
+        private void _18_IO映射_Load(object sender, EventArgs e)
         {
             Initialization();
         }
@@ -42,33 +42,54 @@ namespace four_axis
         //初始化参数
         public void Initialization()
         {
-            textBox1.Text = vr[0].ToString();
-            textBox2.Text = vr[1].ToString();
-            textBox3.Text = vr[2].ToString();
-            textBox4.Text = vr[3].ToString();
-            textBox5.Text = vr[4].ToString();
-            textBox6.Text = vr[7].ToString();
+            textBox1.Text = vr[14].ToString();
+            textBox2.Text = vr[16].ToString();
+            textBox3.Text = vr[18].ToString();
+            textBox4.Text = vr[20].ToString();
+            textBox5.Text = vr[22].ToString();
+            textBox6.Text = vr[23].ToString();
 
-            textBox7.Text = vr[25].ToString();
-            textBox8.Text = vr[26].ToString();
-            textBox9.Text = vr[27].ToString();
-            textBox10.Text = vr[28].ToString();
-            textBox11.Text = vr[29].ToString();
-            textBox12.Text = vr[32].ToString();
+            textBox7.Text = vr[39].ToString();
+            textBox8.Text = vr[41].ToString();
+            textBox9.Text = vr[43].ToString();
+            textBox10.Text = vr[45].ToString();
+            textBox11.Text = vr[47].ToString();
+            textBox12.Text = vr[48].ToString();
 
-            textBox13.Text = vr[50].ToString();
-            textBox14.Text = vr[51].ToString();
-            textBox15.Text = vr[52].ToString();
-            textBox16.Text = vr[53].ToString();
-            textBox17.Text = vr[54].ToString();
-            textBox18.Text = vr[57].ToString();
+            textBox13.Text = vr[64].ToString();
+            textBox14.Text = vr[66].ToString();
+            textBox15.Text = vr[68].ToString();
+            textBox16.Text = vr[70].ToString();
+            textBox17.Text = vr[72].ToString();
+            textBox18.Text = vr[73].ToString();
 
-            textBox19.Text = vr[75].ToString();
-            textBox20.Text = vr[76].ToString();
-            textBox21.Text = vr[77].ToString();
-            textBox22.Text = vr[78].ToString();
-            textBox23.Text = vr[79].ToString();
-            textBox24.Text = vr[82].ToString();
+            textBox19.Text = vr[89].ToString();
+            textBox20.Text = vr[91].ToString();
+            textBox21.Text = vr[93].ToString();
+            textBox22.Text = vr[95].ToString();
+            textBox23.Text = vr[97].ToString();
+            textBox24.Text = vr[98].ToString();
+
+            paratemp[15] = vr[15];
+            paratemp[17] = vr[17];
+            paratemp[19] = vr[19];
+            paratemp[21] = vr[21];
+
+            paratemp[40] = vr[40];
+            paratemp[42] = vr[42];
+            paratemp[44] = vr[44];
+            paratemp[46] = vr[46];
+
+            paratemp[65] = vr[65];
+            paratemp[67] = vr[67];
+            paratemp[69] = vr[69];
+            paratemp[61] = vr[61];
+
+            paratemp[90] = vr[90];
+            paratemp[92] = vr[92];
+            paratemp[94] = vr[94];
+            paratemp[96] = vr[96];
+
         }
 
         //textbox处理
@@ -90,6 +111,22 @@ namespace four_axis
             }
         }
 
+        //选择处理
+        public void Choice(float temp,String str)
+        {
+            if (temp % 2 == 0)
+            {
+                str = "on";
+                temp = 1;
+            }
+            else
+            {
+                str = "off";
+                temp = 0;
+            }     
+        }
+             
+
         public void deal_setpara()
         {
             for (int i = 0; i < AXISMAX; i++)
@@ -106,7 +143,7 @@ namespace four_axis
                 // RS_LIMIT=vr(i*AXISSPACE+12)   //设置轴的负向软限位
                 // FS_LIMIT=vr(i*AXISSPACE+13)   //设置轴的正向软限位
 
-                if(vr[i*AXISSPACE+14]<0)  //原点IN 
+                if (vr[i * AXISSPACE + 14] < 0)  //原点IN 
                 {
                     // datum_in=-1    
                 }
@@ -116,9 +153,9 @@ namespace four_axis
                     // datum_in=vr(i*AXISSPACE+14);		
                     // INVERT_IN(vr(i*AXISSPACE+14),vr(i*AXISSPACE+15))  
                 }
-                
-                
-                if(vr[i*AXISSPACE+16]<0)  //正限位
+
+
+                if (vr[i * AXISSPACE + 16] < 0)  //正限位
                 {
                     //fwd_in=-1
                 }
@@ -126,196 +163,197 @@ namespace four_axis
                 {
                     //'正限位设置及反转
                     //fwd_in=vr(i*AXISSPACE+16);		
-			        //INVERT_IN(vr(i*AXISSPACE+16),vr(i*AXISSPACE+17));
+                    //INVERT_IN(vr(i*AXISSPACE+16),vr(i*AXISSPACE+17));
                 }
 
-                 if(vr[i*AXISSPACE+18]<0)  //负限位
-                 {
-                   // rev_in=-1
-                 }
-                 else
-                 {
-                     //负限位设置及反转
+                if (vr[i * AXISSPACE + 18] < 0)  //负限位
+                {
+                    // rev_in=-1
+                }
+                else
+                {
+                    //负限位设置及反转
                     //rev_in=vr(i*AXISSPACE+18)		
-			        //INVERT_IN(vr(i*AXISSPACE+18),vr(i*AXISSPACE+19))
-                 }
-                
-                 if(vr[i*AXISSPACE+20]<0)  //报警
-                 {
-                    //alm_in=-1
-                 }
-                 else
-                 {
-                     //报警设置及反转
-                    //alm_in=vr(i*AXISSPACE+20)		
-			        //INVERT_IN(vr(i*AXISSPACE+20),vr(i*AXISSPACE+21))
-                 }
+                    //INVERT_IN(vr(i*AXISSPACE+18),vr(i*AXISSPACE+19))
+                }
 
-                if(vr[i*AXISSPACE+22]>=0)
+                if (vr[i * AXISSPACE + 20] < 0)  //报警
+                {
+                    //alm_in=-1
+                }
+                else
+                {
+                    //报警设置及反转
+                    //alm_in=vr(i*AXISSPACE+20)		
+                    //INVERT_IN(vr(i*AXISSPACE+20),vr(i*AXISSPACE+21))
+                }
+
+                if (vr[i * AXISSPACE + 22] >= 0)
                 {
                     zmcaux.ZAux_Direct_SetOp(g_handle, i, Convert.ToUInt32(vr[i * AXISSPACE + 22]));
                     //op(vr(i*AXISSPACE+22),on)  //打开使能
                 }
-          
+
             }
         }
 
         public void initset()
-        { 
-            if(fileflag !=1419)
+        {
+            if (fileflag != 1419)
             {
-                    firstflag=1419;  //上电保存标志
-                    //FLASH_WRITE 20,firstflag,filetoflash,totalfilenum
+                firstflag = 1419;  //上电保存标志
+                //FLASH_WRITE 20,firstflag,filetoflash,totalfilenum
             }
         }
 
-        //X轴 起始速度
+        //X轴 原点信号及反转
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            paratemp[0] = float.Parse(textBox1.Text);
-            //MessageBox.Show(paratemp[0].ToString());   //测试textbox控件值改变
+            paratemp[14] = float.Parse(textBox1.Text);
+            //MessageBox.Show(paratemp[14].ToString());   //测试textbox控件值改变
         }
-        //X轴 运行速度
+        //X轴 正限位信号
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-            paratemp[1] = float.Parse(textBox2.Text);
-            //MessageBox.Show(paratemp[1].ToString());   //测试textbox控件值改变
+            paratemp[16] = float.Parse(textBox2.Text);
+            //MessageBox.Show(paratemp[16].ToString());   //测试textbox控件值改变
         }
-        //X轴 加速度
+        //X轴 负限位信号
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
-            paratemp[2] = float.Parse(textBox3.Text);
-            //MessageBox.Show(paratemp[2].ToString());   //测试textbox控件值改变
+            paratemp[18] = float.Parse(textBox3.Text);
+            //MessageBox.Show(paratemp[18].ToString());   //测试textbox控件值改变
         }
-        //X轴 减速度
+        //X轴 报警信号
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
-            paratemp[3] = float.Parse(textBox4.Text);
-            //MessageBox.Show(paratemp[3].ToString());   //测试textbox控件值改变
+            paratemp[20] = float.Parse(textBox4.Text);
+            //MessageBox.Show(paratemp[20].ToString());   //测试textbox控件值改变
         }
-        //X轴 S曲线时间
+        //X轴 使能信号
         private void textBox5_TextChanged(object sender, EventArgs e)
         {
-            paratemp[4] = float.Parse(textBox5.Text);
-            //MessageBox.Show(paratemp[4].ToString());   //测试textbox控件值改变
+            paratemp[22] = float.Parse(textBox5.Text);
+            //MessageBox.Show(paratemp[22].ToString());   //测试textbox控件值改变
         }
-        //X轴 示教速度
+        //X轴 报警清除信号
         private void textBox6_TextChanged(object sender, EventArgs e)
         {
-            paratemp[7] = float.Parse(textBox6.Text);
-            //MessageBox.Show(paratemp[7].ToString());   //测试textbox控件值改变
+            paratemp[23] = float.Parse(textBox6.Text);
+            //MessageBox.Show(paratemp[23].ToString());   //测试textbox控件值改变
         }
 
-        //Y轴 起始速度
+        //Y轴 原点信号及反转
         private void textBox7_TextChanged(object sender, EventArgs e)
         {
-            paratemp[25] = float.Parse(textBox7.Text);
-            //MessageBox.Show(paratemp[25].ToString());   //测试textbox控件值改变
+            paratemp[39] = float.Parse(textBox7.Text);
+            //MessageBox.Show(paratemp[39].ToString());   //测试textbox控件值改变
         }
-        //Y轴 运行速度
+        //Y轴 正限位信号
         private void textBox8_TextChanged(object sender, EventArgs e)
         {
-            paratemp[26] = float.Parse(textBox8.Text);
-            //MessageBox.Show(paratemp[26].ToString());   //测试textbox控件值改变
+            paratemp[41] = float.Parse(textBox8.Text);
+            //MessageBox.Show(paratemp[41].ToString());   //测试textbox控件值改变
         }
-        //Y轴 加速度
+        //Y轴 负限位信号
         private void textBox9_TextChanged(object sender, EventArgs e)
         {
-            paratemp[27] = float.Parse(textBox9.Text);
-            //MessageBox.Show(paratemp[27].ToString());   //测试textbox控件值改变
+            paratemp[43] = float.Parse(textBox9.Text);
+            //MessageBox.Show(paratemp[43].ToString());   //测试textbox控件值改变
         }
-        //Y轴 减速度
+        //Y轴 报警信号
         private void textBox10_TextChanged(object sender, EventArgs e)
         {
-            paratemp[28] = float.Parse(textBox10.Text);
-            //MessageBox.Show(paratemp[28].ToString());   //测试textbox控件值改变
+            paratemp[45] = float.Parse(textBox10.Text);
+            //MessageBox.Show(paratemp[45].ToString());   //测试textbox控件值改变
         }
-        //Y轴 S曲线时间
+        //Y轴 使能信号
         private void textBox11_TextChanged(object sender, EventArgs e)
         {
-            paratemp[29] = float.Parse(textBox11.Text);
-            //MessageBox.Show(paratemp[29].ToString());   //测试textbox控件值改变
+            paratemp[47] = float.Parse(textBox11.Text);
+            //MessageBox.Show(paratemp[47].ToString());   //测试textbox控件值改变
         }
-        //Y轴 示教速度
+        //Y轴 报警清除信号 
         private void textBox12_TextChanged(object sender, EventArgs e)
         {
-            paratemp[32] = float.Parse(textBox12.Text);
-            //MessageBox.Show(paratemp[32].ToString());   //测试textbox控件值改变
+            paratemp[48] = float.Parse(textBox12.Text);
+            //MessageBox.Show(paratemp[48].ToString());   //测试textbox控件值改变
         }
 
-        //Z轴 起始速度
+        //Z轴 原点信号及反转
         private void textBox13_TextChanged(object sender, EventArgs e)
         {
-            paratemp[50] = float.Parse(textBox13.Text);
-            //MessageBox.Show(paratemp[50].ToString());   //测试textbox控件值改变
+            paratemp[64] = float.Parse(textBox13.Text);
+            //MessageBox.Show(paratemp[64].ToString());   //测试textbox控件值改变
         }
-        //Z轴 运行速度
+        //Z轴 正限位信号
         private void textBox14_TextChanged(object sender, EventArgs e)
         {
-            paratemp[51] = float.Parse(textBox14.Text);
-            //MessageBox.Show(paratemp[51].ToString());   //测试textbox控件值改变
+            paratemp[66] = float.Parse(textBox14.Text);
+            //MessageBox.Show(paratemp[66].ToString());   //测试textbox控件值改变
         }
-        //Z轴 加速度
+        //Z轴 负限位信号
         private void textBox15_TextChanged(object sender, EventArgs e)
         {
-            paratemp[52] = float.Parse(textBox15.Text);
-            //MessageBox.Show(paratemp[52].ToString());   //测试textbox控件值改变
+            paratemp[68] = float.Parse(textBox15.Text);
+            //MessageBox.Show(paratemp[68].ToString());   //测试textbox控件值改变
         }
-        //Z轴 减速度
+        //Z轴 报警信号
         private void textBox16_TextChanged(object sender, EventArgs e)
         {
-            paratemp[53] = float.Parse(textBox16.Text);
-            //MessageBox.Show(paratemp[53].ToString());   //测试textbox控件值改变
+            paratemp[70] = float.Parse(textBox16.Text);
+            //MessageBox.Show(paratemp[70].ToString());   //测试textbox控件值改变
         }
-        //Z轴 S曲线时间
+        //Z轴 使能信号
         private void textBox17_TextChanged(object sender, EventArgs e)
         {
-            paratemp[54] = float.Parse(textBox17.Text);
-            //MessageBox.Show(paratemp[54].ToString());   //测试textbox控件值改变
+            paratemp[72] = float.Parse(textBox17.Text);
+            //MessageBox.Show(paratemp[72].ToString());   //测试textbox控件值改变
         }
-        //Z轴 示教速度
+        //Z轴 报警清除信号
         private void textBox18_TextChanged(object sender, EventArgs e)
         {
-            paratemp[57] = float.Parse(textBox18.Text);
-            //MessageBox.Show(paratemp[57].ToString());   //测试textbox控件值改变
+            paratemp[73] = float.Parse(textBox18.Text);
+            //MessageBox.Show(paratemp[73].ToString());   //测试textbox控件值改变
         }
 
-        //U轴 起始速度
+        //U轴 原点信号及反转
         private void textBox19_TextChanged(object sender, EventArgs e)
         {
-            paratemp[75] = float.Parse(textBox19.Text);
-            //MessageBox.Show(paratemp[75].ToString());   //测试textbox控件值改变
+            paratemp[89] = float.Parse(textBox19.Text);
+            //MessageBox.Show(paratemp[89].ToString());   //测试textbox控件值改变
         }
-        //U轴 运行速度
+        //U轴 正限位信号
         private void textBox20_TextChanged(object sender, EventArgs e)
         {
-            paratemp[76] = float.Parse(textBox20.Text);
-            //MessageBox.Show(paratemp[76].ToString());   //测试textbox控件值改变
+            paratemp[91] = float.Parse(textBox20.Text);
+            //MessageBox.Show(paratemp[91].ToString());   //测试textbox控件值改变
         }
-        //U轴 加速度
+        //U轴 负限位信号
         private void textBox21_TextChanged(object sender, EventArgs e)
         {
-            paratemp[77] = float.Parse(textBox21.Text);
-            //MessageBox.Show(paratemp[77].ToString());   //测试textbox控件值改变
+            paratemp[93] = float.Parse(textBox21.Text);
+            //MessageBox.Show(paratemp[93].ToString());   //测试textbox控件值改变
         }
-        //U轴 减速度
+        //U轴 报警信号
         private void textBox22_TextChanged(object sender, EventArgs e)
         {
-            paratemp[78] = float.Parse(textBox22.Text);
-            //MessageBox.Show(paratemp[78].ToString());   //测试textbox控件值改变
+            paratemp[95] = float.Parse(textBox22.Text);
+            //MessageBox.Show(paratemp[95].ToString());   //测试textbox控件值改变
         }
-        //U轴 S曲线时间
+        //U轴 使能信号
         private void textBox23_TextChanged(object sender, EventArgs e)
         {
-            paratemp[79] = float.Parse(textBox23.Text);
-            //MessageBox.Show(paratemp[79].ToString());   //测试textbox控件值改变
+            paratemp[97] = float.Parse(textBox23.Text);
+            //MessageBox.Show(paratemp[97].ToString());   //测试textbox控件值改变
         }
-        //U轴 示教速度
+        //U轴报警清除信号
         private void textBox24_TextChanged(object sender, EventArgs e)
         {
-            paratemp[82] = float.Parse(textBox24.Text);
-            //MessageBox.Show(paratemp[82].ToString());   //测试textbox控件值改变
+            paratemp[98] = float.Parse(textBox24.Text);
+            //MessageBox.Show(paratemp[98].ToString());   //测试textbox控件值改变
         }
+
 
         //只能输入有理数
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
@@ -415,8 +453,74 @@ namespace four_axis
             deal_limit(sender, e);
         }
 
-        //保存
+        //on/off
         private void button1_Click(object sender, EventArgs e)
+        {
+            Choice(paratemp[15], button1.Text);   
+        }
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Choice(paratemp[17], button2.Text);   
+        }
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Choice(paratemp[19], button3.Text);   
+        }
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Choice(paratemp[21], button4.Text);  
+        }
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Choice(paratemp[40], button5.Text);  
+        }
+        private void button6_Click(object sender, EventArgs e)
+        {
+            Choice(paratemp[42], button6.Text);  
+        }
+        private void button7_Click(object sender, EventArgs e)
+        {
+            Choice(paratemp[44], button7.Text);  
+        }
+        private void button8_Click(object sender, EventArgs e)
+        {
+            Choice(paratemp[46], button8.Text);  
+        }
+        private void button9_Click(object sender, EventArgs e)
+        {
+            Choice(paratemp[65], button9.Text);  
+        }
+        private void button10_Click(object sender, EventArgs e)
+        {
+            Choice(paratemp[67], button10.Text);  
+        }
+        private void button11_Click(object sender, EventArgs e)
+        {
+            Choice(paratemp[69], button11.Text);  
+        }
+        private void button12_Click(object sender, EventArgs e)
+        {
+            Choice(paratemp[71], button12.Text);  
+        }
+        private void button13_Click(object sender, EventArgs e)
+        {
+            Choice(paratemp[90], button13.Text);  
+        }
+        private void button14_Click(object sender, EventArgs e)
+        {
+            Choice(paratemp[92], button14.Text);  
+        }
+        private void button15_Click(object sender, EventArgs e)
+        {
+            Choice(paratemp[94], button15.Text);  
+        }
+        private void button16_Click(object sender, EventArgs e)
+        {
+            Choice(paratemp[96], button16.Text);  
+        }
+
+        //保存
+        private void button25_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < PARANUM; i++)
             {
@@ -430,14 +534,14 @@ namespace four_axis
         }
 
         //返回
-        private void button2_Click(object sender, EventArgs e)
+        private void button26_Click(object sender, EventArgs e)
         {
             flag_returnwindow = 13; //参数设置界面
             for (int i = 0; i < PARANUM; i++)
             {
                 if (paratemp[i] != vr[i])
                 {
-                    flag_change=123;           
+                    flag_change = 123;
                     break;
                 }
                 //DMCPY paraaxis(0),table(0),PARANUM		'赋值	'目前此指令遇到0终止，不能用
@@ -446,7 +550,7 @@ namespace four_axis
 
             if (flag_change == 123)   //有改动
             {
-                _50未保存提示 f50 = new _50未保存提示(return_13参数设置, this, null,null);
+                _50未保存提示 f50 = new _50未保存提示(return_13参数设置, null, null,this);
                 f50.g_handle = g_handle;   //句柄
                 f50.vr = vr;               //存放数组
                 f50.paratemp = paratemp;   //临时数组
@@ -459,8 +563,14 @@ namespace four_axis
                 this.Close();
                 this.return_13参数设置.Visible = true;
             }
-        
         }
 
+   
+
+     
+
+        
+
+       
     }
 }

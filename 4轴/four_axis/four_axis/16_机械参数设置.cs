@@ -43,25 +43,26 @@ namespace four_axis
         //初始化参数
         public void Initialization()
         {
-            textBox1.Text = "0.0";
-            textBox2.Text = "0.0";
-            textBox3.Text = "0.0";
-            textBox4.Text = "0.0";
+            textBox1.Text = vr[10].ToString();
+            textBox2.Text = vr[11].ToString();
+            textBox3.Text = vr[12].ToString();
+            textBox4.Text = vr[13].ToString();
 
-            textBox5.Text = "0.0";
-            textBox6.Text = "0.0";
-            textBox7.Text = "0.0";
-            textBox8.Text = "0.0";
+            textBox5.Text = vr[35].ToString();
+            textBox6.Text = vr[36].ToString();
+            textBox7.Text = vr[37].ToString();
+            textBox8.Text = vr[38].ToString();
 
-            textBox9.Text = "0.0";
-            textBox10.Text = "0.0";
-            textBox11.Text = "0.0";
-            textBox12.Text = "0.0";
+            textBox9.Text = vr[60].ToString();
+            textBox10.Text = vr[61].ToString();
+            textBox11.Text = vr[62].ToString();
+            textBox12.Text = vr[63].ToString();
 
-            textBox13.Text = "0.0";
-            textBox14.Text = "0.0";
-            textBox15.Text = "0.0";
-            textBox16.Text = "0.0";      
+            textBox13.Text = vr[85].ToString();
+            textBox14.Text = vr[86].ToString();
+            textBox15.Text = vr[87].ToString();
+            textBox16.Text = vr[88].ToString();
+
         }
 
         //textbox处理
@@ -361,11 +362,12 @@ namespace four_axis
             if (flag_change == 123)   //有改动
             {
                 //进入提示窗口
-                _50未保存提示 f50 = new _50未保存提示(return_13参数设置,null);
+                _50未保存提示 f50 = new _50未保存提示(return_13参数设置,null,this,null);
                 f50.g_handle = g_handle;   //句柄
                 f50.vr = vr;               //存放数组
                 f50.paratemp = paratemp;   //临时数组
                 f50.flag_returnwindow = flag_returnwindow;  //窗口选择
+                f50.PARANUM = PARANUM;  //轴参数空间
                 f50.ShowDialog();
             }
             else

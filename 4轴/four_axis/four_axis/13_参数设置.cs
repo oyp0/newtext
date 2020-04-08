@@ -49,6 +49,18 @@ namespace four_axis
             this.Hide();//隐藏现在这个窗口
             f16.Show();//新窗口显现    
         }
+        
+        //IO映射
+        private void button3_Click(object sender, EventArgs e)
+        {
+            _18_IO映射 f18 = new _18_IO映射(this);
+            f18.g_handle = g_handle;
+            f18.vr = vr;
+            f18.PARANUM = PARANUM;
+            this.Hide();//隐藏现在这个窗口
+            f18.Show();//新窗口显现    
+
+        }
 
         //返回
         private void button6_Click(object sender, EventArgs e)
@@ -56,6 +68,8 @@ namespace four_axis
             this.Close();
             this.return_10Start.Visible = true;     
         }
+
+  
 
         
     }

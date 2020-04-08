@@ -53,3 +53,4 @@ E:\Git\4轴\four_axis\four_axis\obj\x86\Debug\four_axis.Properties.Resources.res
 E:\Git\4轴\four_axis\four_axis\obj\x86\Debug\four_axis.csproj.GenerateResource.Cache
 E:\Git\4轴\four_axis\four_axis\bin\Debug\four_axis.exe
 E:\Git\4轴\four_axis\four_axis\bin\Debug\four_axis.pdb
+E:\Git\4轴\four_axis\four_axis\obj\x86\Debug\four_axis._18_IO映射.resources
