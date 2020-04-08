@@ -79,11 +79,6 @@ namespace four_axis
             this.Close();
             this.return_10Start.Visible = true;     
         }
-
-       
-
-  
-
-        
+     
     }
 }

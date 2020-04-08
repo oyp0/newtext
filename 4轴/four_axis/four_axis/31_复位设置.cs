@@ -42,6 +42,12 @@ namespace four_axis
         //初始化参数
         public void Initialization()
         {
+            //一进入界面就存放在一个临时的数组中
+            for (int i = 0; i < PARANUM; i++)
+            {
+                paratemp[i] = vr[i];
+            }
+
             textBox1.Text = vr[8].ToString();
             textBox2.Text = vr[5].ToString();
             textBox3.Text = vr[6].ToString();
