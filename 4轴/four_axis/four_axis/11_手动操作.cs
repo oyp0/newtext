@@ -46,6 +46,23 @@ namespace four_axis
             timer1.Interval = 100;    //定时器定时100ms
         }
 
+        //选择处理
+        public String Choice(ref int temp, String str)
+        {
+            if (temp% 2 == 0)
+            {
+                temp = 1;
+                return str = "绝对";
+                
+            }
+            else
+            {
+                temp = 0;
+                return  str = "相对";
+                
+            }
+        }
+
 
         public void deal_manul(int axisnum, int dir)  //轴号，方向
         {
@@ -193,56 +210,20 @@ namespace four_axis
 
         //相对和绝对的选择
         private void button9_Click(object sender, EventArgs e)
-        {
-            if (manulmode[0] % 2 == 0)
-            {
-                button9.Text = "绝对";
-                manulmode[0] = 1;
-            }
-            else
-            {
-                button9.Text = "相对";
-                manulmode[0] = 0;
-            }         
+        {            
+            button9.Text = Choice(ref manulmode[0], button9.Text);
         }
         private void button10_Click(object sender, EventArgs e)
         {
-            if (manulmode[1] % 2 == 0)
-            {
-                button10.Text = "绝对";
-                manulmode[1] = 1;
-            }
-            else
-            {
-                button10.Text = "相对";
-                manulmode[1] = 0;
-            }      
+            button10.Text = Choice(ref manulmode[1], button10.Text);     
         }
         private void button11_Click(object sender, EventArgs e)
         {
-            if (manulmode[2] % 2 == 0)
-            {
-                button11.Text = "绝对";
-                manulmode[2] = 1;
-            }
-            else
-            {
-                button11.Text = "相对";
-                manulmode[2] = 0;
-            }      
+            button11.Text = Choice(ref manulmode[2], button11.Text);     
         }
         private void button12_Click(object sender, EventArgs e)
         {
-            if (manulmode[3] % 2 == 0)
-            {
-                button12.Text = "绝对";
-                manulmode[3] = 1;
-            }
-            else
-            {
-                button12.Text = "相对";
-                manulmode[3] = 0;
-            }      
+            button12.Text = Choice(ref manulmode[3], button12.Text);     
         }
 
         //运行

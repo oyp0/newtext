@@ -112,17 +112,17 @@ namespace four_axis
         }
 
         //选择处理
-        public void Choice(float temp,String str)
+        public String Choice(ref float temp, String str)
         {
             if (temp % 2 == 0)
             {
-                str = "on";
-                temp = 1;
+               temp = 1;
+               return str = "on";
             }
             else
             {
-                str = "off";
-                temp = 0;
+               temp = 0;
+               return str = "off";               
             }     
         }
              
@@ -456,67 +456,67 @@ namespace four_axis
         //on/off
         private void button1_Click(object sender, EventArgs e)
         {
-            Choice(paratemp[15], button1.Text);   
+            button1.Text=Choice(ref paratemp[15], button1.Text);   
         }
         private void button2_Click(object sender, EventArgs e)
         {
-            Choice(paratemp[17], button2.Text);   
+            button2.Text = Choice(ref paratemp[17], button2.Text);   
         }
         private void button3_Click(object sender, EventArgs e)
         {
-            Choice(paratemp[19], button3.Text);   
+            button3.Text = Choice(ref paratemp[19], button3.Text);   
         }
         private void button4_Click(object sender, EventArgs e)
         {
-            Choice(paratemp[21], button4.Text);  
+            button4.Text = Choice(ref paratemp[21], button4.Text);  
         }
         private void button5_Click(object sender, EventArgs e)
         {
-            Choice(paratemp[40], button5.Text);  
+            button5.Text = Choice(ref paratemp[40], button5.Text);  
         }
         private void button6_Click(object sender, EventArgs e)
         {
-            Choice(paratemp[42], button6.Text);  
+            button6.Text = Choice(ref paratemp[42], button6.Text);  
         }
         private void button7_Click(object sender, EventArgs e)
         {
-            Choice(paratemp[44], button7.Text);  
+            button7.Text = Choice(ref paratemp[44], button7.Text);  
         }
         private void button8_Click(object sender, EventArgs e)
         {
-            Choice(paratemp[46], button8.Text);  
+            button8.Text = Choice(ref paratemp[46], button8.Text);  
         }
         private void button9_Click(object sender, EventArgs e)
         {
-            Choice(paratemp[65], button9.Text);  
+            button9.Text = Choice(ref paratemp[65], button9.Text);  
         }
         private void button10_Click(object sender, EventArgs e)
         {
-            Choice(paratemp[67], button10.Text);  
+            button10.Text = Choice(ref paratemp[67], button10.Text);  
         }
         private void button11_Click(object sender, EventArgs e)
         {
-            Choice(paratemp[69], button11.Text);  
+            button11.Text = Choice(ref paratemp[69], button11.Text);  
         }
         private void button12_Click(object sender, EventArgs e)
         {
-            Choice(paratemp[71], button12.Text);  
+            button12.Text = Choice(ref paratemp[71], button12.Text);  
         }
         private void button13_Click(object sender, EventArgs e)
         {
-            Choice(paratemp[90], button13.Text);  
+            button13.Text = Choice(ref paratemp[90], button13.Text);  
         }
         private void button14_Click(object sender, EventArgs e)
         {
-            Choice(paratemp[92], button14.Text);  
+            button14.Text = Choice(ref paratemp[92], button14.Text);  
         }
         private void button15_Click(object sender, EventArgs e)
         {
-            Choice(paratemp[94], button15.Text);  
+            button15.Text = Choice(ref paratemp[94], button15.Text);  
         }
         private void button16_Click(object sender, EventArgs e)
         {
-            Choice(paratemp[96], button16.Text);  
+            button16.Text = Choice(ref paratemp[96], button16.Text);  
         }
 
         //保存
