@@ -30,11 +30,14 @@ namespace four_axis
         //输入口
         private void button41_Click(object sender, EventArgs e)
         {
-            _12_IO界面in f12 = new _12_IO界面in(return_10Start);
-            f12.g_handle = g_handle;
-            f12.vr = vr;
-            this.Hide();//隐藏现在这个窗口
-            f12.Show();//新窗口显现       
+            if (g_handle != (IntPtr)0)
+            {
+                _12_IO界面in f12 = new _12_IO界面in(return_10Start);
+                f12.g_handle = g_handle;
+                f12.vr = vr;
+                this.Hide();//隐藏现在这个窗口
+                f12.Show();//新窗口显现      
+            }
         }
 
         //返回

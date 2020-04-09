@@ -31,11 +31,14 @@ namespace four_axis
         //输出口
         private void button41_Click(object sender, EventArgs e)
         {
-            _17_界面_op f17 = new _17_界面_op(return_10Start);
-            f17.g_handle = g_handle;
-            f17.vr = vr;
-            this.Hide();//隐藏现在这个窗口
-            f17.Show();//新窗口显现       
+            if (g_handle != (IntPtr)0)
+            {
+                _17_界面_op f17 = new _17_界面_op(return_10Start);
+                f17.g_handle = g_handle;
+                f17.vr = vr;
+                this.Hide();//隐藏现在这个窗口
+                f17.Show();//新窗口显现  
+            }
         }
 
         //返回

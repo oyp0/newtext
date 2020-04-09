@@ -31,46 +31,64 @@ namespace four_axis
         //轴参数
         private void button1_Click(object sender, EventArgs e)
         {
-            _15_轴参数设置 f15 = new _15_轴参数设置(this);
-            f15.g_handle = g_handle;
-            f15.vr = vr;
-            f15.PARANUM = PARANUM;
-            this.Hide();//隐藏现在这个窗口
-            f15.Show();//新窗口显现     
+            if (g_handle != (IntPtr)0)
+            {
+                _15_轴参数设置 f15 = new _15_轴参数设置(this);
+                f15.g_handle = g_handle;
+                f15.vr = vr;
+                f15.PARANUM = PARANUM;
+                this.Hide();//隐藏现在这个窗口
+                f15.Show();//新窗口显现    
+            }
         }
 
         //机械参数
         private void button2_Click(object sender, EventArgs e)
         {
-            _16_机械参数设置 f16 = new _16_机械参数设置(this);
-            f16.g_handle = g_handle;
-            f16.vr = vr;
-            f16.PARANUM = PARANUM;
-            this.Hide();//隐藏现在这个窗口
-            f16.Show();//新窗口显现    
+            if (g_handle != (IntPtr)0)
+            {
+                _16_机械参数设置 f16 = new _16_机械参数设置(this);
+                f16.g_handle = g_handle;
+                f16.vr = vr;
+                f16.PARANUM = PARANUM;
+                this.Hide();//隐藏现在这个窗口
+                f16.Show();//新窗口显现    
+            }
         }
         
         //IO映射
         private void button3_Click(object sender, EventArgs e)
         {
-            _18_IO映射 f18 = new _18_IO映射(this);
-            f18.g_handle = g_handle;
-            f18.vr = vr;
-            f18.PARANUM = PARANUM;
-            this.Hide();//隐藏现在这个窗口
-            f18.Show();//新窗口显现    
+            if (g_handle != (IntPtr)0)
+            {
+                _18_IO映射 f18 = new _18_IO映射(this);
+                f18.g_handle = g_handle;
+                f18.vr = vr;
+                f18.PARANUM = PARANUM;
+                this.Hide();//隐藏现在这个窗口
+                f18.Show();//新窗口显现    
+            }
 
         }
 
         //回零设置
         private void button4_Click(object sender, EventArgs e)
         {
-            _31_复位设置 f31 = new _31_复位设置(this);
-            f31.g_handle = g_handle;
-            f31.vr = vr;
-            f31.PARANUM = PARANUM;
-            this.Hide();//隐藏现在这个窗口
-            f31.Show();//新窗口显现    
+            if (g_handle != (IntPtr)0)
+            {
+                _31_复位设置 f31 = new _31_复位设置(this);
+                f31.g_handle = g_handle;
+                f31.vr = vr;
+                f31.PARANUM = PARANUM;
+                this.Hide();//隐藏现在这个窗口
+                f31.Show();//新窗口显现    
+            }
+        }
+
+        //上传下载
+        private void button5_Click(object sender, EventArgs e)
+        {
+
         }
 
         //返回
@@ -79,6 +97,8 @@ namespace four_axis
             this.Close();
             this.return_10Start.Visible = true;     
         }
+
+       
      
     }
 }

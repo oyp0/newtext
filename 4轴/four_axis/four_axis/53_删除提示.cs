@@ -9,27 +9,26 @@ using System.Windows.Forms;
 
 namespace four_axis
 {
-   
-    public partial class _52_操作提示 : Form
+    public partial class _53_删除提示 : Form
     {
-        public String V1;
-
-        public _52_操作提示()
+        public _53_删除提示()
         {
             InitializeComponent();
         }
 
-        private void _52_操作提示_Load(object sender, EventArgs e)
+        //是
+        private void button1_Click(object sender, EventArgs e)
         {
-            label1.Text=V1;
+
         }
 
-        //确认
-        private void button1_Click(object sender, EventArgs e)
+
+        //否
+        private void button2_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-      
+    
     }
 }
