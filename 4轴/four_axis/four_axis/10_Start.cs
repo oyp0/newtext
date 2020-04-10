@@ -344,12 +344,25 @@ namespace four_axis
             }
         }
 
+        //文件管理
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (g_handle != (IntPtr)0)
+            {
+                _14_文件管理 f14 = new _14_文件管理(this);
+                f14.g_handle = g_handle;
+
+                this.Hide();//隐藏现在这个窗口
+                f14.Show();//新窗口显现    
+            }
+        }
+
         //文件选择
         private void button13_Click(object sender, EventArgs e)
         {
             if (g_handle != (IntPtr)0)
             {
-                _33 f33 = new _33(this);
+                _33_文件选择 f33 = new _33_文件选择(this);
                 f33.g_handle = g_handle;
                 f33.runlinenum = runlinenum;
                 f33.filetempnum = filetempnum;
@@ -453,15 +466,7 @@ namespace four_axis
             task_home();
         }
 
-      
-
        
 
-   
-
-     
-
-     
-          
     }
 }

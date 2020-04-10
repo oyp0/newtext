@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace four_axis
 {
-    public partial class _33 : Form
+    public partial class _33_文件选择 : Form
     {
         public IntPtr g_handle;         //链接返回的句柄，可以作为卡号
         public int filetempnum = 0;   
@@ -34,7 +34,7 @@ namespace four_axis
         public int asd;
 
         private _10Start return_10Start = null;
-        public _33(_10Start F10)
+        public _33_文件选择(_10Start F10)
         {
             InitializeComponent();
             this.return_10Start = F10;
@@ -183,16 +183,19 @@ namespace four_axis
                 asd = 123;
             }
 
-            if ((pagenum == totalpagenum) || (asd == 123))
+            if ((pagenum <totalpagenum) || (asd == 123))
+            {
+                pagenum++;
+                filenum = (pagenum - 1) * ONEPAGENUM + 1;
+                LoadPage();            
+            }
+            else
             {
                 Console.WriteLine("最后一页");
                 _52_操作提示 f52 = new _52_操作提示();
                 f52.V1 = "最后一页";
                 f52.ShowDialog();
-                return; 
-            }
-            pagenum++;
-            LoadPage();
+            }           
         }
 
 
@@ -255,9 +258,7 @@ namespace four_axis
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             string buttonText = this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
-        
-
-          //  
+  
             int t = int.Parse(buttonText)%5;
             if (t == 1)
             {

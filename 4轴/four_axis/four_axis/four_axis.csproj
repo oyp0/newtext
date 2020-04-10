@@ -70,6 +70,12 @@
     <Compile Include="13_参数设置.Designer.cs">
       <DependentUpon>13_参数设置.cs</DependentUpon>
     </Compile>
+    <Compile Include="14_文件管理.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="14_文件管理.Designer.cs">
+      <DependentUpon>14_文件管理.cs</DependentUpon>
+    </Compile>
     <Compile Include="15_轴参数设置.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -118,11 +124,11 @@
     <Compile Include="32_文件选择.Designer.cs">
       <DependentUpon>32_文件选择.cs</DependentUpon>
     </Compile>
-    <Compile Include="33.cs">
+    <Compile Include="33_文件选择.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="33.Designer.cs">
-      <DependentUpon>33.cs</DependentUpon>
+    <Compile Include="33_文件选择.Designer.cs">
+      <DependentUpon>33_文件选择.cs</DependentUpon>
     </Compile>
     <Compile Include="50_未保存提示.cs">
       <SubType>Form</SubType>
@@ -181,6 +187,9 @@
     <EmbeddedResource Include="13_参数设置.resx">
       <DependentUpon>13_参数设置.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="14_文件管理.resx">
+      <DependentUpon>14_文件管理.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="15_轴参数设置.resx">
       <DependentUpon>15_轴参数设置.cs</DependentUpon>
     </EmbeddedResource>
@@ -205,8 +214,8 @@
     <EmbeddedResource Include="32_文件选择.resx">
       <DependentUpon>32_文件选择.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="33.resx">
-      <DependentUpon>33.cs</DependentUpon>
+    <EmbeddedResource Include="33_文件选择.resx">
+      <DependentUpon>33_文件选择.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="50_未保存提示.resx">
       <DependentUpon>50_未保存提示.cs</DependentUpon>

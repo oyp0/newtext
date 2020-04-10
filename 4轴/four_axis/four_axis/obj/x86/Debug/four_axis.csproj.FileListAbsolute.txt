@@ -60,4 +60,5 @@ E:\Git\4轴\four_axis\four_axis\obj\x86\Debug\four_axis._53_删除提示.resourc
 E:\Git\4轴\four_axis\four_axis\obj\x86\Debug\four_axis._57_覆盖提示.resources
 E:\Git\4轴\four_axis\four_axis\obj\x86\Debug\four_axis._20_运动类型选择.resources
 E:\Git\4轴\four_axis\four_axis\obj\x86\Debug\four_axis._21_直线指令.resources
-E:\Git\4轴\four_axis\four_axis\obj\x86\Debug\four_axis._33.resources
+E:\Git\4轴\four_axis\four_axis\obj\x86\Debug\four_axis._14_文件管理.resources
+E:\Git\4轴\four_axis\four_axis\obj\x86\Debug\four_axis._33_文件选择.resources
