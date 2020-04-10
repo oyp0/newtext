@@ -94,6 +94,18 @@
     <Compile Include="18_IO映射.Designer.cs">
       <DependentUpon>18_IO映射.cs</DependentUpon>
     </Compile>
+    <Compile Include="20_运动类型选择.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="20_运动类型选择.Designer.cs">
+      <DependentUpon>20_运动类型选择.cs</DependentUpon>
+    </Compile>
+    <Compile Include="21_直线指令.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="21_直线指令.Designer.cs">
+      <DependentUpon>21_直线指令.cs</DependentUpon>
+    </Compile>
     <Compile Include="31_复位设置.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -105,6 +117,12 @@
     </Compile>
     <Compile Include="32_文件选择.Designer.cs">
       <DependentUpon>32_文件选择.cs</DependentUpon>
+    </Compile>
+    <Compile Include="33.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="33.Designer.cs">
+      <DependentUpon>33.cs</DependentUpon>
     </Compile>
     <Compile Include="50_未保存提示.cs">
       <SubType>Form</SubType>
@@ -175,11 +193,20 @@
     <EmbeddedResource Include="18_IO映射.resx">
       <DependentUpon>18_IO映射.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="20_运动类型选择.resx">
+      <DependentUpon>20_运动类型选择.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="21_直线指令.resx">
+      <DependentUpon>21_直线指令.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="31_复位设置.resx">
       <DependentUpon>31_复位设置.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="32_文件选择.resx">
       <DependentUpon>32_文件选择.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="33.resx">
+      <DependentUpon>33.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="50_未保存提示.resx">
       <DependentUpon>50_未保存提示.cs</DependentUpon>

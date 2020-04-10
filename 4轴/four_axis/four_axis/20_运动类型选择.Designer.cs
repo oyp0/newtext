@@ -53,7 +53,7 @@
             // 
             this.button9.BackColor = System.Drawing.Color.MediumTurquoise;
             this.button9.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button9.Location = new System.Drawing.Point(287, 148);
+            this.button9.Location = new System.Drawing.Point(305, 136);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(80, 38);
             this.button9.TabIndex = 150;
@@ -69,6 +69,7 @@
             this.button1.TabIndex = 151;
             this.button1.Text = "直线";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button3
             // 
@@ -147,6 +148,7 @@
             this.Controls.Add(this.button2);
             this.Name = "_20_运动类型选择";
             this.Text = "_20_运动类型选择";
+            this.Load += new System.EventHandler(this._20_运动类型选择_Load);
             this.ResumeLayout(false);
 
         }

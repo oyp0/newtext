@@ -184,7 +184,7 @@ namespace four_axis
         {
             if(filenum < recordCount)     
             {
-                if (filenum < 0)
+                if (filenum != 0)
                 {
                     //flash_read filetoflash(filenum-1),fileflag,filename,filelinepara,codespace(0,MAXLINENUM*LINESPACE)		'读取 
                     //DMCPY codetempspace(0),codespace(0),MAXLINENUM*LINESPACE	'赋值到临时数组
@@ -207,15 +207,6 @@ namespace four_axis
                 f52.ShowDialog();        
             }        
         }
-
-     
-
-
-
-    
-
-       
-
 
     }
 }

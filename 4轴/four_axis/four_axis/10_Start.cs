@@ -194,15 +194,15 @@ namespace four_axis
                         }
 
                         //执行任务1
-                        td_run = new Thread(task_run);
-                        if ((td_run.ThreadState & ThreadState.Unstarted) != 0 && f_run ==0)
-                        {
-                            td_run.Start(); //启动线程
-                            f_run = 1;  //标志启动了线程1
-                        }
-                        //timer2.Enabled = true;
-                        //timer2.Interval = 100;
-                        //timer2.Start();
+                        //td_run = new Thread(task_run);
+                        //if ((td_run.ThreadState & ThreadState.Unstarted) != 0 && f_run ==0)
+                        //{
+                        //    td_run.Start(); //启动线程
+                        //    f_run = 1;  //标志启动了线程1
+                        //}
+                        timer2.Enabled = true;
+                        timer2.Interval = 100;
+                        timer2.Start();
                     }
                     else
                     {
@@ -221,10 +221,10 @@ namespace four_axis
             else if (flag_state == 2)       //恢复
             {
                 //恢复任务1   RESUMETASK 1
-                if ((td_run.ThreadState & ThreadState.Suspended) != 0 && f_run == 1)
-                {
-                    td_run.Resume(); //恢复线程  
-                }
+                //if ((td_run.ThreadState & ThreadState.Suspended) != 0 && f_run == 1)
+                //{
+                //    td_run.Resume(); //恢复线程  
+                //}
                 //轴选择      base(0)
                 //运动恢复	  MOVE_RESUME            
 		        statename.Text ="运行中：执行";  //状态显示
@@ -244,10 +244,10 @@ namespace four_axis
             if (flag_state != 0)
             {
                 //暂停任务1  PAUSETASK 1
-                if ((td_run.ThreadState & ThreadState.WaitSleepJoin) != 0 && f_run == 1)
-                {
-                    td_run.Suspend(); //休眠线程
-                }
+                //if ((td_run.ThreadState & ThreadState.WaitSleepJoin) != 0 && f_run == 1)
+                //{
+                //    td_run.Suspend(); //休眠线程
+                //}
                 //轴选择      base(0)
                 //运动暂停	  move_pause(0) 
                 statename.Text = "运行中：暂停";  //状态显示
@@ -259,21 +259,21 @@ namespace four_axis
         private void button7_Click(object sender, EventArgs e)
         {
             // 停止任务1   stoptask 1
-            if ((td_run.ThreadState & ThreadState.WaitSleepJoin) != 0 && f_run == 1)
-            {
-                td_run.Abort(); //终止线程  
-                f_run = 0; //标志终止了线程1
-            } 
-            //timer2.Enabled = false;
-            //timer2.Stop();
+            //if ((td_run.ThreadState & ThreadState.WaitSleepJoin) != 0 && f_run == 1)
+            //{
+            //    td_run.Abort(); //终止线程  
+            //    f_run = 0; //标志终止了线程1
+            //} 
+            timer2.Enabled = false;
+            timer2.Stop();
             // 停止任务2   stoptask 2	
-            if ((td_home.ThreadState & ThreadState.WaitSleepJoin) != 0 && f_home == 1)
-            {
-                td_home.Abort(); //终止线程  
-                f_home = 0;  //标志终止了线程2
-            } 
-            //timer3.Enabled = false;
-            //timer3.Stop();
+            //if ((td_home.ThreadState & ThreadState.WaitSleepJoin) != 0 && f_home == 1)
+            //{
+            //    td_home.Abort(); //终止线程  
+            //    f_home = 0;  //标志终止了线程2
+            //} 
+            timer3.Enabled = false;
+            timer3.Stop();
 		    zmcaux.ZAux_Direct_Rapidstop(g_handle, 2);  //轴全部停止
             flag_state=0;	 //停止
 		    statename.Text="停止";
@@ -286,15 +286,15 @@ namespace four_axis
             if (flag_state == 0)
             {
                 //执行任务2
-                td_home = new Thread(task_home);
-                if ((td_home.ThreadState & ThreadState.Unstarted) != 0 && f_home == 0)
-                {
-                    td_home.Start(); //启动线程
-                    f_home = 1; //标志启动了线程2
-                }
-                //timer3.Enabled = true;
-                //timer3.Interval = 100;
-                //timer3.Start();
+                //td_home = new Thread(task_home);
+                //if ((td_home.ThreadState & ThreadState.Unstarted) != 0 && f_home == 0)
+                //{
+                //    td_home.Start(); //启动线程
+                //    f_home = 1; //标志启动了线程2
+                //}
+                timer3.Enabled = true;
+                timer3.Interval = 100;
+                timer3.Start();
             }
             else
             {
@@ -349,13 +349,12 @@ namespace four_axis
         {
             if (g_handle != (IntPtr)0)
             {
-                _32_文件选择 f32 = new _32_文件选择(this);
-                f32.g_handle = g_handle;
-                f32.vr = vr;
-                f32.runlinenum = runlinenum;
-                f32.filetempnum = filetempnum;
+                _33 f33 = new _33(this);
+                f33.g_handle = g_handle;
+                f33.runlinenum = runlinenum;
+                f33.filetempnum = filetempnum;
                 this.Hide();//隐藏现在这个窗口
-                f32.Show();//新窗口显现    
+                f33.Show();//新窗口显现    
             }
         }
 
@@ -453,6 +452,8 @@ namespace four_axis
         {
             task_home();
         }
+
+      
 
        
 
