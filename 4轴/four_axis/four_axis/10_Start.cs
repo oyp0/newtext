@@ -351,7 +351,8 @@ namespace four_axis
             {
                 _14_文件管理 f14 = new _14_文件管理(this);
                 f14.g_handle = g_handle;
-
+                f14.filetempnum = filetempnum;   
+                f14.filelinepara = filetempnum;   //总行
                 this.Hide();//隐藏现在这个窗口
                 f14.Show();//新窗口显现    
             }

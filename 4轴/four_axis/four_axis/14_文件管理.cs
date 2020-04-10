@@ -12,6 +12,11 @@ namespace four_axis
     public partial class _14_文件管理 : Form
     {
         public IntPtr g_handle;         //链接返回的句柄，可以作为卡号
+        public int filetempnum = 0;
+        public int filelinepara = 0;   //总行
+        public string codename = "无";  //类型  20界面
+
+
 
         public int pagenum = 0;  //页数
         public int filenum = 1; //文件数
@@ -28,7 +33,24 @@ namespace four_axis
         public int FILEFLASHFLAG=13941;	 //读写标志
         int asd;
 
+         public int linenum;	//总行数，当前行号
+
         public string filename;       //文件名
+
+        int winnum=0;    //窗口30要记得传值过来哦  
+
+
+        ////////////行编辑////////////////////
+	
+        public int MAXLINENUM=100;	//允许最大行数
+        public int LINESTART=30;	//flash指令起始地址
+        public int LINESPACE=20;	//行空间
+
+        public int[] templine= new int[30];	//临时
+	
+
+
+
 
         private _10Start return_10Start = null;
         public _14_文件管理(_10Start F10)
@@ -267,29 +289,6 @@ namespace four_axis
                 f52.V1 = "最后一页";
                 f52.ShowDialog();
             }
-           
-
-
-
-
-            if ((filenum <= totalfilenum) && (totalfilenum % ONEPAGENUM == 0) && (totalfilenum < FILENUMMAX))
-            {
-                asd = 123;
-            }
-
-            if ((pagenum <= totalpagenum) || (asd == 123))
-            {
-                pagenum = pagenum + 1;
-                filenum = (pagenum - 1) * ONEPAGENUM + 1;
-                deal_fileflash(0);
-            }
-            else
-            {
-                Console.WriteLine("最后一页");
-                _52_操作提示 f52 = new _52_操作提示();
-                f52.V1 = "最后一页";
-                f52.ShowDialog();
-            }
         }
 
         //新建
@@ -301,12 +300,12 @@ namespace four_axis
                 {
                     fileflag = FILEFLASHFLAG;
                     //flash_read i+1,fileflag
-                    if (fileflag != FILEFLASHFLAG)   //未使用
+                    if (fileflag == FILEFLASHFLAG)   //未使用
                     {
                         filetoflash[totalfilenum] = i + 1;   //ID表存flash块号
                         totalfilenum = totalfilenum + 1;	//当前总数+1
                         filenum = totalfilenum;			//当前选择ID更新 
-                        // filename="New"+tostr(filenum,1,0);	//文件名初始值
+                        filename="New";	//文件名初始值
                         //   FLASH_WRITE i+1,FILEFLASHFLAG,filename,filelinepara,setzero;	//占用flash块,
                         //标志，   文件名，   指令允许，  指令空间， 指令起始， 数据0
                         pagenum = (filenum - 1) / ONEPAGENUM + 1;
@@ -443,6 +442,124 @@ namespace four_axis
                 deal_fileslt(5);
                 MessageBox.Show(buttonText);
             }
+        }
+
+        //刷新显示
+        private void show_code(int num)
+        {
+            if (num == 0)
+            {
+                codename = "无";
+                //进入19界面
+            }
+            else if (num == 1)
+            {
+                codename = "直线";
+                //21进入直线界面
+            }
+            else if (num == 2)
+            {
+                codename = "三点画弧";
+                //22进入三点画弧
+            }
+            else if (num == 3)
+            {
+                codename = "延时";
+                //23进入延时界面
+            }
+            else if (num == 4)
+            {
+                codename = "多个输出";
+                //24进入多个输出界面
+            }
+            else if (num == 5)
+            {
+                codename = "输出延时复位";
+                //25进入输出延时复位界面
+            }
+            else if (num == 6)
+            {
+                codename = "圆心画弧";
+                //26进入圆心画弧界面
+            }
+            else if (num == 7)
+            {
+                codename = "绝对模式";
+                //27进入绝对模式界面
+            }
+            else if (num == 8)
+            {
+                codename = "相对模式";
+                //28进入相对模式界面
+            }
+
+        }
+
+
+        //加载
+        private void deal_lineload(int num)
+        {
+            if(num<=filelinepara)
+            {
+                	//dmcpy templine(0),codespace((num-1)*LINESPACE),LINESPACE;	'复制到临时数组    
+                	linenum=num;	//浏览界面跳转用
+                    show_code(templine[0]);	//刷新显示
+            }
+            else if(num>filelinepara && winnum==30)  //只有游览界面才提示
+            {
+                Console.WriteLine("超过文件总行数");
+                _52_操作提示 f52 = new _52_操作提示();
+                f52.V1 = "超过文件总行数";
+                f52.ShowDialog();
+            }
+          
+        }
+
+
+        //游览
+        private void button9_Click(object sender, EventArgs e)
+        {
+            if (filenum <= totalfilenum)
+            {
+                if (filenum != 0)
+                {
+                    //flash_read filetoflash(filenum-1),fileflag,filename,filelinepara,codespace(0,MAXLINENUM*LINESPACE)		'读取
+                    //DMCPY codetempspace(0),codespace(0),MAXLINENUM*LINESPACE	'赋值到临时数组
+                    //dmcpy filelintempepara(0),filelinepara(0),10
+                    //DMCPY filejudname(0),filename(0),FILENAMELENG
+
+                    linenum=1;
+                    _19_文件编辑 f19 = new _19_文件编辑(this);
+                    f19.g_handle = g_handle;
+                    f19.codename = codename;
+                    f19.filenum = filenum;
+                    f19.filelinepara = filelinepara;
+                    this.Hide();//隐藏现在这个窗口
+                    f19.Show();//新窗口显现    
+				   // HMI_SHOWWINDOW(19,0)
+                    deal_lineload(linenum);	//加载第一行
+                    this.Close();
+                    this.return_10Start.filetempnum = filetempnum;
+                    this.return_10Start.Visible = true;
+
+                    Console.WriteLine("当前编辑 filenum={0}\filename={1}", filenum, filename);
+                }
+                else
+                {
+                    Console.WriteLine("未选择ID");
+                    _52_操作提示 f52 = new _52_操作提示();
+                    f52.V1 = "未选择文件ID";
+                    f52.ShowDialog();
+                }
+            }
+            else
+            {
+                Console.WriteLine("文件不存在");
+                _52_操作提示 f52 = new _52_操作提示();
+                f52.V1 = "文件不存在";
+                f52.ShowDialog();
+            }
+
         }
 
 

@@ -62,3 +62,4 @@ E:\Git\4轴\four_axis\four_axis\obj\x86\Debug\four_axis._20_运动类型选择.r
 E:\Git\4轴\four_axis\four_axis\obj\x86\Debug\four_axis._21_直线指令.resources
 E:\Git\4轴\four_axis\four_axis\obj\x86\Debug\four_axis._14_文件管理.resources
 E:\Git\4轴\four_axis\four_axis\obj\x86\Debug\four_axis._33_文件选择.resources
+E:\Git\4轴\four_axis\four_axis\obj\x86\Debug\four_axis._19_文件编辑.resources

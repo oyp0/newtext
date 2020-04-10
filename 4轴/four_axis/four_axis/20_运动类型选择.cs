@@ -11,6 +11,8 @@ namespace four_axis
 {
     public partial class _20_运动类型选择 : Form
     {
+        public IntPtr g_handle;         //链接返回的句柄，可以作为卡号
+
         public int MAXLINENUM=100;	//允许最大行数
         public int LINESTART=30;		//flash指令起始地址
         public int LINESPACE=20;		//行空间
@@ -26,9 +28,12 @@ namespace four_axis
 
         public int filelinepara = 0;   //总行
 
-        public _20_运动类型选择()
+
+        private _19_文件编辑 return_19_文件编辑 = null;
+        public _20_运动类型选择(_19_文件编辑 F19)
         {
             InitializeComponent();
+            this.return_19_文件编辑 = F19;
         }
 
         private void _20_运动类型选择_Load(object sender, EventArgs e)
@@ -115,5 +120,12 @@ namespace four_axis
 
             deal_lineload(linenum);
         }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+      
     }
 }
