@@ -74,7 +74,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(244, 162);
             this.dataGridView1.TabIndex = 22;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
-      
             // 
             // Column1
             // 
@@ -91,7 +90,7 @@
             // label2
             // 
             this.label2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(239, 51);
+            this.label2.Location = new System.Drawing.Point(199, 51);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(18, 28);
             this.label2.TabIndex = 21;
@@ -151,20 +150,16 @@
             this.labPageIndex.Location = new System.Drawing.Point(114, 48);
             this.labPageIndex.Multiline = true;
             this.labPageIndex.Name = "labPageIndex";
-            this.labPageIndex.Size = new System.Drawing.Size(119, 31);
+            this.labPageIndex.Size = new System.Drawing.Size(79, 31);
             this.labPageIndex.TabIndex = 23;
             // 
             // labRecordCount
             // 
-            this.labRecordCount.Location = new System.Drawing.Point(263, 48);
+            this.labRecordCount.Location = new System.Drawing.Point(223, 48);
             this.labRecordCount.Multiline = true;
             this.labRecordCount.Name = "labRecordCount";
-            this.labRecordCount.Size = new System.Drawing.Size(51, 31);
+            this.labRecordCount.Size = new System.Drawing.Size(77, 31);
             this.labRecordCount.TabIndex = 24;
-            // 
-            // timer1
-            // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // _33
             // 

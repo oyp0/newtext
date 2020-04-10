@@ -124,8 +124,8 @@ namespace four_axis
              deal_fileflash(0);
 
             labPageIndex.Text = "当前页: " + pagenum.ToString(); //当前页
-         //   labRecordCount.Text = totalfilenum.ToString() + " 行";//总记录数
-            labRecordCount.Text = totalpagenum.ToString();//总页
+         // labRecordCount.Text = totalfilenum.ToString() + " 行";//总记录数
+            labRecordCount.Text = "总页: " + totalpagenum.ToString();//总页
         }
 
 
@@ -155,14 +155,7 @@ namespace four_axis
             }
         }
 
-        private void deal_fileslt(int num) //选择id
-        {
-            if ((num + ONEPAGENUM * (pagenum - 1)) <= (totalfilenum + 1))
-            {
-                filenum = num + ONEPAGENUM * (pagenum - 1);
-            }
-        }
-
+      
 
         //上一页
         private void btnPrev_Click(object sender, EventArgs e)
@@ -170,6 +163,9 @@ namespace four_axis
             if (pagenum == 1)
             {
                 Console.WriteLine("第一页");
+                _52_操作提示 f52 = new _52_操作提示();
+                f52.V1 = "第一页";
+                f52.ShowDialog();
                 return; 
             }
             pagenum--;
@@ -245,17 +241,23 @@ namespace four_axis
             this.return_10Start.Visible = true;
         }
 
-        //定时器
-        private void timer1_Tick(object sender, EventArgs e)
+
+        private void deal_fileslt(int num) //选择id
         {
-
+            if ((num + ONEPAGENUM * (pagenum - 1)) <= (totalfilenum + 1))
+            {
+                filenum = num + ONEPAGENUM * (pagenum - 1);   //获取文件数
+                filename = this.dataGridView1.Rows[num-1].Cells[1].Value.ToString(); //获取文件名
+            }
         }
-
 
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             string buttonText = this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+        
+
+          //  
             int t = int.Parse(buttonText)%5;
             if (t == 1)
             {
