@@ -28,7 +28,7 @@ namespace four_axis
 
         //////////////游览操作///
          public int BROWSEPAGEGNUM=5;
-	     public int browseshowid(5);
+	     public int[] browseshowid = new int[5];
          public int  browsepage=1;
 
 

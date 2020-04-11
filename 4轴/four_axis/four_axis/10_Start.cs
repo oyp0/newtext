@@ -38,13 +38,18 @@ namespace four_axis
 
         public float[] table = new float[4];  //xyzu的坐标 
 
+        public int manulradio = 100;		//初始速度比
+
         private Form1 returnForm1 = null;
+
         public _10Start(Form1 F1)
         {
             InitializeComponent();
             // 接受Form1对象
             this.returnForm1 = F1;
         }
+
+
 
         Thread td_run; 
         Thread td_home;
@@ -353,6 +358,7 @@ namespace four_axis
                 f14.g_handle = g_handle;
                 f14.filetempnum = filetempnum;   
                 f14.filelinepara = filetempnum;   //总行
+                f14.vr = vr;
                 this.Hide();//隐藏现在这个窗口
                 f14.Show();//新窗口显现    
             }

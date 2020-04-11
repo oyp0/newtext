@@ -16,8 +16,8 @@ namespace four_axis
         public IntPtr g_handle;         //链接返回的句柄，可以作为卡号
         public int AXISMAX = 4;		//轴数
         public int AXISSPACE = 25;	    //每轴参数空间
-        public float[] vr = new float[500];  //数组
         public float f1;   //中间变量
+        public float[] vr = new float[500];  //数组
 
         public int[] manulmode = new int[4];  //模式
         public float[] manulpos = new float[4];   //位置
@@ -88,7 +88,6 @@ namespace four_axis
                     iresult = zmcaux.ZAux_Direct_Single_Cancel(g_handle, axisnum, 2);
                 }	
             }
-            //MessageBox.Show("停");
         }
 
         public void deal_manulrun(int axisnum)  //轴号
@@ -364,7 +363,12 @@ namespace four_axis
         private void button19_Click(object sender, EventArgs e)
         {
             this.Close();
+            this.return_10Start.manulradio = manulradio;
             this.return_10Start.Visible = true;
-        }   
+        }
+
+     
+
+        
     }
 }

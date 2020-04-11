@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
@@ -53,6 +54,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // textBox1
@@ -63,6 +65,8 @@
             this.textBox1.Size = new System.Drawing.Size(87, 29);
             this.textBox1.TabIndex = 43;
             this.textBox1.Text = "0";
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // textBox2
             // 
@@ -72,6 +76,8 @@
             this.textBox2.Size = new System.Drawing.Size(87, 29);
             this.textBox2.TabIndex = 44;
             this.textBox2.Text = "0";
+            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.textBox2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox2_KeyPress);
             // 
             // textBox3
             // 
@@ -81,6 +87,8 @@
             this.textBox3.Size = new System.Drawing.Size(87, 29);
             this.textBox3.TabIndex = 45;
             this.textBox3.Text = "0";
+            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
+            this.textBox3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox3_KeyPress);
             // 
             // textBox4
             // 
@@ -90,6 +98,8 @@
             this.textBox4.Size = new System.Drawing.Size(87, 29);
             this.textBox4.TabIndex = 46;
             this.textBox4.Text = "0";
+            this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
+            this.textBox4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox4_KeyPress);
             // 
             // button8
             // 
@@ -100,6 +110,8 @@
             this.button8.TabIndex = 71;
             this.button8.Text = "U+";
             this.button8.UseVisualStyleBackColor = true;
+            this.button8.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button8_MouseDown);
+            this.button8.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button8_MouseUp);
             // 
             // button7
             // 
@@ -110,6 +122,8 @@
             this.button7.TabIndex = 70;
             this.button7.Text = "U-";
             this.button7.UseVisualStyleBackColor = true;
+            this.button7.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button7_MouseDown);
+            this.button7.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button7_MouseUp);
             // 
             // button6
             // 
@@ -120,6 +134,8 @@
             this.button6.TabIndex = 69;
             this.button6.Text = "Z+";
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button6_MouseDown);
+            this.button6.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button6_MouseUp);
             // 
             // button5
             // 
@@ -130,6 +146,8 @@
             this.button5.TabIndex = 68;
             this.button5.Text = "Z-";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button5_MouseDown);
+            this.button5.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button5_MouseUp);
             // 
             // button4
             // 
@@ -140,6 +158,8 @@
             this.button4.TabIndex = 67;
             this.button4.Text = "Y+";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button4_MouseDown);
+            this.button4.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button4_MouseUp);
             // 
             // button3
             // 
@@ -150,6 +170,8 @@
             this.button3.TabIndex = 66;
             this.button3.Text = "Y-";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button3_MouseDown);
+            this.button3.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button3_MouseUp);
             // 
             // button2
             // 
@@ -160,6 +182,8 @@
             this.button2.TabIndex = 65;
             this.button2.Text = "X+";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button2_MouseDown);
+            this.button2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button2_MouseUp);
             // 
             // button1
             // 
@@ -170,6 +194,8 @@
             this.button1.TabIndex = 64;
             this.button1.Text = "X-";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button1_MouseDown);
+            this.button1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button1_MouseUp);
             // 
             // textBox8
             // 
@@ -215,6 +241,8 @@
             this.textBox9.Size = new System.Drawing.Size(87, 29);
             this.textBox9.TabIndex = 81;
             this.textBox9.Text = "0";
+            this.textBox9.TextChanged += new System.EventHandler(this.textBox9_TextChanged);
+            this.textBox9.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox9_KeyPress);
             // 
             // button9
             // 
@@ -290,6 +318,10 @@
             this.label7.TabIndex = 89;
             this.label7.Text = "当前坐标";
             // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // _21_直线指令
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -322,6 +354,7 @@
             this.Controls.Add(this.textBox1);
             this.Name = "_21_直线指令";
             this.Text = "_21_直线指令";
+            this.Load += new System.EventHandler(this._21_直线指令_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -354,5 +387,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Timer timer1;
     }
 }

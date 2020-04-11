@@ -195,6 +195,7 @@ namespace four_axis
                 _52_操作提示 f52 = new _52_操作提示();
                 f52.V1 = "最后一页";
                 f52.ShowDialog();
+                return;
             }           
         }
 

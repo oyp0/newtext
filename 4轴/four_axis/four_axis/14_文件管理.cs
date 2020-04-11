@@ -16,7 +16,7 @@ namespace four_axis
         public int filelinepara = 0;   //总行
         public string codename = "无";  //类型  20界面
 
-
+        public float[] vr = new float[500];  //数组
 
         public int pagenum = 0;  //页数
         public int filenum = 1; //文件数
@@ -47,8 +47,8 @@ namespace four_axis
         public int LINESPACE=20;	//行空间
 
         public int[] templine= new int[30];	//临时
-	
 
+         public int nCurrent = 0;      //当前记录行
 
 
 
@@ -120,6 +120,7 @@ namespace four_axis
 
             int beginRecord;    //开始指针
             int endRecord;      //结束指针
+
             DataTable dtTemp;
             dtTemp = table.Clone();
 
@@ -134,7 +135,7 @@ namespace four_axis
             for (int i = beginRecord; i < endRecord; i++)
             {
                 dtTemp.ImportRow(table.Rows[i]);
-            }
+            }     
 
             dataGridView1.Rows.Clear();
 
@@ -181,7 +182,6 @@ namespace four_axis
         {
 
             int row = this.dataGridView1.CurrentRow.Index - 1;
-            MessageBox.Show(row.ToString());
             if (row < 0)
             {
                 Console.WriteLine("第一个");
@@ -190,25 +190,29 @@ namespace four_axis
                 f52.ShowDialog();
             }
             else
-            this.dataGridView1.CurrentCell = this.dataGridView1[0, row];
+            {
+                deal_fileflash(0);
+                filenum = (pagenum - 1) * ONEPAGENUM + row + 1;
+                this.dataGridView1.CurrentCell = this.dataGridView1[0, row];
+            }
 
-            //if(filenum > 1)
+            //if (filenum > 1)
             //{
-            //    filenum=filenum-1;
+            //    filenum = filenum - 1;
             //    int temppage;
             //    temppage = (filenum - 1) / ONEPAGENUM + 1;
-            //    if(pagenum != temppage)
+            //    if (pagenum != temppage)
             //    {
-            //        pagenum=temppage;
-            //        deal_fileflash(0);		
+            //        pagenum = temppage;
+            //        deal_fileflash(0);
             //    }
             //}
             //else
             //{
-            //     Console.WriteLine("第一个");
-            //     _52_操作提示 f52 = new _52_操作提示();
-            //     f52.V1 = "第一个";
-            //     f52.ShowDialog();
+            //    Console.WriteLine("第一个");
+            //    _52_操作提示 f52 = new _52_操作提示();
+            //    f52.V1 = "第一个";
+            //    f52.ShowDialog();
             //}            
         }
         
@@ -216,17 +220,21 @@ namespace four_axis
         private void button2_Click(object sender, EventArgs e)
         {
             int row = this.dataGridView1.CurrentRow.Index + 1;
-            MessageBox.Show(row.ToString());
             if (row > this.dataGridView1.RowCount - 1)
             {
                 Console.WriteLine("最后一个");
                 _52_操作提示 f52 = new _52_操作提示();
                 f52.V1 = "最后一个";
-                f52.ShowDialog();    
+                f52.ShowDialog();
             }
             else
-            this.dataGridView1.CurrentCell = this.dataGridView1[0, row];
-
+            {
+                deal_fileflash(0);
+                filenum = (pagenum - 1) * ONEPAGENUM + row + 1;
+                this.dataGridView1.CurrentCell = this.dataGridView1[0, row];    
+            }
+         
+            
 
             //if((filenum<(totalfilenum+1))&&(filenum < FILENUMMAX))
             //{
@@ -261,9 +269,11 @@ namespace four_axis
                 _52_操作提示 f52 = new _52_操作提示();
                 f52.V1 = "第一页";
                 f52.ShowDialog();
+                return;
             }
             pagenum--;
             filenum = (pagenum - 1) * ONEPAGENUM + 1;
+            MessageBox.Show(filenum.ToString());
             LoadPage();       
         }
 
@@ -279,7 +289,9 @@ namespace four_axis
             {
                 pagenum++;
                 filenum = (pagenum - 1) * ONEPAGENUM + 1;
+                MessageBox.Show(filenum.ToString());
                 LoadPage();
+
 
             }
             else
@@ -288,6 +300,7 @@ namespace four_axis
                 _52_操作提示 f52 = new _52_操作提示();
                 f52.V1 = "最后一页";
                 f52.ShowDialog();
+                return;
             }
         }
 
@@ -296,32 +309,43 @@ namespace four_axis
         {
             if (totalfilenum < FILENUMMAX)
             {
-                for (int i = 0; i < FILENUMMAX; i++)
-                {
-                    fileflag = FILEFLASHFLAG;
-                    //flash_read i+1,fileflag
-                    if (fileflag == FILEFLASHFLAG)   //未使用
-                    {
-                        filetoflash[totalfilenum] = i + 1;   //ID表存flash块号
-                        totalfilenum = totalfilenum + 1;	//当前总数+1
-                        filenum = totalfilenum;			//当前选择ID更新 
-                        filename="New";	//文件名初始值
-                        //   FLASH_WRITE i+1,FILEFLASHFLAG,filename,filelinepara,setzero;	//占用flash块,
-                        //标志，   文件名，   指令允许，  指令空间， 指令起始， 数据0
-                        pagenum = (filenum - 1) / ONEPAGENUM + 1;
-                        totalpagenum = (totalfilenum - 1) / ONEPAGENUM + 1;
-                        break;
-                    }
-                }
-                fileflag = 0;
-                deal_fileflash(0);
+
+                filename = "New";	//文件名初始值  
             }
             else
             {
                 _52_操作提示 f52 = new _52_操作提示();
                 f52.V1 = "文件已满";
-                f52.ShowDialog();    
+                f52.ShowDialog();      
             }
+            //if (totalfilenum < FILENUMMAX)
+            //{
+            //    for (int i = 0; i < FILENUMMAX; i++)
+            //    {
+            //        fileflag = FILEFLASHFLAG;
+            //        //flash_read i+1,fileflag
+            //        if (fileflag == FILEFLASHFLAG)   //未使用
+            //        {
+            //            filetoflash[totalfilenum] = i + 1;   //ID表存flash块号
+            //            totalfilenum = totalfilenum + 1;	//当前总数+1
+            //            filenum = totalfilenum;			//当前选择ID更新 
+            //            filename="New";	//文件名初始值
+            //            //   FLASH_WRITE i+1,FILEFLASHFLAG,filename,filelinepara,setzero;	//占用flash块,
+            //            //标志，   文件名，   指令允许，  指令空间， 指令起始， 数据0
+            //            pagenum = (filenum - 1) / ONEPAGENUM + 1;
+            //            totalpagenum = (totalfilenum - 1) / ONEPAGENUM + 1;
+            //            break;
+            //        }
+            //    }
+            //    fileflag = 0;
+            //    deal_fileflash(0);
+            //}
+            //else
+            //{
+            //    _52_操作提示 f52 = new _52_操作提示();
+            //    f52.V1 = "文件已满";
+            //    f52.ShowDialog();    
+            //}
                 
         }
 
