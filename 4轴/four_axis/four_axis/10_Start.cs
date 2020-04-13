@@ -31,7 +31,6 @@ namespace four_axis
         public int[] flag_erroshow = new int[100];
         public int[] zeroerror = new int[100];
         public int flag_erroryes = 0;
-        public string errortext = "使用正常";
         public string errortemptext = "";
 
 
@@ -461,11 +460,10 @@ namespace four_axis
         private void task_error()
         {
             while (true)
-            { 
-                zmcaux.ZAux_Direct_GetAxisStatus(g_handle, 0, ref piValue);
-
-                reg = piValue & Math.Pow(2, 15);  //22位
+            {
                 //轴0
+                zmcaux.ZAux_Direct_GetAxisStatus(g_handle, 0, ref piValue);
+                reg = piValue & int.Parse(Math.Pow(2, 21).ToString());  //22位           
                // if (read_bit2(22, axisstatus(0)))
                 if (reg == 1)
                 {
@@ -483,13 +481,305 @@ namespace four_axis
                     flag_erroshow[0]=0;	//清除显示标志
                     int num;
                     //num = STRFIND(errortemptext,",轴0伺服报警")		'报警取消时删除
+                    num = errortemptext.indexof(",轴0伺服报警");
                     if (num != -1)
                     { 
                        // DMDEL  errortemptext(num,num+11)	'只删除一次
                     }
                 }
 
+                zmcaux.ZAux_Direct_GetAxisStatus(g_handle, 0, ref piValue);
+                reg = piValue & int.Parse(Math.Pow(2, 3).ToString());  //4位
+                if (reg == 1)
+                {
+                    flag_error[1] = 1;
+                    deal_stop();  //停止运动
+                    if (flag_erroshow[1] != 231)
+                    {
+                        errortemptext = errortemptext + "," + "轴0正限位报警";
+                        flag_erroshow[1] = 231;
+                        Console.WriteLine("轴0正限位报警");
+                    }
+
+                }
+                else
+                {
+                    flag_erroshow[1] = 0;	//清除显示标志
+                    int num;
+                    //num = STRFIND(errortemptext,",轴0正限位报警")		
+                    num = errortemptext.indexof(",轴0正限位报警");
+                    if (num != -1)
+                    {
+                        // DMDEL  errortemptext(num,num+13)	'只刷新一次
+                    }   
+                }
+
+                zmcaux.ZAux_Direct_GetAxisStatus(g_handle, 0, ref piValue);
+                reg = piValue & int.Parse(Math.Pow(2, 4).ToString());  //5位
+                if (reg == 1)
+                {
+                    flag_error[2] = 1;
+                    deal_stop();  //停止运动
+                    if (flag_erroshow[2] != 231)
+                    {
+                        errortemptext = errortemptext + "," + "轴0负限位报警";
+                        flag_erroshow[2] = 231;
+                        Console.WriteLine("轴0负限位报警");
+                    }
+
+                }
+                else
+                {
+                    flag_erroshow[2] = 0;	//清除显示标志
+                    int num;
+                    //num = STRFIND(errortemptext,",轴0负限位报警")		
+                    num = errortemptext.indexof(",轴0负限位报警");
+                    if (num != -1)
+                    {
+                        // DMDEL  errortemptext(num,num+13)	'只刷新一次
+                    }
+                }
+
                 
+
+                //轴1
+                zmcaux.ZAux_Direct_GetAxisStatus(g_handle, 1, ref piValue);
+                reg = piValue & int.Parse(Math.Pow(2, 21).ToString());  //22位
+                // if (read_bit2(22, axisstatus(0)))
+                if (reg == 1)
+                {
+                    flag_error[5] = 1;		//报警标志
+                    deal_stop();  //停止运动
+                    if (flag_erroshow[5] != 231) //只加一次
+                    {
+                        errortemptext = errortemptext + "," + "轴0伺服报警";
+                        flag_erroshow[5] = 231;
+                        Console.WriteLine("轴0伺服报警");
+                    }
+                }
+                else
+                {
+                    flag_erroshow[5] = 0;	//清除显示标志
+                    int num;
+                    //num = STRFIND(errortemptext,",轴0伺服报警")		'报警取消时删除
+                    num = errortemptext.indexof(",轴0伺服报警");
+                    if (num != -1)
+                    {
+                        // DMDEL  errortemptext(num,num+11)	'只删除一次
+                    }
+                }
+
+                zmcaux.ZAux_Direct_GetAxisStatus(g_handle, 1, ref piValue);
+                reg = piValue & int.Parse(Math.Pow(2, 3).ToString());  //4位
+                if (reg == 1)
+                {
+                    flag_error[6] = 1;
+                    deal_stop();  //停止运动
+                    if (flag_erroshow[6] != 231)
+                    {
+                        errortemptext = errortemptext + "," + "轴0正限位报警";
+                        flag_erroshow[6] = 231;
+                        Console.WriteLine("轴0正限位报警");
+                    }
+
+                }
+                else
+                {
+                    flag_erroshow[6] = 0;	//清除显示标志
+                    int num;
+                    //num = STRFIND(errortemptext,",轴0正限位报警")		
+                    num = errortemptext.indexof(",轴0正限位报警");
+                    if (num != -1)
+                    {
+                        // DMDEL  errortemptext(num,num+13)	'只刷新一次
+                    }
+                }
+
+                zmcaux.ZAux_Direct_GetAxisStatus(g_handle, 1, ref piValue);
+                reg = piValue & int.Parse(Math.Pow(2, 4).ToString());  //5位
+                if (reg == 1)
+                {
+                    flag_error[7] = 1;
+                    deal_stop();  //停止运动
+                    if (flag_erroshow[7] != 231)
+                    {
+                        errortemptext = errortemptext + "," + "轴0负限位报警";
+                        flag_erroshow[7] = 231;
+                        Console.WriteLine("轴0负限位报警");
+                    }
+
+                }
+                else
+                {
+                    flag_erroshow[7] = 0;	//清除显示标志
+                    int num;
+                    //num = STRFIND(errortemptext,",轴0负限位报警")		
+                    num = errortemptext.indexof(",轴0负限位报警");
+                    if (num != -1)
+                    {
+                        // DMDEL  errortemptext(num,num+13)	'只刷新一次
+                    }
+                }
+
+
+                //轴2
+                zmcaux.ZAux_Direct_GetAxisStatus(g_handle, 2, ref piValue);
+                reg = piValue & int.Parse(Math.Pow(2, 21).ToString());  //22位
+                // if (read_bit2(22, axisstatus(0)))
+                if (reg == 1)
+                {
+                    flag_error[10] = 1;		//报警标志
+                    deal_stop();  //停止运动
+                    if (flag_erroshow[10] != 231) //只加一次
+                    {
+                        errortemptext = errortemptext + "," + "轴0伺服报警";
+                        flag_erroshow[10] = 231;
+                        Console.WriteLine("轴0伺服报警");
+                    }
+                }
+                else
+                {
+                    flag_erroshow[10] = 0;	//清除显示标志
+                    int num;
+                    //num = STRFIND(errortemptext,",轴0伺服报警")		'报警取消时删除
+                    num = errortemptext.indexof(",轴0伺服报警");
+                    if (num != -1)
+                    {
+                        // DMDEL  errortemptext(num,num+11)	'只删除一次
+                    }
+                }
+
+                zmcaux.ZAux_Direct_GetAxisStatus(g_handle, 2, ref piValue);
+                reg = piValue & int.Parse(Math.Pow(2, 3).ToString());  //4位
+                if (reg == 1)
+                {
+                    flag_error[11] = 1;
+                    deal_stop();  //停止运动
+                    if (flag_erroshow[11] != 231)
+                    {
+                        errortemptext = errortemptext + "," + "轴0正限位报警";
+                        flag_erroshow[11] = 231;
+                        Console.WriteLine("轴0正限位报警");
+                    }
+
+                }
+                else
+                {
+                    flag_erroshow[11] = 0;	//清除显示标志
+                    int num;
+                    //num = STRFIND(errortemptext,",轴0正限位报警")		
+                    num = errortemptext.indexof(",轴0正限位报警");
+                    if (num != -1)
+                    {
+                        // DMDEL  errortemptext(num,num+13)	'只刷新一次
+                    }
+                }
+
+                zmcaux.ZAux_Direct_GetAxisStatus(g_handle, 2, ref piValue);
+                reg = piValue & int.Parse(Math.Pow(2, 4).ToString());  //5位
+                if (reg == 1)
+                {
+                    flag_error[12] = 1;
+                    deal_stop();  //停止运动
+                    if (flag_erroshow[12] != 231)
+                    {
+                        errortemptext = errortemptext + "," + "轴0负限位报警";
+                        flag_erroshow[12] = 231;
+                        Console.WriteLine("轴0负限位报警");
+                    }
+
+                }
+                else
+                {
+                    flag_erroshow[12] = 0;	//清除显示标志
+                    int num;
+                    //num = STRFIND(errortemptext,",轴0负限位报警")		
+                    num = errortemptext.indexof(",轴0负限位报警");
+                    if (num != -1)
+                    {
+                        // DMDEL  errortemptext(num,num+13)	'只刷新一次
+                    }
+                }
+
+
+                //轴3
+                zmcaux.ZAux_Direct_GetAxisStatus(g_handle, 3, ref piValue);
+                reg = piValue & int.Parse(Math.Pow(2, 21).ToString());  //22位
+                // if (read_bit2(22, axisstatus(0)))
+                if (reg == 1)
+                {
+                    flag_error[15] = 1;		//报警标志
+                    deal_stop();  //停止运动
+                    if (flag_erroshow[15] != 231) //只加一次
+                    {
+                        errortemptext = errortemptext + "," + "轴0伺服报警";
+                        flag_erroshow[15] = 231;
+                        Console.WriteLine("轴0伺服报警");
+                    }
+                }
+                else
+                {
+                    flag_erroshow[15] = 0;	//清除显示标志
+                    int num;
+                    //num = STRFIND(errortemptext,",轴0伺服报警")		'报警取消时删除
+                    num = errortemptext.indexof(",轴0伺服报警");
+                    if (num != -1)
+                    {
+                        // DMDEL  errortemptext(num,num+11)	'只删除一次
+                    }
+                }
+
+                zmcaux.ZAux_Direct_GetAxisStatus(g_handle, 3, ref piValue);
+                reg = piValue & int.Parse(Math.Pow(2, 3).ToString());  //4位
+                if (reg == 1)
+                {
+                    flag_error[16] = 1;
+                    deal_stop();  //停止运动
+                    if (flag_erroshow[16] != 231)
+                    {
+                        errortemptext = errortemptext + "," + "轴0正限位报警";
+                        flag_erroshow[16] = 231;
+                        Console.WriteLine("轴0正限位报警");
+                    }
+
+                }
+                else
+                {
+                    flag_erroshow[16] = 0;	//清除显示标志
+                    int num;
+                    //num = STRFIND(errortemptext,",轴0正限位报警")		
+                    num = errortemptext.indexof(",轴0正限位报警");
+                    if (num != -1)
+                    {
+                        // DMDEL  errortemptext(num,num+13)	'只刷新一次
+                    }
+                }
+
+                zmcaux.ZAux_Direct_GetAxisStatus(g_handle, 3, ref piValue);
+                reg = piValue & int.Parse(Math.Pow(2, 4).ToString());  //5位
+                if (reg == 1)
+                {
+                    flag_error[17] = 1;
+                    deal_stop();  //停止运动
+                    if (flag_erroshow[17] != 231)
+                    {
+                        errortemptext = errortemptext + "," + "轴0负限位报警";
+                        flag_erroshow[17] = 231;
+                        Console.WriteLine("轴0负限位报警");
+                    }
+
+                }
+                else
+                {
+                    flag_erroshow[17] = 0;	//清除显示标志
+                    int num;
+                    //num = STRFIND(errortemptext,",轴0负限位报警")		
+                    num = errortemptext.indexof(",轴0负限位报警");
+                    if (num != -1)
+                    {
+                        // DMDEL  errortemptext(num,num+13)	'只刷新一次
+                    }
+                }
 
             }
         }
