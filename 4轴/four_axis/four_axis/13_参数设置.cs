@@ -16,6 +16,7 @@ namespace four_axis
         public IntPtr g_handle;         //链接返回的句柄，可以作为卡号
         public float[] vr = new float[500];  //数组
         public int PARANUM;           //轴参数空间
+        public float[] paratemp = new float[150];   //临时存储，用于不保存时还原参数
 
         private _10Start return_10Start = null;
         public _13参数设置(_10Start F10)
@@ -95,6 +96,7 @@ namespace four_axis
         private void button6_Click(object sender, EventArgs e)
         {
             this.Close();
+            this.return_10Start.paratemp = paratemp;
             this.return_10Start.Visible = true;     
         }
 

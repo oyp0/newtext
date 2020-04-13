@@ -13,7 +13,7 @@ namespace four_axis
     {
         public IntPtr g_handle;         //链接返回的句柄，可以作为卡号
         public int filetempnum = 0;
-        public int filelinepara = 0;   //总行
+        public int filelinepara;   //总行
         public string codename = "无";  //类型  20界面
 
         public float[] vr = new float[500];  //数组
@@ -33,9 +33,11 @@ namespace four_axis
         public int FILEFLASHFLAG=13941;	 //读写标志
         int asd;
 
-         public int linenum;	//总行数，当前行号
+        public int linenum;	//总行数，当前行号
+        public int manulradio;		//初始速度比
 
         public string filename;       //文件名
+        public float[] paratemp = new float[150];   //临时存储，用于不保存时还原参数
 
         int winnum=0;    //窗口30要记得传值过来哦  
 
@@ -46,11 +48,14 @@ namespace four_axis
         public int LINESTART=30;	//flash指令起始地址
         public int LINESPACE=20;	//行空间
 
+        public String[] codespace = new String[2000];	//存放数组
+        public String[] codetempspace = new String[2000];	//临时空间
+
         public int[] templine= new int[30];	//临时
 
-         public int nCurrent = 0;      //当前记录行
+        public int nCurrent = 0;      //当前记录行
 
-
+        public int browsepage = 1;
 
         private _10Start return_10Start = null;
         public _14_文件管理(_10Start F10)
@@ -91,7 +96,7 @@ namespace four_axis
 
             table.Columns.Add(column1);             //将列添加到table表中
             table.Columns.Add(column2);
-            for (int i = 1; i <= 7; i++)
+            for (int i = 1; i <= 1; i++)
             {
                 DataRow dr = table.NewRow();            //table表创建行
                 dr["文件ID"] = i.ToString();
@@ -273,7 +278,6 @@ namespace four_axis
             }
             pagenum--;
             filenum = (pagenum - 1) * ONEPAGENUM + 1;
-            MessageBox.Show(filenum.ToString());
             LoadPage();       
         }
 
@@ -289,10 +293,7 @@ namespace four_axis
             {
                 pagenum++;
                 filenum = (pagenum - 1) * ONEPAGENUM + 1;
-                MessageBox.Show(filenum.ToString());
                 LoadPage();
-
-
             }
             else
             {
@@ -304,13 +305,32 @@ namespace four_axis
             }
         }
 
+     
+
         //新建
         private void button3_Click(object sender, EventArgs e)
         {
             if (totalfilenum < FILENUMMAX)
             {
-
-                filename = "New";	//文件名初始值  
+                if (pagenum == totalpagenum)
+                {
+                    filetoflash[totalfilenum] = totalfilenum + 1;   //ID表存flash块号
+                    totalfilenum = totalfilenum + 1;	//当前总数+1
+                    filenum = totalfilenum;			//当前选择ID更新 
+                    filename = "New";	//文件名初始值  
+                    pagenum = (filenum - 1) / ONEPAGENUM + 1;
+                    totalpagenum = (totalfilenum - 1) / ONEPAGENUM + 1;
+                    int index = this.dataGridView1.Rows.Add();
+                    if (index < ONEPAGENUM)
+                    {
+                        this.dataGridView1.Rows[index].Cells[0].Value = (pagenum - 1) * ONEPAGENUM + index + 1;
+                        this.dataGridView1.Rows[index].Cells[1].Value = filename;
+                    }
+                    deal_fileflash(0);
+                    return;                
+                }
+                pagenum = totalpagenum;
+                LoadPage();          
             }
             else
             {
@@ -318,6 +338,7 @@ namespace four_axis
                 f52.V1 = "文件已满";
                 f52.ShowDialog();      
             }
+
             //if (totalfilenum < FILENUMMAX)
             //{
             //    for (int i = 0; i < FILENUMMAX; i++)
@@ -338,7 +359,7 @@ namespace four_axis
             //        }
             //    }
             //    fileflag = 0;
-            //    deal_fileflash(0);
+             //   deal_fileflash(0);
             //}
             //else
             //{
@@ -474,12 +495,12 @@ namespace four_axis
             if (num == 0)
             {
                 codename = "无";
-                //进入19界面
+                //进入19界面      
             }
             else if (num == 1)
             {
                 codename = "直线";
-                //21进入直线界面
+                 
             }
             else if (num == 2)
             {
@@ -525,9 +546,11 @@ namespace four_axis
         {
             if(num<=filelinepara)
             {
-                	//dmcpy templine(0),codespace((num-1)*LINESPACE),LINESPACE;	'复制到临时数组    
-                	linenum=num;	//浏览界面跳转用
-                    show_code(templine[0]);	//刷新显示
+                templine[0] = int.Parse(codespace[(num - 1) * LINESPACE]);
+                MessageBox.Show(templine[0].ToString());
+                //dmcpy templine(0),codespace((num-1)*LINESPACE),LINESPACE;	'复制到临时数组    
+                linenum=num;	//浏览界面跳转用
+                show_code(templine[0]);	//刷新显示
             }
             else if(num>filelinepara && winnum==30)  //只有游览界面才提示
             {
@@ -539,9 +562,32 @@ namespace four_axis
           
         }
 
+        private void deal_browseflash()
+        { 
+            
+        }
 
         //游览
         private void button9_Click(object sender, EventArgs e)
+        {
+            if (filenum>0)
+            {
+                browsepage=1;
+		        deal_browseflash();
+		        
+                //HMI_SHOWWINDOW(30,0);     
+            }
+            else
+            {
+                 Console.WriteLine("未选择ID");
+                _52_操作提示 f52 = new _52_操作提示();
+                f52.V1 = "未选择ID";
+                f52.ShowDialog();   
+            }   
+        }
+
+        //编辑
+        private void button8_Click(object sender, EventArgs e)
         {
             if (filenum <= totalfilenum)
             {
@@ -552,20 +598,26 @@ namespace four_axis
                     //dmcpy filelintempepara(0),filelinepara(0),10
                     //DMCPY filejudname(0),filename(0),FILENAMELENG
 
-                    linenum=1;
+                    linenum = 1;
                     _19_文件编辑 f19 = new _19_文件编辑(this);
                     f19.g_handle = g_handle;
                     f19.codename = codename;
                     f19.filenum = filenum;
                     f19.filelinepara = filelinepara;
+                    f19.codespace = codespace;
+                    f19.codetempspace = codetempspace;
+                    f19.browsepage = browsepage;
+                    f19.manulradio = manulradio;	//初始速度比
+                    //f19.paratemp = paratemp;
+                    //f19.vr = vr;
+                    f19.pagenum = pagenum;
+                    f19.filetoflash = filetoflash;
+                    f19.showidlist = showidlist;
+                    f19.linenum = linenum;
                     this.Hide();//隐藏现在这个窗口
                     f19.Show();//新窗口显现    
-				   // HMI_SHOWWINDOW(19,0)
                     deal_lineload(linenum);	//加载第一行
-                    this.Close();
-                    this.return_10Start.filetempnum = filetempnum;
-                    this.return_10Start.Visible = true;
-
+                    filename = this.dataGridView1.Rows[linenum - 1].Cells[1].Value.ToString(); //获取文件名
                     Console.WriteLine("当前编辑 filenum={0}\filename={1}", filenum, filename);
                 }
                 else
@@ -583,7 +635,6 @@ namespace four_axis
                 f52.V1 = "文件不存在";
                 f52.ShowDialog();
             }
-
         }
 
 

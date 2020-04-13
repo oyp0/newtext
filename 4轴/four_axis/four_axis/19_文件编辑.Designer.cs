@@ -55,7 +55,7 @@
             // 
             this.button10.BackColor = System.Drawing.Color.MediumTurquoise;
             this.button10.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button10.Location = new System.Drawing.Point(612, 360);
+            this.button10.Location = new System.Drawing.Point(676, 406);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(97, 46);
             this.button10.TabIndex = 56;
@@ -171,6 +171,7 @@
             this.button1.TabIndex = 70;
             this.button1.Text = "上一行";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 

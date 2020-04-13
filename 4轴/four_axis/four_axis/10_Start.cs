@@ -20,7 +20,20 @@ namespace four_axis
         public int AXISSPACE = 25;	    //每轴参数空间
         public int PARANUM;           //轴参数空间
         public float[] vr = new float[500];  //数组
+        public float[] paratemp = new float[150];   //临时存储，用于不保存时还原参数
         public float f1;   //中间变量
+
+        public int reg; //判断
+        public int piValue;
+
+
+        public int[] flag_error = new int[100];
+        public int[] flag_erroshow = new int[100];
+        public int[] zeroerror = new int[100];
+        public int flag_erroryes = 0;
+        public string errortext = "使用正常";
+        public string errortemptext = "";
+
 
 
         public int stepmode = 0;   //步模式
@@ -260,8 +273,8 @@ namespace four_axis
             }
         }
 
-        //停止
-        private void button7_Click(object sender, EventArgs e)
+        //停止运动
+        private void deal_stop()
         {
             // 停止任务1   stoptask 1
             //if ((td_run.ThreadState & ThreadState.WaitSleepJoin) != 0 && f_run == 1)
@@ -279,10 +292,16 @@ namespace four_axis
             //} 
             timer3.Enabled = false;
             timer3.Stop();
-		    zmcaux.ZAux_Direct_Rapidstop(g_handle, 2);  //轴全部停止
-            flag_state=0;	 //停止
-		    statename.Text="停止";
+            zmcaux.ZAux_Direct_Rapidstop(g_handle, 2);  //轴全部停止
+            flag_state = 0;	 //停止
+            statename.Text = "停止";
             runlinenum = 0;
+        }
+
+        //停止
+        private void button7_Click(object sender, EventArgs e)
+        {
+            deal_stop();
         }
 
         //回零
@@ -358,6 +377,7 @@ namespace four_axis
                 f14.g_handle = g_handle;
                 f14.filetempnum = filetempnum;   
                 f14.filelinepara = filetempnum;   //总行
+                f14.manulradio = manulradio;
                 f14.vr = vr;
                 this.Hide();//隐藏现在这个窗口
                 f14.Show();//新窗口显现    
@@ -435,6 +455,43 @@ namespace four_axis
             //等待轴停止  还没写
             flag_home=1;	 //回零完成
 	        statename.Text ="复位完成";
+        }
+
+        //任务3
+        private void task_error()
+        {
+            while (true)
+            { 
+                zmcaux.ZAux_Direct_GetAxisStatus(g_handle, 0, ref piValue);
+
+                reg = piValue & Math.Pow(2, 15);  //22位
+                //轴0
+               // if (read_bit2(22, axisstatus(0)))
+                if (reg == 1)
+                {
+                    flag_error[0] = 1;		//报警标志
+                    deal_stop();  //停止运动
+                    if (flag_erroshow[0] != 231) //只加一次
+                    {
+                        errortemptext = errortemptext + "," + "轴0伺服报警";
+                        flag_erroshow[0] = 231;
+                        Console.WriteLine("轴0伺服报警");
+                    }
+                }
+                else
+                { 
+                    flag_erroshow[0]=0;	//清除显示标志
+                    int num;
+                    //num = STRFIND(errortemptext,",轴0伺服报警")		'报警取消时删除
+                    if (num != -1)
+                    { 
+                       // DMDEL  errortemptext(num,num+11)	'只删除一次
+                    }
+                }
+
+                
+
+            }
         }
 
         //定时器1  

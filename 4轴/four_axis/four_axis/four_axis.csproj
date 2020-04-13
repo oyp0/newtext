@@ -118,6 +118,42 @@
     <Compile Include="21_直线指令.Designer.cs">
       <DependentUpon>21_直线指令.cs</DependentUpon>
     </Compile>
+    <Compile Include="23_延时指令.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="23_延时指令.Designer.cs">
+      <DependentUpon>23_延时指令.cs</DependentUpon>
+    </Compile>
+    <Compile Include="24_输出指令、.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="24_输出指令、.Designer.cs">
+      <DependentUpon>24_输出指令、.cs</DependentUpon>
+    </Compile>
+    <Compile Include="25_输出复位指令.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="25_输出复位指令.Designer.cs">
+      <DependentUpon>25_输出复位指令.cs</DependentUpon>
+    </Compile>
+    <Compile Include="26_圆心圆弧指令.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="26_圆心圆弧指令.Designer.cs">
+      <DependentUpon>26_圆心圆弧指令.cs</DependentUpon>
+    </Compile>
+    <Compile Include="27_绝对模式.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="27_绝对模式.Designer.cs">
+      <DependentUpon>27_绝对模式.cs</DependentUpon>
+    </Compile>
+    <Compile Include="28_相对模式.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="28_相对模式.Designer.cs">
+      <DependentUpon>28_相对模式.cs</DependentUpon>
+    </Compile>
     <Compile Include="31_复位设置.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -181,6 +217,12 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Zmcaux.cs" />
+    <Compile Include="22_三点圆弧指令.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="22_三点圆弧指令.Designer.cs">
+      <DependentUpon>22_三点圆弧指令.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="10_Start.resx">
       <DependentUpon>10_Start.cs</DependentUpon>
     </EmbeddedResource>
@@ -216,6 +258,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="21_直线指令.resx">
       <DependentUpon>21_直线指令.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="23_延时指令.resx">
+      <DependentUpon>23_延时指令.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="24_输出指令、.resx">
+      <DependentUpon>24_输出指令、.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="25_输出复位指令.resx">
+      <DependentUpon>25_输出复位指令.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="26_圆心圆弧指令.resx">
+      <DependentUpon>26_圆心圆弧指令.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="27_绝对模式.resx">
+      <DependentUpon>27_绝对模式.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="28_相对模式.resx">
+      <DependentUpon>28_相对模式.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="31_复位设置.resx">
       <DependentUpon>31_复位设置.cs</DependentUpon>
@@ -256,6 +316,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="22_三点圆弧指令.resx">
+      <DependentUpon>22_三点圆弧指令.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

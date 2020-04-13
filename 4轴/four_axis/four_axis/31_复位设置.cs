@@ -367,7 +367,7 @@ namespace four_axis
             if (flag_change == 123)   //有改动
             {
                 //进入提示窗口
-                _50未保存提示 f50 = new _50未保存提示(return_13参数设置, null, null, null,this);
+                _50未保存提示 f50 = new _50未保存提示(return_13参数设置, null, null, null,this,null,null);
                 f50.g_handle = g_handle;   //句柄
                 f50.vr = vr;               //存放数组
                 f50.paratemp = paratemp;   //临时数组

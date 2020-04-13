@@ -11,55 +11,32 @@ using cszmcaux;
 
 namespace four_axis
 {
-    public partial class _21_直线指令 : Form
+    public partial class _22_三点圆弧指令 : Form
     {
         public IntPtr g_handle;         //链接返回的句柄，可以作为卡号
 
-        public int MAXLINENUM=100;	//允许最大行数
-	    public int LINESTART=30	;	//flash指令起始地址
-	    public int LINESPACE=20	;	//行空间
-        public int AXISSPACE = 25;	    //每轴参数空间
-        public float f1;   //中间变量
         public int iresult; //返回值
-
-        public String[] codespace = new String[2000];	//存放数组
-        public int linenum;	//总行数，当前行号
+        public float f1;   //中间变量
         public float[] vr = new float[500];  //数组     
         public int manulradio;		//初始速度比  
-   
+        public int AXISSPACE = 25;	    //每轴参数空间
+        public String[] codespace = new String[2000];	//存放数组
+        public int linenum;	//总行数，当前行号
+        public int LINESPACE = 20;	//行空间
 
-        
-        private _20_运动类型选择 return_20_运动类型选择 = null;        
-        public _21_直线指令(_20_运动类型选择 F20)
+
+        private _20_运动类型选择 return_20_运动类型选择 = null;
+        public _22_三点圆弧指令(_20_运动类型选择 F20)
         {
             InitializeComponent();
             this.return_20_运动类型选择 = F20;
         }
 
-        private void _21_直线指令_Load(object sender, EventArgs e)
+        private void 三点圆弧指令_Load(object sender, EventArgs e)
         {
             timer1.Enabled = true;    //定时器使能
             timer1.Interval = 100;    //定时器定时100ms
         }
-
-        //设置坐标
-        private void deal_linesetpos(int num)
-        {
-            if (num == 0)
-            {
-                for (int i = 0; i < 4; i++)
-                {
-                    zmcaux.ZAux_Direct_SetDpos(g_handle, i, float.Parse(codespace[(linenum - 1) * LINESPACE + 5 + i]));
-                }
-            }
-        }
-
-        //设置坐标
-        private void button9_Click(object sender, EventArgs e)
-        {
-
-        }
-
 
         //运动
         public void deal_manul(int axisnum, int dir)  //轴号，方向
@@ -115,7 +92,7 @@ namespace four_axis
         }
         private void button2_MouseUp(object sender, MouseEventArgs e)
         {
-            deal_manulstop(0);
+            deal_manulstop(0); 
         }
 
         //X-
@@ -188,22 +165,35 @@ namespace four_axis
             deal_manulstop(0); 
         }
 
+
         //位置改变
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void textBox1_TextChanged(object sender, EventArgs e) //X坐标  终点坐标
         {
             codespace[(linenum - 1) * LINESPACE + 5] = textBox1.Text;
         }
-        private void textBox2_TextChanged(object sender, EventArgs e)
+        private void textBox2_TextChanged(object sender, EventArgs e)//Y坐标  终点坐标
         {
             codespace[(linenum - 1) * LINESPACE + 6] = textBox2.Text;
         }
-        private void textBox3_TextChanged(object sender, EventArgs e)
+        private void textBox3_TextChanged(object sender, EventArgs e)//Z坐标  终点坐标
         {
             codespace[(linenum - 1) * LINESPACE + 7] = textBox3.Text;
         }
-        private void textBox4_TextChanged(object sender, EventArgs e)
+        private void textBox10_TextChanged(object sender, EventArgs e)//X坐标  中间点坐标
         {
-            codespace[(linenum - 1) * LINESPACE + 8] = textBox4.Text;
+            codespace[(linenum - 1) * LINESPACE + 8] = textBox10.Text;
+        }
+        private void textBox11_TextChanged(object sender, EventArgs e)//Y坐标  中间点坐标
+        {
+            codespace[(linenum - 1) * LINESPACE + 9] = textBox11.Text;
+        }
+        private void textBox12_TextChanged(object sender, EventArgs e)//Z坐标  中间点坐标
+        {
+            codespace[(linenum - 1) * LINESPACE + 10] = textBox12.Text;
+        }
+        private void textBox4_TextChanged(object sender, EventArgs e)//U坐标  旋转轴
+        {
+            codespace[(linenum - 1) * LINESPACE + 11] = textBox4.Text;
         }
 
         //只能输入数字
@@ -219,14 +209,25 @@ namespace four_axis
         {
             deal_limit(sender, e);
         }
+        private void textBox10_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            deal_limit(sender, e);
+        }
+        private void textBox11_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            deal_limit(sender, e);
+        }
+        private void textBox12_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            deal_limit(sender, e);
+        }
         private void textBox4_KeyPress(object sender, KeyPressEventArgs e)
         {
             deal_limit(sender, e);
         }
 
-
         //速度改变
-        private void textBox9_TextChanged(object sender, EventArgs e)
+        private void textBox9_TextChanged(object sender, EventArgs e)//速度
         {
             codespace[(linenum - 1) * LINESPACE + 4] = textBox9.Text;
         }
@@ -252,13 +253,7 @@ namespace four_axis
             }
         }
 
-       
-  
 
-
-  
-
-
-       
+        
     }
 }

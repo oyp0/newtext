@@ -54,7 +54,7 @@ namespace four_axis
             dataGridView1.AllowUserToAddRows = false;
             // 让 DataGridView1 的所有列宽自动调整一下。
             dataGridView1.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
-
+      
             PageSorter();
         }
 
@@ -177,7 +177,6 @@ namespace four_axis
         //下一页
         private void btnNext_Click(object sender, EventArgs e)
         {
-
             if ((filenum <= totalfilenum) && (totalfilenum % ONEPAGENUM == 0) && (totalfilenum < FILENUMMAX))
             {
                 asd = 123;

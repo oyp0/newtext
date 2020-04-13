@@ -17,14 +17,14 @@ namespace four_axis
         public int LINESTART=30;		//flash指令起始地址
         public int LINESPACE=20;		//行空间
 
-        public int manulradio = 100;		//初始速度比    还没传过来
-        public float[] codespace = new float[2000];		//存放数组
+        public int manulradio;		//初始速度比    还没传过来
+        public String[] codespace = new String[2000];	//存放数组
         public int[] codetempspace= new int[2000];	//临时空间
         public string  codename = "无" ;  //类型
         public int[] templine= new int[20];	//临时
         public float[] vr = new float[500];  //数组     
 
-        public int linenum;	//总行数，当前行号    还没传过来 文件编辑界面
+        public int linenum;	//总行数，当前行号  
         public int linetype,linejump;
 
         public int winnum = 0; //窗口30的进来标志
@@ -123,10 +123,12 @@ namespace four_axis
             }
         }
 
+        //直线类型
         private void button1_Click(object sender, EventArgs e)
         {
-            codespace[(linenum-1)*LINESPACE]=1;	 //直线类型
-            codespace[(linenum-1)*LINESPACE+4]=80;	 //速度默认
+            MessageBox.Show(manulradio.ToString());
+            codespace[(linenum-1)*LINESPACE]="1";	 //直线类型
+            codespace[(linenum-1)*LINESPACE+4]="80";	 //速度默认
 
             //直线窗口
             if (g_handle != (IntPtr)0)
@@ -141,9 +143,155 @@ namespace four_axis
                 f21.Show();//新窗口显现     
 
                 deal_lineload(linenum);
-            }
+            }    
+        }
 
-           
-        }   
+        //三点圆弧
+        private void button2_Click(object sender, EventArgs e)
+        {
+            codespace[(linenum - 1) * LINESPACE] = "2";	 //圆弧类型
+            codespace[(linenum - 1) * LINESPACE + 4] = "80";	 //速度默认
+
+            //三点圆弧窗口
+            if (g_handle != (IntPtr)0)
+            {
+                _22_三点圆弧指令 f22 = new _22_三点圆弧指令(this);
+                f22.g_handle = g_handle;  //句柄
+                f22.vr = vr;  //数组
+                f22.codespace = codespace; //数组
+                f22.manulradio = manulradio; //速度比例
+                f22.linenum = linenum;  //行号
+                this.Hide();//隐藏现在这个窗口
+                f22.Show();//新窗口显现     
+
+                deal_lineload(linenum);    
+            }
+        }
+       
+        //圆心圆弧
+        private void button3_Click(object sender, EventArgs e)
+        {
+            codespace[(linenum - 1) * LINESPACE] = "6";	 //圆弧类型
+            codespace[(linenum - 1) * LINESPACE + 4] = "80";	 //速度默认
+            //圆心圆弧窗口
+            if (g_handle != (IntPtr)0)
+            {
+                _26_圆心圆弧指令 f26 = new _26_圆心圆弧指令(this);
+                f26.g_handle = g_handle;  //句柄
+                f26.vr = vr;  //数组
+                f26.codespace = codespace; //数组
+                f26.manulradio = manulradio; //速度比例
+                f26.linenum = linenum;  //行号
+                this.Hide();//隐藏现在这个窗口
+                f26.Show();//新窗口显现     
+
+                deal_lineload(linenum);
+            }
+        }
+
+        //绝对模式
+        private void button4_Click(object sender, EventArgs e)
+        {
+            codespace[(linenum - 1) * LINESPACE] = "7";	 //绝对
+            //绝对
+            if (g_handle != (IntPtr)0)
+            {
+                _27_绝对模式 f27 = new _27_绝对模式(this);
+                f27.g_handle = g_handle;  //句柄
+              
+                this.Hide();//隐藏现在这个窗口
+                f27.Show();//新窗口显现     
+
+                deal_lineload(linenum);
+            }
+        }
+
+        //相对模式
+        private void button5_Click(object sender, EventArgs e)
+        {
+            codespace[(linenum - 1) * LINESPACE] = "8";	 //绝对
+            //相对
+            if (g_handle != (IntPtr)0)
+            {
+                _28_相对模式 f28 = new _28_相对模式(this);
+                f28.g_handle = g_handle;  //句柄
+
+                this.Hide();//隐藏现在这个窗口
+                f28.Show();//新窗口显现     
+
+                deal_lineload(linenum);
+            }
+        }
+        
+        //延时
+        private void button6_Click(object sender, EventArgs e)
+        {
+            codespace[(linenum - 1) * LINESPACE] = "3";	 //延时
+            //延时窗口
+            if (g_handle != (IntPtr)0)
+            {
+                _23_延时指令 f23 = new _23_延时指令(this);
+                f23.g_handle = g_handle;  //句柄
+                f23.codespace = codespace; //数组
+                f23.linenum = linenum;  //行号
+                this.Hide();//隐藏现在这个窗口
+                f23.Show();//新窗口显现     
+
+                deal_lineload(linenum);
+            }
+        }
+
+        //输出类型
+        private void button7_Click(object sender, EventArgs e)
+        {
+            codespace[(linenum - 1) * LINESPACE] = "4";	 //输出
+            //输出窗口
+            if (g_handle != (IntPtr)0)
+            {
+                _24_输出指令_ f24 = new _24_输出指令_(this);
+                f24.g_handle = g_handle;  //句柄
+                f24.codespace = codespace; //数组
+                f24.linenum = linenum;  //行号
+                this.Hide();//隐藏现在这个窗口
+                f24.Show();//新窗口显现     
+
+                deal_lineload(linenum);
+            }
+        }
+
+        //输出复位类型
+        private void button8_Click(object sender, EventArgs e)
+        {
+            codespace[(linenum - 1) * LINESPACE] = "5";	 //输出复位
+            //输出复位窗口
+            if (g_handle != (IntPtr)0)
+            {
+                _25_输出复位指令 f25 = new _25_输出复位指令(this);
+                f25.g_handle = g_handle;  //句柄
+                f25.codespace = codespace; //数组
+                f25.linenum = linenum;  //行号
+                this.Hide();//隐藏现在这个窗口
+                f25.Show();//新窗口显现     
+
+                deal_lineload(linenum);
+            }
+        }
+
+
+        //返回
+        private void button9_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+       
+     
+       
+       
+
+      
+       
+
+       
     }
 }

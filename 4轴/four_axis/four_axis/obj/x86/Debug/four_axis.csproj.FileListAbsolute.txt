@@ -63,3 +63,10 @@ E:\Git\4轴\four_axis\four_axis\obj\x86\Debug\four_axis._21_直线指令.resourc
 E:\Git\4轴\four_axis\four_axis\obj\x86\Debug\four_axis._14_文件管理.resources
 E:\Git\4轴\four_axis\four_axis\obj\x86\Debug\four_axis._33_文件选择.resources
 E:\Git\4轴\four_axis\four_axis\obj\x86\Debug\four_axis._19_文件编辑.resources
+E:\Git\4轴\four_axis\four_axis\obj\x86\Debug\four_axis._22_三点圆弧指令.resources
+E:\Git\4轴\four_axis\four_axis\obj\x86\Debug\four_axis._23_延时指令.resources
+E:\Git\4轴\four_axis\four_axis\obj\x86\Debug\four_axis._24_输出指令_.resources
+E:\Git\4轴\four_axis\four_axis\obj\x86\Debug\four_axis._25_输出复位指令.resources
+E:\Git\4轴\four_axis\four_axis\obj\x86\Debug\four_axis._26_圆心圆弧指令.resources
+E:\Git\4轴\four_axis\four_axis\obj\x86\Debug\four_axis._27_绝对模式.resources
+E:\Git\4轴\four_axis\four_axis\obj\x86\Debug\four_axis._28_相对模式.resources

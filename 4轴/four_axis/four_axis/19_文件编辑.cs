@@ -13,7 +13,7 @@ namespace four_axis
     {
         public IntPtr g_handle;         //链接返回的句柄，可以作为卡号
 
-        public int linenum=0;	//总行数，当前行号  
+        public int linenum=1;	//总行数，当前行号  
         public int filelinepara = 0;   //总行
         public string codename;  //类型 
         public int  linejump = 1;
@@ -21,10 +21,26 @@ namespace four_axis
 
         int winnum = 0;    //窗口30要记得传值过来哦  
         public int[] templine = new int[30];	//临时
+        public int LINESPACE=20;		//行空间
 
-
+        public int FILENAMELENG = 20; //文件名长度
         public int   flag_returnwindow=0;	//参数修改标志
 
+        public String[] codespace = new String[2000];	//存放数组
+        public String[] codetempspace = new String[2000];	//临时空间
+
+        public int pagenum;  //页数
+        public int ONEPAGENUM = 5;	//每页文件数
+        public int[] filetoflash = new int[15]; //id列表   
+        public int[] showidlist = new int[5];	//显示ID	
+
+        public float[] vr = new float[500];  //数组
+        public int PARANUM;           //轴参数空间
+        public float[] paratemp = new float[150];   //临时存储，用于不保存时还原参数
+
+        public int manulradio;		//初始速度比
+
+        int flag_change;
 
         //////////////游览操作///
          public int BROWSEPAGEGNUM=5;
@@ -51,12 +67,16 @@ namespace four_axis
         //指令相关
         private void button7_Click(object sender, EventArgs e)
         {
+            //MessageBox.Show(linenum.ToString());
+            //MessageBox.Show(filelinepara.ToString());
             if(linenum <= filelinepara)  //'未新建行时不允许操作
             {
                 _20_运动类型选择 f20 = new _20_运动类型选择(this);
                 f20.g_handle = g_handle;
                 f20.codename = codename;
-                this.Hide();//隐藏现在这个窗口
+                f20.codespace = codespace;
+                f20.linenum = linenum;
+                f20.manulradio =manulradio;		//初始速度比
                 f20.Show();//新窗口显现        
             }
             else
@@ -132,6 +152,7 @@ namespace four_axis
         {
             if(num<=filelinepara)
             {
+                    templine[0] = int.Parse(codespace[(num - 1) * LINESPACE]);
                 	//dmcpy templine(0),codespace((num-1)*LINESPACE),LINESPACE;	'复制到临时数组    
                 	linenum=num;	//浏览界面跳转用
                     show_code(templine[0]);	//刷新显示
@@ -208,12 +229,86 @@ namespace four_axis
             }
             
         }
-   
 
+        //文件操作
+        private void deal_fileflash(int num)
+        {
+            //FLASH_WRITE 20,firstflag,filetoflash,totalfilenum	'读文件列表,当前文件数	
+            int t0, t1;
+            t0 = (pagenum - 1) * ONEPAGENUM;
+            t1 = pagenum * ONEPAGENUM;
+            for (int i = t0; i < t1; i++)
+            {
+                if (filetoflash[i] != -1)
+                {
+                    // flash_read filetoflash(i),fileflag,filename			'读取标志判断是否有存储				
+                    // DMCPY ZINDEX_ARRAY(shownamelist(i mod ONEPAGENUM ))(0),filename(0),FILENAMELENG	
+
+                    showidlist[i % ONEPAGENUM] = i + 1;	//显示ID
+                    //MessageBox.Show(showidlist[i%ONEPAGENUM].ToString());
+                }
+                else
+                {
+                    //DMCPY ZINDEX_ARRAY(shownamelist(i mod ONEPAGENUM ))(0),zeroname(0),FILENAMELENG
+                    showidlist[i % ONEPAGENUM] = 0;	//显示ID
+                    //MessageBox.Show(showidlist[i%ONEPAGENUM].ToString());
+                }
+            }
+        }
+
+        //退出
         private void button10_Click(object sender, EventArgs e)
         {
-            int flag_change;
             flag_returnwindow=14;	//文件配方界面
+            for (int j = 0; j == 0; j++)
+            { 
+                //if(filelinepara[j] !=filelintempepara[j])
+                //{
+                //     flag_change=123;
+                //        break;
+                //}
+                for (int i = 0; i < FILENAMELENG;i++)  //文件名判断
+                {
+                    flag_change = 123;
+                    break;
+                }
+
+                for(int i=0;i<filelinepara*LINESPACE;i++)
+                {
+                    if(codespace[i]!=codetempspace[i])  //参数不同
+                    {
+                        flag_change = 123;
+                        break;
+                    }
+                }                      
+            }
+
+            if (flag_change == 123)   //有改动
+            {
+                _50未保存提示 f50 = new _50未保存提示(null, null, null, null, null, this.return_14_文件管理,this);
+                f50.g_handle = g_handle;   //句柄
+                //f50.vr = vr;               //存放数组
+                //f50.paratemp = paratemp;   //临时数组             
+                //f50.PARANUM = PARANUM;  //轴参数空间
+                f50.pagenum = pagenum;
+                f50.filetoflash = filetoflash;
+                f50.showidlist = showidlist;
+                f50.flag_returnwindow = flag_returnwindow;  //窗口选择
+                f50.Show();//新窗口显现     
+            }
+            else if (flag_returnwindow == 14)
+            {
+                this.Close();
+                this.return_14_文件管理.filetoflash = filetoflash;
+                this.return_14_文件管理.showidlist = showidlist;
+                this.return_14_文件管理.Visible = true;
+            }
+
+        }
+
+        //上一行
+        private void button1_Click(object sender, EventArgs e)
+        {
 
         }
     }

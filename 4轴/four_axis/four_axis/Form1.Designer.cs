@@ -36,7 +36,7 @@
             // 
             // Search
             // 
-            this.Search.Location = new System.Drawing.Point(258, 224);
+            this.Search.Location = new System.Drawing.Point(254, 224);
             this.Search.Name = "Search";
             this.Search.Size = new System.Drawing.Size(54, 32);
             this.Search.TabIndex = 8;
