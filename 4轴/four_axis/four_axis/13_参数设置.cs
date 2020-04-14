@@ -17,6 +17,7 @@ namespace four_axis
         public float[] vr = new float[500];  //数组
         public int PARANUM;           //轴参数空间
         public float[] paratemp = new float[150];   //临时存储，用于不保存时还原参数
+        public int flag_Initialization = 1; //初始化标志 只初始化一次
 
         private _10Start return_10Start = null;
         public _13参数设置(_10Start F10)
@@ -96,6 +97,7 @@ namespace four_axis
         private void button6_Click(object sender, EventArgs e)
         {
             this.Close();
+            this.return_10Start.flag_Initialization = flag_Initialization;
             this.return_10Start.paratemp = paratemp;
             this.return_10Start.Visible = true;     
         }

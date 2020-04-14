@@ -22,6 +22,8 @@ namespace four_axis
         public int FILENUMMAX = 15;  //文件允许总数
         public int ONEPAGENUM = 5;	//每页文件数
         public int TOTALPANGE;  	//页数
+
+        public int flag_Initialization = 1; //初始化标志 只初始化一次
                                        
         public int runlinenum = 0;  //运行行号
         public int fileid,sltid;	//文件id,选中id;
@@ -241,6 +243,7 @@ namespace four_axis
         private void button1_Click(object sender, EventArgs e)
         {
             this.Close();
+            this.return_10Start.flag_Initialization = flag_Initialization;
             this.return_10Start.Visible = true;
         }
 

@@ -23,8 +23,10 @@ namespace four_axis
         public float[] paratemp = new float[150];   //临时存储，用于不保存时还原参数
         public float f1;   //中间变量
 
+       
         public int reg; //判断
         public int piValue;
+        public int[] pi = new int[4];
 
 
         public int[] flag_error = new int[100];
@@ -33,7 +35,7 @@ namespace four_axis
         public int flag_erroryes = 0;
         public string errortemptext = "";
 
-
+        public int flag_Initialization = 0; //初始化标志 只初始化一次
 
         public int stepmode = 0;   //步模式
         public int cyclemode = 0;  //周期模式
@@ -52,8 +54,11 @@ namespace four_axis
 
         public int manulradio = 100;		//初始速度比
 
-        private Form1 returnForm1 = null;
+        public int LINESPACE = 20;		//行空间
+        public String[] codespace = new String[2000];	//存放数组
+        public int flag_abs;
 
+        private Form1 returnForm1 = null;
         public _10Start(Form1 F1)
         {
             InitializeComponent();
@@ -76,8 +81,11 @@ namespace four_axis
             timer1.Start();
 
             label12.Text = DateTime.Now.ToString("yyyy-MM-dd");        // 2008-09-04
-           
-            deal_setparainit();
+
+            if (flag_Initialization == 0)
+            {
+                deal_setparainit();
+            }
             Initialization();
             filelinepara[0] = 0;
 
@@ -309,7 +317,7 @@ namespace four_axis
         {
             deal_stop();
         }
-
+         
         //回零
         private void button8_Click(object sender, EventArgs e)
         {
@@ -870,7 +878,108 @@ namespace four_axis
             task_home();
         }
 
-       
 
+        ////////////////////运行指令////////////////////////////
+        public void run_jud(int num)
+        { 
+            if (g_handle != (IntPtr)0)
+            {
+                for(int i=0;i<4;i++)
+                {
+                    zmcaux.ZAux_Direct_GetLoaded(g_handle, i, ref pi[i]);                     
+                }
+                if(stepmode==1)
+                {
+                    Console.WriteLine("步进");
+                    while (steprun == 1)
+                    {
+                        stepmode = 0;
+                        break;
+                    }
+                  
+                }
+            }	  
+        }
+
+        //空行
+        public void run_empty(int num)
+        {
+            Console.WriteLine("空行");
+        }
+	
+        //直线
+        public void run_line(int num)
+        { 
+            Console.WriteLine("直线,速度={0}", codespace[(num-1)*LINESPACE+4]);
+            Console.WriteLine("x={0}   y={1}  z={2}  u={3}", codespace[(num - 1) * LINESPACE + 5], codespace[(num - 1) * LINESPACE + 6], codespace[(num - 1) * LINESPACE + 7], codespace[(num - 1) * LINESPACE + 8]);
+
+            //force_speed
+            if (flag_abs == 0)
+            {
+
+            }
+            else
+            { 
+                
+            }
+
+            run_jud(num);
+        }
+
+        //三点圆弧
+        public void run_circ2(int num)
+        {
+            run_jud(num);
+            
+        }
+
+        //圆心圆弧
+        public void run_circ(int num)
+        {
+            run_jud(num);
+        }
+
+        //延时
+        public void run_delay(int num)
+        {
+            Console.WriteLine("延时:{0}",codespace[(num - 1) * LINESPACE + 5]);
+            //move_delay();
+            run_jud(num);
+        }
+
+        //输出模式
+        public void run_op(int num)
+        {
+            Console.WriteLine("输出");
+            Console.WriteLine("起始编号:{0}   结束编号:{1}   状态值:{2}", codespace[(num - 1) * LINESPACE + 5], codespace[(num - 1) * LINESPACE + 6], codespace[(num - 1) * LINESPACE + 7]);
+
+            run_jud(num);
+            
+        }
+
+        //输出复位模式
+        public void run_op2(int num)
+        {
+            Console.WriteLine("输出复位");
+            Console.WriteLine("编号:{0}   状态值:{1}   复位时间:{2}", codespace[(num - 1) * LINESPACE + 5], codespace[(num - 1) * LINESPACE + 6], codespace[(num - 1) * LINESPACE + 7]);
+            run_jud(num);
+        }
+
+        //绝对模式
+        public void run_abs(int num)
+        {
+            Console.WriteLine("绝对模式，后续运动按绝对坐标");
+            flag_abs = 1;
+            run_jud(num);
+        }
+
+        //相对模式
+        public void run_rel(int num)
+        {
+            Console.WriteLine("相对模式，后续运动按相对坐标");
+            flag_abs = 0;
+            run_jud(num);
+        }
+        ///////////////////////////////////////////////
     }
 }

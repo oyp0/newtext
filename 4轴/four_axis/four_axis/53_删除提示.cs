@@ -26,9 +26,11 @@ namespace four_axis
         public int[] showidlist = new int[5];	//显示ID	
 
 
-        public _53_删除提示()
+        private _14_文件管理 return_14_文件管理 = null;
+        public _53_删除提示(_14_文件管理 F14)
         {
             InitializeComponent();
+            this.return_14_文件管理 = F14;
         }
 
         //文件操作
@@ -109,11 +111,20 @@ namespace four_axis
 
         }
 
-
         //否
         private void button2_Click(object sender, EventArgs e)
         {
             this.Close();
+            this.return_14_文件管理.totalfilenum = totalfilenum;
+            this.return_14_文件管理.totalpagenum = totalpagenum;
+            this.return_14_文件管理.pagenum = pagenum;
+            this.return_14_文件管理.filenum = filenum;
+            this.return_14_文件管理.fileflag = fileflag;
+            this.return_14_文件管理.FILENUMMAX = FILENUMMAX;
+            this.return_14_文件管理.ONEPAGENUM = ONEPAGENUM;
+            this.return_14_文件管理.filetoflash = filetoflash;
+            this.return_14_文件管理.showidlist = showidlist;
+            this.return_14_文件管理.Visible = true;
         }
 
     

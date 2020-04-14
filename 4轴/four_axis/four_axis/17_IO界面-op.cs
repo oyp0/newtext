@@ -15,6 +15,7 @@ namespace four_axis
     {
         public IntPtr g_handle;         //链接返回的句柄，可以作为卡号
         public float[] vr = new float[500];  //数组
+        public int flag_Initialization = 1; //初始化标志 只初始化一次
 
         private _10Start return_10Start = null;
         public _17_界面_op(_10Start F10)
@@ -44,6 +45,7 @@ namespace four_axis
         private void button42_Click(object sender, EventArgs e)
         {
             this.Close();
+            this.return_10Start.flag_Initialization = flag_Initialization;
             this.return_10Start.Visible = true;
         }
     }

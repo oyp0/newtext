@@ -37,6 +37,8 @@ namespace four_axis
         public int linenum;	//总行数，当前行号
         public int manulradio;		//初始速度比
 
+        public int flag_Initialization = 1; //初始化标志 只初始化一次
+
         public int FILENAMELENG = 20;  //文件名长度      
         public float[] paratemp = new float[150];   //临时存储，用于不保存时还原参数
         public string[] filename = new string[20];   //文件名
@@ -329,13 +331,13 @@ namespace four_axis
                 if (pagenum == totalpagenum)
                 {
                     filetoflash[totalfilenum] = totalfilenum + 1;   //ID表存flash块号
-                    totalfilenum = totalfilenum + 1;	//当前总数+1
+                    totalfilenum = totalfilenum + 1;	//当前总数+1    
                     filenum = totalfilenum;			//当前选择ID更新 
                     filename[0] = "New";	//文件名初始值  
                     pagenum = (filenum - 1) / ONEPAGENUM + 1;
                     totalpagenum = (totalfilenum - 1) / ONEPAGENUM + 1;
                     int index = this.dataGridView1.Rows.Add();
-                    if (index < ONEPAGENUM)
+                    if (index%5 < ONEPAGENUM)
                     {
                         this.dataGridView1.Rows[index].Cells[0].Value = (pagenum - 1) * ONEPAGENUM + index + 1;
                         this.dataGridView1.Rows[index].Cells[1].Value = filename[0];
@@ -396,8 +398,7 @@ namespace four_axis
                 else
                 {
                     dataGridView1.Rows.RemoveAt(t - 1);
-                }
-               
+                }              
             } 
 
             //if (g_handle != (IntPtr)0)
@@ -413,6 +414,7 @@ namespace four_axis
             //    f53.ONEPAGENUM = ONEPAGENUM;
             //    f53.filetoflash = filetoflash;
             //    f53.showidlist = showidlist;
+            //this.Hide();
             //    f53.Show();//新窗口显现    
             //}    
         }
@@ -470,6 +472,7 @@ namespace four_axis
         private void button10_Click(object sender, EventArgs e)
         {
             this.Close();
+            this.return_10Start.flag_Initialization = flag_Initialization;
             this.return_10Start.Visible = true;
         }
 
@@ -522,12 +525,14 @@ namespace four_axis
             if (num == 0)
             {
                 codename = "无";
-                //进入19界面      
+
+                //进入19界面     
+         
             }
             else if (num == 1)
             {
                 codename = "直线";
-                 
+                //21进入直线
             }
             else if (num == 2)
             {
@@ -600,8 +605,15 @@ namespace four_axis
             {
                 browsepage=1;
 		        deal_browseflash();
-		        
-                //HMI_SHOWWINDOW(30,0);     
+
+                _30_游览文件 f30 = new _30_游览文件(this);
+                f30.g_handle = g_handle;
+                f30.pagenum = pagenum;
+                f30.filetoflash = filetoflash;
+                f30.showidlist = showidlist;
+                this.Hide();//隐藏现在这个窗口
+                f30.Show();//新窗口显现    
+ 
             }
             else
             {
@@ -620,8 +632,7 @@ namespace four_axis
                 if (filenum != 0)
                 {
                     //flash_read filetoflash(filenum-1),fileflag,filename,filelinepara,codespace(0,MAXLINENUM*LINESPACE)		'读取
-
-
+ 
                     //   char [] chArr = filename[0].ToCharArray();
                     //  shownamelist[i % ONEPAGENUM].CopyTo(0,chArr,0,FILENAMELENG);
 

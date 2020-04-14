@@ -70,3 +70,5 @@ E:\Git\4轴\four_axis\four_axis\obj\x86\Debug\four_axis._25_输出复位指令.r
 E:\Git\4轴\four_axis\four_axis\obj\x86\Debug\four_axis._26_圆心圆弧指令.resources
 E:\Git\4轴\four_axis\four_axis\obj\x86\Debug\four_axis._27_绝对模式.resources
 E:\Git\4轴\four_axis\four_axis\obj\x86\Debug\four_axis._28_相对模式.resources
+E:\Git\4轴\four_axis\four_axis\obj\x86\Debug\four_axis._30_游览文件.resources
+E:\Git\4轴\four_axis\four_axis\obj\x86\Debug\four_axis._55_u参数设置.resources

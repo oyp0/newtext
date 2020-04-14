@@ -17,7 +17,6 @@ namespace four_axis
         public float[] paratemp = new float[150];   //临时存储，用于不保存时还原参数
         public int  flag_returnwindow=0;
 
-
         public int pagenum;  //页数
         public int ONEPAGENUM = 5;	//每页文件数
         public int[] filetoflash = new int[15]; //id列表   

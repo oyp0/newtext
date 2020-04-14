@@ -19,6 +19,8 @@ namespace four_axis
         public float f1;   //中间变量
         public float[] vr = new float[500];  //数组
 
+        public int flag_Initialization = 1; //初始化标志 只初始化一次
+
         public int[] manulmode = new int[4];  //模式
         public float[] manulpos = new float[4];   //位置
 
@@ -364,6 +366,7 @@ namespace four_axis
         {
             this.Close();
             this.return_10Start.manulradio = manulradio;
+            this.return_10Start.flag_Initialization = flag_Initialization;
             this.return_10Start.Visible = true;
         }
 

@@ -244,7 +244,7 @@ namespace four_axis
                 //HMI_SHOWWINDOW(30,0)
             }
             else
-            {
+            {   
                  Console.WriteLine("未选择ID");
                 _52_操作提示 f52 = new _52_操作提示();
                 f52.V1 = "未选择文件ID";

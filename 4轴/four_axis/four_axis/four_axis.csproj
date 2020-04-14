@@ -154,6 +154,12 @@
     <Compile Include="28_相对模式.Designer.cs">
       <DependentUpon>28_相对模式.cs</DependentUpon>
     </Compile>
+    <Compile Include="30_游览文件.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="30_游览文件.Designer.cs">
+      <DependentUpon>30_游览文件.cs</DependentUpon>
+    </Compile>
     <Compile Include="31_复位设置.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -195,6 +201,12 @@
     </Compile>
     <Compile Include="53_删除提示.Designer.cs">
       <DependentUpon>53_删除提示.cs</DependentUpon>
+    </Compile>
+    <Compile Include="55_u参数设置.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="55_u参数设置.Designer.cs">
+      <DependentUpon>55_u参数设置.cs</DependentUpon>
     </Compile>
     <Compile Include="57_覆盖提示.cs">
       <SubType>Form</SubType>
@@ -277,6 +289,9 @@
     <EmbeddedResource Include="28_相对模式.resx">
       <DependentUpon>28_相对模式.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="30_游览文件.resx">
+      <DependentUpon>30_游览文件.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="31_复位设置.resx">
       <DependentUpon>31_复位设置.cs</DependentUpon>
     </EmbeddedResource>
@@ -297,6 +312,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="53_删除提示.resx">
       <DependentUpon>53_删除提示.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="55_u参数设置.resx">
+      <DependentUpon>55_u参数设置.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="57_覆盖提示.resx">
       <DependentUpon>57_覆盖提示.cs</DependentUpon>
