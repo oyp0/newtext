@@ -46,7 +46,7 @@ namespace four_axis
         public int filetempnum = 0;    //文件数
         public int runlinenum = 0;  //运行行号
 
-        public int filelinepara = 0;   //总行
+        public int[] filelinepara = new int[10];   //总行
 
         public float[] table = new float[4];  //xyzu的坐标 
 
@@ -59,6 +59,7 @@ namespace four_axis
             InitializeComponent();
             // 接受Form1对象
             this.returnForm1 = F1;
+         
         }
 
 
@@ -78,6 +79,9 @@ namespace four_axis
            
             deal_setparainit();
             Initialization();
+            filelinepara[0] = 0;
+
+            //           task_error();  //出错处理
         }
 
         //textbox处理
@@ -223,6 +227,7 @@ namespace four_axis
                     }
                     else
                     {
+                        Console.WriteLine("未选择文件");
                         _52_操作提示 f52 = new _52_操作提示();
                         f52.V1 = "未选择文件";
                         f52.ShowDialog();
@@ -230,6 +235,7 @@ namespace four_axis
                 }
                 else
                 {
+                    Console.WriteLine("机台复位未完成");
                     _52_操作提示 f52 = new _52_操作提示();
                     f52.V1 = "机台复位未完成";
                     f52.ShowDialog();                   
@@ -249,6 +255,7 @@ namespace four_axis
             }
             else
             {
+                Console.WriteLine("已在运行中");
                 _52_操作提示 f52 = new _52_操作提示();
                 f52.V1 = "已在运行中";
                 f52.ShowDialog();             
@@ -321,6 +328,7 @@ namespace four_axis
             }
             else
             {
+                Console.WriteLine("运行中无法操作");
                 _52_操作提示 f52 = new _52_操作提示();
                 f52.V1 = "运行中无法操作";
                 f52.ShowDialog();                  
@@ -374,8 +382,8 @@ namespace four_axis
             {
                 _14_文件管理 f14 = new _14_文件管理(this);
                 f14.g_handle = g_handle;
-                f14.filetempnum = filetempnum;   
-                f14.filelinepara = filetempnum;   //总行
+                f14.filetempnum = filetempnum;
+                f14.filelinepara = filelinepara;   //总行
                 f14.manulradio = manulradio;
                 f14.vr = vr;
                 this.Hide();//隐藏现在这个窗口
@@ -400,6 +408,7 @@ namespace four_axis
         //清除
         private void button12_Click(object sender, EventArgs e)
         {
+            Console.WriteLine("清除伺服报警");
             for (int i = 0; i < AXISMAX; i++)
             {
                 //move_op2(vr(i*AXISSPACE+23),on,1000)axis(6)	//清除报警
@@ -420,7 +429,7 @@ namespace four_axis
             while (cyclenum >= 0 || cyclenum == -1)  //重复循环
             {
                 runlinenum = 1;	 //首行
-                while (runlinenum <= filelinepara)        //单次程序运行
+                while (runlinenum <= filelinepara[0])        //单次程序运行
                 {
                     //ZINDEX_CALL(runindex(codespace((runlinenum-1)*LINESPACE+0)))(runlinenum)	'文件类型跳转
                     runlinenum = runlinenum + 1;
@@ -481,9 +490,10 @@ namespace four_axis
                     flag_erroshow[0]=0;	//清除显示标志
                     int num;
                     //num = STRFIND(errortemptext,",轴0伺服报警")		'报警取消时删除
-                    num = errortemptext.indexof(",轴0伺服报警");
+                    num = errortemptext.IndexOf(",轴0伺服报警");
                     if (num != -1)
-                    { 
+                    {
+                        errortemptext = errortemptext.Remove(num, num + 11);  //只删除一次
                        // DMDEL  errortemptext(num,num+11)	'只删除一次
                     }
                 }
@@ -507,9 +517,10 @@ namespace four_axis
                     flag_erroshow[1] = 0;	//清除显示标志
                     int num;
                     //num = STRFIND(errortemptext,",轴0正限位报警")		
-                    num = errortemptext.indexof(",轴0正限位报警");
+                    num = errortemptext.IndexOf(",轴0正限位报警");
                     if (num != -1)
                     {
+                        errortemptext = errortemptext.Remove(num, num + 13); //只刷新一次
                         // DMDEL  errortemptext(num,num+13)	'只刷新一次
                     }   
                 }
@@ -533,9 +544,10 @@ namespace four_axis
                     flag_erroshow[2] = 0;	//清除显示标志
                     int num;
                     //num = STRFIND(errortemptext,",轴0负限位报警")		
-                    num = errortemptext.indexof(",轴0负限位报警");
+                    num = errortemptext.IndexOf(",轴0负限位报警");
                     if (num != -1)
                     {
+                        errortemptext = errortemptext.Remove(num, num + 13); //只刷新一次
                         // DMDEL  errortemptext(num,num+13)	'只刷新一次
                     }
                 }
@@ -562,9 +574,10 @@ namespace four_axis
                     flag_erroshow[5] = 0;	//清除显示标志
                     int num;
                     //num = STRFIND(errortemptext,",轴0伺服报警")		'报警取消时删除
-                    num = errortemptext.indexof(",轴0伺服报警");
+                    num = errortemptext.IndexOf(",轴0伺服报警");
                     if (num != -1)
                     {
+                        errortemptext = errortemptext.Remove(num, num + 11);  //只删除一次
                         // DMDEL  errortemptext(num,num+11)	'只删除一次
                     }
                 }
@@ -588,9 +601,10 @@ namespace four_axis
                     flag_erroshow[6] = 0;	//清除显示标志
                     int num;
                     //num = STRFIND(errortemptext,",轴0正限位报警")		
-                    num = errortemptext.indexof(",轴0正限位报警");
+                    num = errortemptext.IndexOf(",轴0正限位报警");
                     if (num != -1)
                     {
+                        errortemptext = errortemptext.Remove(num, num + 13); //只刷新一次
                         // DMDEL  errortemptext(num,num+13)	'只刷新一次
                     }
                 }
@@ -614,9 +628,10 @@ namespace four_axis
                     flag_erroshow[7] = 0;	//清除显示标志
                     int num;
                     //num = STRFIND(errortemptext,",轴0负限位报警")		
-                    num = errortemptext.indexof(",轴0负限位报警");
+                    num = errortemptext.IndexOf(",轴0负限位报警");
                     if (num != -1)
                     {
+                        errortemptext = errortemptext.Remove(num, num + 13); //只刷新一次
                         // DMDEL  errortemptext(num,num+13)	'只刷新一次
                     }
                 }
@@ -642,9 +657,10 @@ namespace four_axis
                     flag_erroshow[10] = 0;	//清除显示标志
                     int num;
                     //num = STRFIND(errortemptext,",轴0伺服报警")		'报警取消时删除
-                    num = errortemptext.indexof(",轴0伺服报警");
+                    num = errortemptext.IndexOf(",轴0伺服报警");
                     if (num != -1)
                     {
+                        errortemptext = errortemptext.Remove(num, num + 11);  //只删除一次
                         // DMDEL  errortemptext(num,num+11)	'只删除一次
                     }
                 }
@@ -668,9 +684,10 @@ namespace four_axis
                     flag_erroshow[11] = 0;	//清除显示标志
                     int num;
                     //num = STRFIND(errortemptext,",轴0正限位报警")		
-                    num = errortemptext.indexof(",轴0正限位报警");
+                    num = errortemptext.IndexOf(",轴0正限位报警");
                     if (num != -1)
                     {
+                        errortemptext = errortemptext.Remove(num, num + 13); //只刷新一次
                         // DMDEL  errortemptext(num,num+13)	'只刷新一次
                     }
                 }
@@ -694,9 +711,10 @@ namespace four_axis
                     flag_erroshow[12] = 0;	//清除显示标志
                     int num;
                     //num = STRFIND(errortemptext,",轴0负限位报警")		
-                    num = errortemptext.indexof(",轴0负限位报警");
+                    num = errortemptext.IndexOf(",轴0负限位报警");
                     if (num != -1)
                     {
+                        errortemptext = errortemptext.Remove(num, num + 13); //只刷新一次
                         // DMDEL  errortemptext(num,num+13)	'只刷新一次
                     }
                 }
@@ -722,9 +740,10 @@ namespace four_axis
                     flag_erroshow[15] = 0;	//清除显示标志
                     int num;
                     //num = STRFIND(errortemptext,",轴0伺服报警")		'报警取消时删除
-                    num = errortemptext.indexof(",轴0伺服报警");
+                    num = errortemptext.IndexOf(",轴0伺服报警");
                     if (num != -1)
                     {
+                        errortemptext = errortemptext.Remove(num, num + 11);  //只删除一次
                         // DMDEL  errortemptext(num,num+11)	'只删除一次
                     }
                 }
@@ -748,9 +767,10 @@ namespace four_axis
                     flag_erroshow[16] = 0;	//清除显示标志
                     int num;
                     //num = STRFIND(errortemptext,",轴0正限位报警")		
-                    num = errortemptext.indexof(",轴0正限位报警");
+                    num = errortemptext.IndexOf(",轴0正限位报警");
                     if (num != -1)
                     {
+                        errortemptext = errortemptext.Remove(num, num + 13); //只刷新一次
                         // DMDEL  errortemptext(num,num+13)	'只刷新一次
                     }
                 }
@@ -774,13 +794,43 @@ namespace four_axis
                     flag_erroshow[17] = 0;	//清除显示标志
                     int num;
                     //num = STRFIND(errortemptext,",轴0负限位报警")		
-                    num = errortemptext.indexof(",轴0负限位报警");
+                    num = errortemptext.IndexOf(",轴0负限位报警");
                     if (num != -1)
                     {
-                        // DMDEL  errortemptext(num,num+13)	'只刷新一次
+                        errortemptext = errortemptext.Remove(num, num + 13); //只刷新一次
+                        //DMDEL  errortemptext(num,num+13)	'只刷新一次
                     }
                 }
 
+                for(int i=0;i<100;i++)
+                {
+                    if( flag_error[i]==1)
+                    {
+                        flag_erroryes=1;
+                        break;
+                    }
+                }
+
+                if(flag_erroryes==1)
+                {
+                      errortext.Text = String.Copy(errortemptext);
+                      errortext.ForeColor = Color.Red;
+                      flag_erroryes=0;
+                      for(int i=0;i<100;i++)
+                      {
+                        flag_error[i]=0	;
+                      }
+                }
+                else
+                {
+                    errortext.ForeColor = Color.Green;
+                    for (int i = 0; i < 100; i++)
+                    {
+                        flag_error[i] = 0;
+                    }
+			        errortemptext="";	
+			        errortext.Text="使用正常";
+                }
             }
         }
 
@@ -794,7 +844,7 @@ namespace four_axis
                 textBox3.Text = filetempnum.ToString();
                 button13.Text = filetempnum.ToString();
                 textBox5.Text = (runlinenum - 1).ToString();
-                textBox6.Text = filelinepara.ToString();
+                textBox6.Text = filelinepara[0].ToString();
                 textBox7.Text = yield.ToString();
 
                 int iret = 0;

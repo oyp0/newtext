@@ -14,9 +14,10 @@ namespace four_axis
         public IntPtr g_handle;         //链接返回的句柄，可以作为卡号
 
         public int linenum=1;	//总行数，当前行号  
-        public int filelinepara = 0;   //总行
+        public int[] filelinepara  = new int [10];   //总行
+        public int[] filelintempepara = new int[10];  
         public string codename;  //类型 
-        public int  linejump = 1;
+        public string linejump = "1";
         public int filenum;  //文件数
 
         int winnum = 0;    //窗口30要记得传值过来哦  
@@ -62,14 +63,36 @@ namespace four_axis
             timer1.Enabled = true;
             timer1.Interval = 100;
             timer1.Start();
+
+            textBox6.Text = linejump.ToString();
         }
+
+        //textbox
+        public void deal_limit(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 0x20) e.KeyChar = (char)0;  //禁止空格键  
+            if (e.KeyChar == 0x08) e.KeyChar = (char)0;  //禁止退格键  
+            if ((e.KeyChar == 0x2D) && (((TextBox)sender).Text.Length == 0)) return;   //处理负数  
+            if (e.KeyChar > 0x20)
+            {
+                try
+                {
+                    double.Parse(((TextBox)sender).Text + e.KeyChar.ToString());
+                }
+                catch
+                {
+                    e.KeyChar = (char)0;   //处理非法字符  
+                }
+            }
+        }
+
 
         //指令相关
         private void button7_Click(object sender, EventArgs e)
         {
             //MessageBox.Show(linenum.ToString());
-            //MessageBox.Show(filelinepara.ToString());
-            if(linenum <= filelinepara)  //'未新建行时不允许操作
+            //MessageBox.Show(filelinepara[0].ToString());
+            if(linenum <= filelinepara[0])  //'未新建行时不允许操作
             {
                 _20_运动类型选择 f20 = new _20_运动类型选择(this);
                 f20.g_handle = g_handle;
@@ -92,8 +115,7 @@ namespace four_axis
         private void timer1_Tick(object sender, EventArgs e)
         {
             textBox1.Text = linenum.ToString();    //当前行 
-            textBox2.Text = filelinepara.ToString();   //总行数
-            textBox6.Text = linejump.ToString();
+            textBox2.Text = filelinepara[0].ToString();   //总行数
         }
 
         //刷新显示
@@ -150,14 +172,14 @@ namespace four_axis
         //加载
         private void deal_lineload(int num)
         {
-            if(num<=filelinepara)
+            if(num<=filelinepara[0])
             {
                     templine[0] = int.Parse(codespace[(num - 1) * LINESPACE]);
                 	//dmcpy templine(0),codespace((num-1)*LINESPACE),LINESPACE;	'复制到临时数组    
                 	linenum=num;	//浏览界面跳转用
                     show_code(templine[0]);	//刷新显示
             }
-            else if(num>filelinepara && winnum==30)  //只有游览界面才提示
+            else if(num>filelinepara[0] && winnum==30)  //只有游览界面才提示
             {
                 Console.WriteLine("超过文件总行数");
                 _52_操作提示 f52 = new _52_操作提示();
@@ -170,15 +192,16 @@ namespace four_axis
         //跳转
         private void button13_Click(object sender, EventArgs e)
         {
-            if (linejump <= filelinepara)
+            MessageBox.Show(filelinepara[0].ToString());
+            if (int.Parse(linejump) <= filelinepara[0])
             {
-                if(linejump>0)
+                if (int.Parse(linejump) > 0)
                 {
-                    linenum  =linejump;
+                    linenum  =int.Parse(linejump);
                 }
                 else
                 {
-                    linejump=1;	//还原
+                    linejump="1";	//还原
 			        linenum=1;
                 }
                 //wa(10)
@@ -197,9 +220,9 @@ namespace four_axis
         //保存
         private void button5_Click(object sender, EventArgs e)
         {
-            //flash_write filetoflash(filenum-1),fileflag,filename,filelinepara,codespace(0,MAXLINENUM*LINESPACE)	'保存
+            //flash_write filetoflash(filenum-1),fileflag,filename,filelinepara[0],codespace(0,MAXLINENUM*LINESPACE)	'保存
             //DMCPY codetempspace(0),codespace(0),MAXLINENUM*LINESPACE	'赋值到临时数组
-            //dmcpy filelintempepara(0),filelinepara(0),10
+            //dmcpy filelintempepara(0),filelinepara[0],10
             //DMCPY filejudname(0),filename(0),FILENAMELENG
             _51_保存成功提示 f51 = new _51_保存成功提示();
             f51.ShowDialog();   
@@ -207,7 +230,7 @@ namespace four_axis
 
         private void deal_browseflash()
         {
-            //flash_read filetoflash(filenum-1),fileflag,filename,filelinepara,codespace(0,MAXLINENUM*LINESPACE)		'读取
+            //flash_read filetoflash(filenum-1),fileflag,filename,filelinepara[0],codespace(0,MAXLINENUM*LINESPACE)		'读取
 	        //'DMCPY codetempspace(0),codespace(0),MAXLINENUM*LINESPACE	'赋值到临时数组
         }
 
@@ -261,19 +284,19 @@ namespace four_axis
         {
             flag_returnwindow=14;	//文件配方界面
             for (int j = 0; j == 0; j++)
-            { 
-                //if(filelinepara[j] !=filelintempepara[j])
-                //{
-                //     flag_change=123;
-                //        break;
-                //}
-                for (int i = 0; i < FILENAMELENG;i++)  //文件名判断
+            {
+                if (filelinepara[j] != filelintempepara[j])
+                {
+                    flag_change = 123;
+                    break;
+                }
+                for (int i = 0; i < FILENAMELENG; i++)  //文件名判断
                 {
                     flag_change = 123;
                     break;
                 }
 
-                for(int i=0;i<filelinepara*LINESPACE;i++)
+                for(int i=0;i<filelinepara[0]*LINESPACE;i++)
                 {
                     if(codespace[i]!=codetempspace[i])  //参数不同
                     {
@@ -306,10 +329,17 @@ namespace four_axis
 
         }
 
-        //上一行
-        private void button1_Click(object sender, EventArgs e)
+        //linejump 的值改变
+  
+        private void textBox6_TextChanged(object sender, EventArgs e)
         {
-
+            linejump = textBox6.Text;
         }
+
+        private void textBox6_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            deal_limit(sender, e);
+        }
+
     }
 }

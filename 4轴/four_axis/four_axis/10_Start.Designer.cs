@@ -424,6 +424,7 @@
             // errortext
             // 
             this.errortext.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.errortext.ForeColor = System.Drawing.Color.Red;
             this.errortext.Location = new System.Drawing.Point(185, 412);
             this.errortext.Name = "errortext";
             this.errortext.ReadOnly = true;

@@ -68,7 +68,7 @@ namespace four_axis
                     {
                         fileflag = 0;
                         Console.WriteLine("清除flash：", filetoflash[filenum - 1]);
-                        //FLASH_WRITE filetoflash(filenum-1),fileflag,zeroname,filelinepara,setzero				'释放flash块		
+                        //FLASH_WRITE filetoflash(filenum-1),fileflag,zeroname,filelinepara[0],setzero				'释放flash块		
                         //DMDEL filetoflash(filenum-1)		'删除块号
                         filetoflash[FILENUMMAX - 1] = -1;				//ID列表刷新
                         if (filenum == totalfilenum)
