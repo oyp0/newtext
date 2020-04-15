@@ -46,6 +46,8 @@ namespace four_axis
         public int[] filetoflash = new int[15]; //id列表   
         public int[] showidlist = new int[5];	//显示ID	
 
+        public int change; // 接收运动指令标志 
+
         private _20_运动类型选择 return_20_运动类型选择 = null;
         private _19_文件编辑 return_19_文件编辑 = null;
         private _14_文件管理 return_14_文件管理 = null;
@@ -63,7 +65,14 @@ namespace four_axis
             timer1.Interval = 100;    //定时器定时100ms
             timer1.Start();
 
-            textBox10.Text = linejump.ToString();
+            textBox10.Text = linejump;
+            textBox1.Text = codetempspace[(linenum - 1) * LINESPACE + 5];
+            textBox2.Text = codetempspace[(linenum - 1) * LINESPACE + 6];
+            textBox3.Text = codetempspace[(linenum - 1) * LINESPACE + 7];
+            textBox4.Text = codetempspace[(linenum - 1) * LINESPACE + 8];
+            textBox9.Text = codetempspace[(linenum - 1) * LINESPACE + 4];     
+            
+      
         }
 
 
@@ -82,7 +91,7 @@ namespace four_axis
         //设置坐标
         private void button9_Click(object sender, EventArgs e)
         {
-            deal_linesetpos(0);
+      //      deal_linesetpos(0);
         }
 
 
@@ -304,6 +313,7 @@ namespace four_axis
                 f20.pagenum = pagenum;
                 f20.filetoflash = filetoflash;
                 f20.showidlist = showidlist;
+                f20.change21 = change;
                 f20.Show();//新窗口显现        
             }
             else
@@ -328,6 +338,7 @@ namespace four_axis
             {
                 codename = "直线";
                 //21进入直线界面
+                MessageBox.Show("正在这个界面");
             }
             else if (num == 2)
             {
@@ -367,7 +378,6 @@ namespace four_axis
 
         }
 
-
         //加载
         private void deal_lineload(int num)
         {
@@ -390,8 +400,9 @@ namespace four_axis
 
         //跳转
         private void button17_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show(filelinepara[0].ToString());
+        {          
+            linejump = textBox10.Text;
+            MessageBox.Show(linejump);
             if (int.Parse(linejump) <= filelinepara[0])
             {
                 if (int.Parse(linejump) > 0)
@@ -400,7 +411,7 @@ namespace four_axis
                 }
                 else
                 {
-                    linejump = "1";	//还原
+                    linejump = textBox10.Text;	//还原
                     linenum = 1;
                 }
                 //wa(10)
@@ -419,7 +430,7 @@ namespace four_axis
         private void button18_Click(object sender, EventArgs e)
         {
             flag_returnwindow = 14;	//文件配方界面
-            for (int j = 0; j == 0; j++)
+            for (int j = 0; j == 10; j++)
             {
                 if (filelinepara[j] != filelintempepara[j])
                 {
@@ -432,7 +443,7 @@ namespace four_axis
                     break;
                 }
 
-                for (int i = 0; i < filelinepara[0] * LINESPACE; i++)
+                for (int i = 0; i < 2000; i++)
                 {
                     if (codespace[i] != codetempspace[i])  //参数不同
                     {
@@ -441,10 +452,11 @@ namespace four_axis
                     }
                 }
             }
+                        
 
             if (flag_change == 123)   //有改动
             {
-                _50未保存提示 f50 = new _50未保存提示(null, null, null, null, null, this.return_14_文件管理, this.return_19_文件编辑);
+                _50未保存提示 f50 = new _50未保存提示(null, null, null, null, null, this.return_14_文件管理, this.return_19_文件编辑,this.return_20_运动类型选择,this,null,null,null,null);
                 f50.g_handle = g_handle;   //句柄
                 //f50.vr = vr;               //存放数组
                 //f50.paratemp = paratemp;   //临时数组             
@@ -472,8 +484,7 @@ namespace four_axis
                     this.return_14_文件管理.filetoflash = filetoflash;
                     this.return_14_文件管理.showidlist = showidlist;
                     this.return_14_文件管理.Visible = true; 
-                }
-                
+                }               
             }
         }
 
@@ -486,20 +497,19 @@ namespace four_axis
         {
             deal_limit(sender, e);
         }
-
-
-
         
+        //保存
+        private void button12_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < 2000; i++)
+            {
+                codetempspace[i] = codespace[i];
+            }
+            _51_保存成功提示 f51 = new _51_保存成功提示();
+            f51.ShowDialog();    
+        }
 
-      
-
- 
-  
-        
-
-  
-
-
+       
        
     }
 }

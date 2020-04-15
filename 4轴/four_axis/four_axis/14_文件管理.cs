@@ -111,7 +111,7 @@ namespace four_axis
 
             table.Columns.Add(column1);             //将列添加到table表中
             table.Columns.Add(column2);
-            for (int i = 1; i <= 1; i++)
+            for (int i = 1; i <= 10; i++)
             {
                 DataRow dr = table.NewRow();            //table表创建行
                 dr["文件ID"] = i.ToString();

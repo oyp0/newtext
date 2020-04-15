@@ -43,6 +43,14 @@ namespace four_axis
 
         int flag_change;
 
+        // 进入运动指令标志 
+        public int change_21 = 0;
+        public int change_22 = 0;
+        public int change_23 = 0;
+        public int change_24 = 0;
+        public int change_25 = 0; 
+
+
         //////////////游览操作///
          public int BROWSEPAGEGNUM=5;
 	     public int[] browseshowid = new int[5];
@@ -131,6 +139,7 @@ namespace four_axis
         //刷新显示
         private void show_code(int num)
         {
+            MessageBox.Show(num.ToString());
             if (num == 0)
             {
                 codename = "无";
@@ -138,44 +147,137 @@ namespace four_axis
             }
             else if (num == 1)
             {
-                codename = "直线";
-                //21进入直线界面
-                _21_直线指令 f21 = new _21_直线指令(null,this,this.return_14_文件管理);
-                f21.g_handle = g_handle;
-                f21.vr = vr;  //数组
-                f21.codespace = codespace; //数组
-                f21.manulradio = manulradio; //速度比例
-                f21.linenum = linenum;  //行号
-                f21.filelinepara = filelinepara;
-                f21.filelintempepara = filelintempepara;
-                f21.codename = codename;
-                f21.codetempspace = codetempspace;
-                f21.linejump = linejump;
-                f21.pagenum = pagenum;
-                f21.filetoflash = filetoflash;
-                f21.showidlist = showidlist;
-                this.Hide();//隐藏现在这个窗口
-                f21.Show();//新窗口显现                   
+                if(change_21==0)
+                {
+                    change_21 = 1;
+                    codename = "直线";
+                    //21进入直线界面
+                    _21_直线指令 f21 = new _21_直线指令(null,this,this.return_14_文件管理);
+                    f21.g_handle = g_handle;
+                    f21.vr = vr;  //数组
+                    f21.codespace = codespace; //数组
+                    f21.manulradio = manulradio; //速度比例
+                    f21.linenum = linenum;  //行号
+                    f21.filelinepara = filelinepara;
+                    f21.filelintempepara = filelintempepara;
+                    f21.codename = codename;
+                    f21.codetempspace = codetempspace;
+                    f21.linejump = linejump;
+                    f21.pagenum = pagenum;
+                    f21.filetoflash = filetoflash;
+                    f21.showidlist = showidlist;
+                    f21.change = change_21;
+                    this.Hide();//隐藏现在这个窗口
+                    f21.Show();//新窗口显现                       
+                }
             }
             else if (num == 2)
             {
-                codename = "三点画弧";
-                //22进入三点画弧
+                if (change_22 == 0)
+                {
+                    change_22 = 1;
+                    codename = "三点画弧";
+                    //22进入三点画弧
+                    _22_三点圆弧指令 f22 = new _22_三点圆弧指令(null, this, this.return_14_文件管理);
+                    f22.g_handle = g_handle;
+                    f22.vr = vr;  //数组
+                    f22.codespace = codespace; //数组
+                    f22.manulradio = manulradio; //速度比例
+                    f22.linenum = linenum;  //行号
+                    f22.filelinepara = filelinepara;
+                    f22.filelintempepara = filelintempepara;
+                    f22.codename = codename;
+                    f22.codetempspace = codetempspace;
+                    f22.linejump = linejump;
+                    f22.pagenum = pagenum;
+                    f22.filetoflash = filetoflash;
+                    f22.showidlist = showidlist;
+                    f22.change = change_22;
+                    this.Hide();//隐藏现在这个窗口
+                    f22.Show();//新窗口显现                       
+                }             
             }
             else if (num == 3)
             {
-                codename = "延时";
-                //23进入延时界面
+                if (change_23 == 0)
+                {
+                    change_23 = 1;
+                    codename = "延时";
+                    //23进入延时界面
+                    _23_延时指令 f23 = new _23_延时指令(null, this, this.return_14_文件管理);
+                    f23.g_handle = g_handle;
+                    f23.vr = vr;  //数组
+                    f23.codespace = codespace; //数组
+                    f23.manulradio = manulradio; //速度比例
+                    f23.linenum = linenum;  //行号
+                    f23.filelinepara = filelinepara;
+                    f23.filelintempepara = filelintempepara;
+                    f23.codename = codename;
+                    f23.codetempspace = codetempspace;
+                    f23.linejump = linejump;
+                    f23.pagenum = pagenum;
+                    f23.filetoflash = filetoflash;
+                    f23.showidlist = showidlist;
+                    f23.change = change_23;
+                    this.Hide();//隐藏现在这个窗口
+                    f23.Show();//新窗口显现                       
+                }             
+               
             }
             else if (num == 4)
             {
-                codename = "多个输出";
-                //24进入多个输出界面
+                if (change_24 == 0)
+                {
+                    change_24 = 1;
+                    codename = "多个输出";
+                    //24进入多个输出界面
+                    _24_输出指令_ f24 = new _24_输出指令_(null, this, this.return_14_文件管理);
+                    f24.g_handle = g_handle;
+                    f24.vr = vr;  //数组
+                    f24.codespace = codespace; //数组
+                    f24.manulradio = manulradio; //速度比例
+                    f24.linenum = linenum;  //行号
+                    f24.filelinepara = filelinepara;
+                    f24.filelintempepara = filelintempepara;
+                    f24.codename = codename;
+                    f24.codetempspace = codetempspace;
+                    f24.linejump = linejump;
+                    f24.pagenum = pagenum;
+                    f24.filetoflash = filetoflash;
+                    f24.showidlist = showidlist;
+                    f24.change = change_24;
+                    this.Hide();//隐藏现在这个窗口
+                    f24.Show();//新窗口显现                       
+                }       
+                
+                
             }
             else if (num == 5)
             {
-                codename = "输出延时复位";
-                //25进入输出延时复位界面
+                if (change_25 == 0)
+                {
+                    change_25 = 1;
+                    codename = "输出延时复位";
+                    //25进入输出延时复位界面
+                    _25_输出复位指令 f25 = new _25_输出复位指令(null, this, this.return_14_文件管理);
+                    f25.g_handle = g_handle;
+                    f25.vr = vr;  //数组
+                    f25.codespace = codespace; //数组
+                    f25.manulradio = manulradio; //速度比例
+                    f25.linenum = linenum;  //行号
+                    f25.filelinepara = filelinepara;
+                    f25.filelintempepara = filelintempepara;
+                    f25.codename = codename;
+                    f25.codetempspace = codetempspace;
+                    f25.linejump = linejump;
+                    f25.pagenum = pagenum;
+                    f25.filetoflash = filetoflash;
+                    f25.showidlist = showidlist;
+                    f25.change = change_25;
+                    this.Hide();//隐藏现在这个窗口
+                    f25.Show();//新窗口显现                       
+                }       
+  
             }
             else if (num == 6)
             {
@@ -199,6 +301,7 @@ namespace four_axis
         private void deal_lineload(int num)
         {
             codespace[(num - 1) * LINESPACE] = linejump;
+
             if(num<=filelinepara[0])
             {
                     templine[0] = int.Parse(codespace[(num - 1) * LINESPACE]);
@@ -217,20 +320,20 @@ namespace four_axis
 
         //跳转
         private void button13_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show(filelinepara[0].ToString());
+        {          
             if (int.Parse(linejump) <= filelinepara[0])
             {
                 if (int.Parse(linejump) > 0)
                 {
-                    linenum  =int.Parse(linejump);
+                   linenum = int.Parse(linejump);
                 }
                 else
                 {
-                    linejump="1";	//还原
-			        linenum=1;
+                    linejump = textBox6.Text;	//还原
+                    linenum = 1;
                 }
                 //wa(10)
+
                 deal_lineload(linenum);
             }
             else
@@ -238,9 +341,8 @@ namespace four_axis
                 Console.WriteLine("超出范围");
                 _52_操作提示 f52 = new _52_操作提示();
                 f52.V1 = "超出范围";
-                f52.ShowDialog();   
+                f52.ShowDialog();
             }
-
         }
 
         //保存
@@ -309,18 +411,18 @@ namespace four_axis
         private void button10_Click(object sender, EventArgs e)
         {
             flag_returnwindow=14;	//文件配方界面
-            for (int j = 0; j == 0; j++)
+            for (int j = 0; j == 10; j++)
             {
                 if (filelinepara[j] != filelintempepara[j])
                 {
                     flag_change = 123;
                     break;
                 }
-                for (int i = 0; i < FILENAMELENG; i++)  //文件名判断
-                {
-                    flag_change = 123;
-                    break;
-                }
+                //for (int i = 0; i < FILENAMELENG; i++)  //文件名判断
+                //{
+                //    flag_change = 123;
+                //    break;
+                //}
 
                 for(int i=0;i<filelinepara[0]*LINESPACE;i++)
                 {
@@ -334,7 +436,7 @@ namespace four_axis
 
             if (flag_change == 123)   //有改动
             {
-                _50未保存提示 f50 = new _50未保存提示(null, null, null, null, null, this.return_14_文件管理,this);
+                _50未保存提示 f50 = new _50未保存提示(null, null, null, null, null, this.return_14_文件管理,this,null,null,null,null,null,null);
                 f50.g_handle = g_handle;   //句柄
                 //f50.vr = vr;               //存放数组
                 //f50.paratemp = paratemp;   //临时数组             

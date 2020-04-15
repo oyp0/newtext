@@ -30,8 +30,16 @@ namespace four_axis
       
         private _14_文件管理 return_14_文件管理 = null;
         private _19_文件编辑 return_19_文件编辑 = null;
+        private _20_运动类型选择 return_20_运动类型选择 = null;
 
-        public _50未保存提示(_13参数设置 F13,_15_轴参数设置 F15,_16_机械参数设置 F16,_18_IO映射 F18,_31_复位设置 F31,_14_文件管理 F14,_19_文件编辑 F19)
+        private _21_直线指令 return_21_直线指令 = null;
+        private _22_三点圆弧指令 return_22_三点圆弧指令 = null;
+        private _23_延时指令 return_23_延时指令 = null;
+        private _24_输出指令_ return_24_输出指令_ = null;
+        private _25_输出复位指令 return_25_输出复位指令 = null;
+
+
+        public _50未保存提示(_13参数设置 F13,_15_轴参数设置 F15,_16_机械参数设置 F16,_18_IO映射 F18,_31_复位设置 F31,_14_文件管理 F14,_19_文件编辑 F19,_20_运动类型选择 F20,_21_直线指令 F21,_22_三点圆弧指令 F22,_23_延时指令 F23,_24_输出指令_ F24,_25_输出复位指令 F25)
         {
             InitializeComponent();
             this.return_13参数设置 = F13;
@@ -41,7 +49,12 @@ namespace four_axis
             this.return_31_复位设置 = F31;
             this.return_14_文件管理 = F14;
             this.return_19_文件编辑 = F19;
-
+            this.return_20_运动类型选择 = F20;
+            this.return_21_直线指令 = F21;
+            this.return_22_三点圆弧指令 = F22;
+            this.return_23_延时指令 = F23;
+            this.return_24_输出指令_ = F24;
+            this.return_25_输出复位指令 = F25;
         }
 
         private void _50未保存提示_Load(object sender, EventArgs e)
@@ -135,14 +148,132 @@ namespace four_axis
             else if (flag_returnwindow == 14) //文件
             {
                 deal_fileflash(0);
-                //上一级窗口关闭  
-                this.return_19_文件编辑.Close();
-                //关闭当前窗口
-                this.Close();
-                this.return_14_文件管理.pagenum = pagenum;
-                this.return_14_文件管理.filetoflash = filetoflash;
-                this.return_14_文件管理.showidlist = showidlist;
-                this.return_14_文件管理.Visible = true;
+
+
+                if (this.return_19_文件编辑 != null && this.return_20_运动类型选择 == null && this.return_21_直线指令 == null)
+                {
+                    this.Close();
+                    this.return_19_文件编辑.Close();
+                    this.return_14_文件管理.pagenum = pagenum;
+                    this.return_14_文件管理.filetoflash = filetoflash;
+                    this.return_14_文件管理.showidlist = showidlist;
+                    this.return_14_文件管理.Visible = true;
+                }
+                if (this.return_19_文件编辑 == null && this.return_20_运动类型选择 != null && this.return_21_直线指令 == null)
+                {
+                    this.Close();
+                    this.return_20_运动类型选择.Close();
+                    this.return_14_文件管理.pagenum = pagenum;
+                    this.return_14_文件管理.filetoflash = filetoflash;
+                    this.return_14_文件管理.showidlist = showidlist;
+                    this.return_14_文件管理.Visible = true;
+                }
+                if (this.return_19_文件编辑 == null && this.return_20_运动类型选择 != null && this.return_21_直线指令 != null)
+                {
+                    this.Close();
+                    this.return_20_运动类型选择.Close();
+                    this.return_21_直线指令.Close();
+                    this.return_14_文件管理.pagenum = pagenum;
+                    this.return_14_文件管理.filetoflash = filetoflash;
+                    this.return_14_文件管理.showidlist = showidlist;
+                    this.return_14_文件管理.Visible = true;
+                }
+                if (this.return_19_文件编辑 != null && this.return_20_运动类型选择 == null && this.return_21_直线指令 != null)
+                {
+                    this.Close();
+                    this.return_19_文件编辑.Close();
+                    this.return_21_直线指令.Close();
+                    this.return_14_文件管理.pagenum = pagenum;
+                    this.return_14_文件管理.filetoflash = filetoflash;
+                    this.return_14_文件管理.showidlist = showidlist;
+                    this.return_14_文件管理.Visible = true;
+                }
+
+                if (this.return_19_文件编辑 == null && this.return_20_运动类型选择 != null && this.return_22_三点圆弧指令 != null)
+                {
+                    this.Close();
+                    this.return_20_运动类型选择.Close();
+                    this.return_22_三点圆弧指令.Close();
+                    this.return_14_文件管理.pagenum = pagenum;
+                    this.return_14_文件管理.filetoflash = filetoflash;
+                    this.return_14_文件管理.showidlist = showidlist;
+                    this.return_14_文件管理.Visible = true;
+                }
+                if (this.return_19_文件编辑 != null && this.return_20_运动类型选择 == null && this.return_22_三点圆弧指令 != null)
+                {
+                    this.Close();
+                    this.return_19_文件编辑.Close();
+                    this.return_22_三点圆弧指令.Close();
+                    this.return_14_文件管理.pagenum = pagenum;
+                    this.return_14_文件管理.filetoflash = filetoflash;
+                    this.return_14_文件管理.showidlist = showidlist;
+                    this.return_14_文件管理.Visible = true;
+                }
+
+                if (this.return_19_文件编辑 == null && this.return_20_运动类型选择 != null && this.return_23_延时指令 != null)
+                {
+                    this.Close();
+                    this.return_20_运动类型选择.Close();
+                    this.return_23_延时指令.Close();
+                    this.return_14_文件管理.pagenum = pagenum;
+                    this.return_14_文件管理.filetoflash = filetoflash;
+                    this.return_14_文件管理.showidlist = showidlist;
+                    this.return_14_文件管理.Visible = true;
+                }
+                if (this.return_19_文件编辑 != null && this.return_20_运动类型选择 == null && this.return_23_延时指令 != null)
+                {
+                    this.Close();
+                    this.return_19_文件编辑.Close();
+                    this.return_23_延时指令.Close();
+                    this.return_14_文件管理.pagenum = pagenum;
+                    this.return_14_文件管理.filetoflash = filetoflash;
+                    this.return_14_文件管理.showidlist = showidlist;
+                    this.return_14_文件管理.Visible = true;
+                }
+
+                if (this.return_19_文件编辑 == null && this.return_20_运动类型选择 != null && this.return_24_输出指令_ != null)
+                {
+                    this.Close();
+                    this.return_20_运动类型选择.Close();
+                    this.return_24_输出指令_.Close();
+                    this.return_14_文件管理.pagenum = pagenum;
+                    this.return_14_文件管理.filetoflash = filetoflash;
+                    this.return_14_文件管理.showidlist = showidlist;
+                    this.return_14_文件管理.Visible = true;
+                }
+                if (this.return_19_文件编辑 != null && this.return_20_运动类型选择 == null && this.return_24_输出指令_ != null)
+                {
+                    this.Close();
+                    this.return_19_文件编辑.Close();
+                    this.return_24_输出指令_.Close();
+                    this.return_14_文件管理.pagenum = pagenum;
+                    this.return_14_文件管理.filetoflash = filetoflash;
+                    this.return_14_文件管理.showidlist = showidlist;
+                    this.return_14_文件管理.Visible = true;
+                }
+
+                if (this.return_19_文件编辑 == null && this.return_20_运动类型选择 != null && this.return_25_输出复位指令 != null)
+                {
+                    this.Close();
+                    this.return_20_运动类型选择.Close();
+                    this.return_25_输出复位指令.Close();
+                    this.return_14_文件管理.pagenum = pagenum;
+                    this.return_14_文件管理.filetoflash = filetoflash;
+                    this.return_14_文件管理.showidlist = showidlist;
+                    this.return_14_文件管理.Visible = true;
+                }
+                if (this.return_19_文件编辑 != null && this.return_20_运动类型选择 == null && this.return_25_输出复位指令 != null)
+                {
+                    this.Close();
+                    this.return_19_文件编辑.Close();
+                    this.return_25_输出复位指令.Close();
+                    this.return_14_文件管理.pagenum = pagenum;
+                    this.return_14_文件管理.filetoflash = filetoflash;
+                    this.return_14_文件管理.showidlist = showidlist;
+                    this.return_14_文件管理.Visible = true;
+                }
+
+
             }
             flag_returnwindow = 0;         
         }
