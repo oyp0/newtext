@@ -18,25 +18,33 @@ namespace four_axis
         public int LINESPACE=20;		//行空间
 
         public int manulradio;		//初始速度比    还没传过来
-        public String[] codespace = new String[2000];	//存放数组
-        public int[] codetempspace= new int[2000];	//临时空间
-        public string  codename = "无" ;  //类型
-        public int[] templine= new int[20];	//临时
         public float[] vr = new float[500];  //数组     
 
         public int linenum;	//总行数，当前行号  
-        public int linetype,linejump;
+        public int linetype;
 
-        public int winnum = 0; //窗口30的进来标志
+        public int[] filelinepara = new int[10];   //总行
+        public int[] filelintempepara = new int[10];
+        public string codename;  //类型 
+        public String[] codespace = new String[2000];	//存放数组
+        public String[] codetempspace = new String[2000];	//临时空间
 
-        public int filelinepara = 0;   //总行
+        public string linejump;
+        public int[] templine = new int[30];	//临时
+        int winnum = 0;    //窗口30要记得传值过来哦  
+
+        public int pagenum;  //页数
+        public int[] filetoflash = new int[15]; //id列表   
+        public int[] showidlist = new int[5];	//显示ID
 
 
         private _19_文件编辑 return_19_文件编辑 = null;
-        public _20_运动类型选择(_19_文件编辑 F19)
+        private _14_文件管理 return_14_文件管理 = null;
+        public _20_运动类型选择(_19_文件编辑 F19,_14_文件管理 F14)
         {
             InitializeComponent();
             this.return_19_文件编辑 = F19;
+            this.return_14_文件管理 = F14;
         }
 
         private void _20_运动类型选择_Load(object sender, EventArgs e)
@@ -57,7 +65,7 @@ namespace four_axis
             {
                 codename = "直线";
 
-                _21_直线指令 f21 = new _21_直线指令(this);
+                _21_直线指令 f21 = new _21_直线指令(this,this.return_19_文件编辑,null);
                 f21.g_handle = g_handle;  //句柄
                 f21.vr = vr;  //数组
                 f21.codespace = codespace; //数组
@@ -109,13 +117,13 @@ namespace four_axis
         private void deal_lineload(int num)
         {   
             //winnum=HMI_BASEWINDOW
-            if (num <= filelinepara)
+            if (num <= filelinepara[0])
             { 
                 //dmcpy templine(0),codespace((num-1)*LINESPACE),LINESPACE;	//复制到临时数组   
                 linenum = num; //游览界面跳转用
                 show_code(templine[0]);  //刷新显示
             }
-            else if ((num > filelinepara) && winnum ==30)
+            else if ((num > filelinepara[0]) && winnum ==30)
             {
                 _52_操作提示 f52 = new _52_操作提示();
                 f52.V1 = "超过文件总行数";
@@ -133,13 +141,23 @@ namespace four_axis
             //直线窗口
             if (g_handle != (IntPtr)0)
             {
-                _21_直线指令 f21 = new _21_直线指令(this);
-                f21.g_handle = g_handle;  //句柄
+                
+                _21_直线指令 f21 = new _21_直线指令(this,this.return_19_文件编辑,this.return_14_文件管理);
+                f21.g_handle = g_handle;
                 f21.vr = vr;  //数组
                 f21.codespace = codespace; //数组
                 f21.manulradio = manulradio; //速度比例
                 f21.linenum = linenum;  //行号
-                this.Hide();//隐藏现在这个窗口
+                f21.filelinepara = filelinepara;
+                f21.filelintempepara = filelintempepara;
+                f21.codename = codename;
+                f21.codetempspace = codetempspace;
+                f21.linejump = linejump;
+                f21.pagenum = pagenum;
+                f21.filetoflash = filetoflash;
+                f21.showidlist = showidlist;
+                this.return_19_文件编辑.Close(); //关闭上一级窗口
+                this.Close();//关闭这个窗口
                 f21.Show();//新窗口显现     
 
                 deal_lineload(linenum);

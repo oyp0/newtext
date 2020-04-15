@@ -576,6 +576,8 @@ namespace four_axis
         //加载
         private void deal_lineload(int num)
         {
+            MessageBox.Show(num.ToString());
+            MessageBox.Show(filelinepara[0].ToString());
             if(num<=filelinepara[0])
             {
                 templine[0] = int.Parse(codespace[(num - 1) * LINESPACE]);
@@ -667,7 +669,7 @@ namespace four_axis
                     f19.linenum = linenum;
                     this.Hide();//隐藏现在这个窗口
                     f19.Show();//新窗口显现    
-                    deal_lineload(linenum);	//加载第一行
+              //    deal_lineload(linenum);	//加载第一行
                     filename[0] = this.dataGridView1.Rows[linenum - 1].Cells[1].Value.ToString(); //获取文件名
                     Console.WriteLine("当前编辑 filenum={0}\filename={1}", filenum, filename);
                 }

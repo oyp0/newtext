@@ -94,12 +94,20 @@ namespace four_axis
             //MessageBox.Show(filelinepara[0].ToString());
             if(linenum <= filelinepara[0])  //'未新建行时不允许操作
             {
-                _20_运动类型选择 f20 = new _20_运动类型选择(this);
+                _20_运动类型选择 f20 = new _20_运动类型选择(this,this.return_14_文件管理);
                 f20.g_handle = g_handle;
+                f20.vr = vr;  //数组
+                f20.codespace = codespace; //数组
+                f20.manulradio = manulradio; //速度比例
+                f20.linenum = linenum;  //行号
+                f20.filelinepara = filelinepara;
+                f20.filelintempepara = filelintempepara;
                 f20.codename = codename;
-                f20.codespace = codespace;
-                f20.linenum = linenum;
-                f20.manulradio =manulradio;		//初始速度比
+                f20.codetempspace = codetempspace;
+                f20.linejump = linejump;
+                f20.pagenum = pagenum;
+                f20.filetoflash = filetoflash;
+                f20.showidlist = showidlist;
                 f20.Show();//新窗口显现        
             }
             else
@@ -116,6 +124,8 @@ namespace four_axis
         {
             textBox1.Text = linenum.ToString();    //当前行 
             textBox2.Text = filelinepara[0].ToString();   //总行数
+            textBox5.Text = codename;
+            button7.Text = codename;
         }
 
         //刷新显示
@@ -130,6 +140,22 @@ namespace four_axis
             {
                 codename = "直线";
                 //21进入直线界面
+                _21_直线指令 f21 = new _21_直线指令(null,this,this.return_14_文件管理);
+                f21.g_handle = g_handle;
+                f21.vr = vr;  //数组
+                f21.codespace = codespace; //数组
+                f21.manulradio = manulradio; //速度比例
+                f21.linenum = linenum;  //行号
+                f21.filelinepara = filelinepara;
+                f21.filelintempepara = filelintempepara;
+                f21.codename = codename;
+                f21.codetempspace = codetempspace;
+                f21.linejump = linejump;
+                f21.pagenum = pagenum;
+                f21.filetoflash = filetoflash;
+                f21.showidlist = showidlist;
+                this.Hide();//隐藏现在这个窗口
+                f21.Show();//新窗口显现                   
             }
             else if (num == 2)
             {
@@ -172,6 +198,7 @@ namespace four_axis
         //加载
         private void deal_lineload(int num)
         {
+            codespace[(num - 1) * LINESPACE] = linejump;
             if(num<=filelinepara[0])
             {
                     templine[0] = int.Parse(codespace[(num - 1) * LINESPACE]);
@@ -185,8 +212,7 @@ namespace four_axis
                 _52_操作提示 f52 = new _52_操作提示();
                 f52.V1 = "超过文件总行数";
                 f52.ShowDialog();
-            }
-          
+            }          
         }
 
         //跳转

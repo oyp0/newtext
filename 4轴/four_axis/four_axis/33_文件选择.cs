@@ -247,7 +247,6 @@ namespace four_axis
             this.return_10Start.Visible = true;
         }
 
-
         private void deal_fileslt(int num) //选择id
         {
             if ((num + ONEPAGENUM * (pagenum - 1)) <= (totalfilenum + 1))
