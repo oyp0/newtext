@@ -105,7 +105,7 @@ namespace four_axis
             //MessageBox.Show(filelinepara[0].ToString());
             if(linenum <= filelinepara[0])  //'未新建行时不允许操作
             {
-                _20_运动类型选择 f20 = new _20_运动类型选择(this,this.return_14_文件管理);
+                _20_运动类型选择 f20 = new _20_运动类型选择(this,this.return_14_文件管理,null,null,null,null,null,null,null,null);
                 f20.g_handle = g_handle;
                 f20.vr = vr;  //数组
                 f20.codespace = codespace; //数组

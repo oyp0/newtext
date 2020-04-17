@@ -300,8 +300,9 @@ namespace four_axis
             //MessageBox.Show(filelinepara[0].ToString());
             if (linenum <= filelinepara[0])  //'未新建行时不允许操作
             {
-               
-                    _20_运动类型选择 f20 = new _20_运动类型选择(this.return_19_文件编辑, this.return_14_文件管理);
+                if (this.return_20_运动类型选择 == null && this.return_19_文件编辑 != null && this.return_14_文件管理 != null)
+                {
+                    _20_运动类型选择 f20 = new _20_运动类型选择(this.return_19_文件编辑, this.return_14_文件管理,null,null,null,null,null,this,null,null);
                     f20.g_handle = g_handle;
                     f20.vr = vr;  //数组
                     f20.codespace = codespace; //数组
@@ -315,9 +316,29 @@ namespace four_axis
                     f20.pagenum = pagenum;
                     f20.filetoflash = filetoflash;
                     f20.showidlist = showidlist;
-                    f20.change21 = change;
+                    f20.change26 = change;
                     f20.Show();//新窗口显现        
-            
+                }
+                if (this.return_20_运动类型选择 != null && this.return_19_文件编辑 == null && this.return_14_文件管理 != null)
+                {
+                    this.return_20_运动类型选择.Close();
+                    _20_运动类型选择 f20 = new _20_运动类型选择(null, this.return_14_文件管理, null, null, null, null, null, this, null, null);
+                    f20.g_handle = g_handle;
+                    f20.vr = vr;  //数组
+                    f20.codespace = codespace; //数组
+                    f20.manulradio = manulradio; //速度比例
+                    f20.linenum = linenum;  //行号
+                    f20.filelinepara = filelinepara;
+                    f20.filelintempepara = filelintempepara;
+                    f20.codename = codename;
+                    f20.codetempspace = codetempspace;
+                    f20.linejump = linejump;
+                    f20.pagenum = pagenum;
+                    f20.filetoflash = filetoflash;
+                    f20.showidlist = showidlist;
+                    f20.change26 = change;
+                    f20.Show();//新窗口显现
+                }
             }
             else
             {
