@@ -47,6 +47,7 @@ namespace four_axis
         {
             this.Close();
             this.return_10Start.flag_Initialization = flag_Initialization;
+            this.return_10Start.vr = vr;
             this.return_10Start.Visible = true;
         }
     }

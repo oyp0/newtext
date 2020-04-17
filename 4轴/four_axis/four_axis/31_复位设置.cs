@@ -23,7 +23,7 @@ namespace four_axis
         public int fileflag;        //读写判断
         public int firstflag = 0;
 
-        public int flag_setchange = 0;     //参数修改标志
+        public int flag_Initialization; //初始化标志 只初始化一次
         public int flag_returnwindow = 0;
         public int flag_change;
 
@@ -343,8 +343,8 @@ namespace four_axis
                 vr[i] = paratemp[i];
             }
             deal_setpara();
-            initset();
-            flag_setchange = 0;  //保存标志
+            initset();          
+            flag_Initialization = 1;  //保存标志
             _51_保存成功提示 f51 = new _51_保存成功提示();
             f51.ShowDialog(); 
         }
@@ -378,6 +378,8 @@ namespace four_axis
             else
             {
                 this.Close();
+                this.return_13参数设置.vr = vr;
+                this.return_13参数设置.flag_Initialization = flag_Initialization;
                 this.return_13参数设置.Visible = true;
             }
         }

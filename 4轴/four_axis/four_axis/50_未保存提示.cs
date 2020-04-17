@@ -120,6 +120,7 @@ namespace four_axis
                     //关闭当前窗口
                     this.Close();
                     this.return_13参数设置.paratemp = paratemp;
+
                     this.return_13参数设置.Visible = true;    
                 }
                 if (this.return_15_轴参数设置 == null && this.return_16_机械参数设置 != null && this.return_18_IO映射 == null && this.return_31_复位设置 == null)

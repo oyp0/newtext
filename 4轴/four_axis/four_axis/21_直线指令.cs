@@ -743,11 +743,15 @@ namespace four_axis
                     flag_change = 123;
                     break;
                 }
-                for (int i = 0; i < FILENAMELENG; i++)  //文件名判断
-                {
-                    flag_change = 123;
-                    break;
-                }
+
+                //for (int i = 0; i < FILENAMELENG; i++)  
+                //{
+                //    if (filejudname[i]!=filename[i]) 	//文件名判断
+                //    {
+                //    flag_change = 123;
+                //    break;
+                //    }
+                //}
 
                 for (int i = 0; i < 2000; i++)
                 {

@@ -35,3 +35,4 @@ E:\Git\4轴\four_axis\four_axis\obj\x64\Debug\four_axis._22_三点圆弧指令.r
 E:\Git\4轴\four_axis\four_axis\obj\x64\Debug\four_axis.csproj.GenerateResource.Cache
 E:\Git\4轴\four_axis\four_axis\obj\x64\Debug\four_axis.exe
 E:\Git\4轴\four_axis\four_axis\obj\x64\Debug\four_axis.pdb
+E:\Git\4轴\four_axis\four_axis\obj\x64\Debug\four_axis.csprojResolveAssemblyReference.cache
