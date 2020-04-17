@@ -64,5 +64,10 @@ namespace four_axis
                 g_handle = (IntPtr)0;
             }
         }
+
+        private void C_Ip_Address_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

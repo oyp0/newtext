@@ -69,6 +69,7 @@
             this.C_Ip_Address.Name = "C_Ip_Address";
             this.C_Ip_Address.Size = new System.Drawing.Size(134, 20);
             this.C_Ip_Address.TabIndex = 11;
+            this.C_Ip_Address.SelectedIndexChanged += new System.EventHandler(this.C_Ip_Address_SelectedIndexChanged);
             // 
             // Form1
             // 

@@ -69,6 +69,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.button13 = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
+            this.timer4 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // button8
@@ -457,6 +458,10 @@
             this.label12.Size = new System.Drawing.Size(129, 28);
             this.label12.TabIndex = 70;
             // 
+            // timer4
+            // 
+            this.timer4.Tick += new System.EventHandler(this.timer4_Tick);
+            // 
             // _10Start
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -550,5 +555,6 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button button13;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Timer timer4;
     }
 }

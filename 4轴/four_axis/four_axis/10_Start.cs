@@ -90,7 +90,9 @@ namespace four_axis
             Initialization();
             filelinepara[0] = 0;
 
-            //           task_error();  //出错处理
+            //timer4.Enabled = true;
+            //timer4.Interval = 100;
+            //timer4.Start();
         }
 
         //textbox处理
@@ -431,6 +433,7 @@ namespace four_axis
         private void task_run()
         { 
             flag_state=1;      //运行
+            statename.Text = "运行中：执行";
             //Move_Mark指令
             zmcaux.ZAux_Direct_SetMovemark(g_handle, 0, 0);
             zmcaux.ZAux_Direct_SetMovemark(g_handle, 1, 0);
@@ -442,10 +445,12 @@ namespace four_axis
                 runlinenum = 1;	 //首行
                 while (runlinenum <= filelinepara[0])        //单次程序运行
                 {
+                    Console.WriteLine("指令行号：{0}", runlinenum);
                     //ZINDEX_CALL(runindex(codespace((runlinenum-1)*LINESPACE+0)))(runlinenum)	'文件类型跳转
                     runlinenum = runlinenum + 1;
                 }
                 //等待轴停止  还没写
+                //wait idle	'运行完成一次
                 yield = yield + 1;   //产量加一
 		        cyclenum=cyclenum-1; //循环次数减一
                 if (cyclenum==1)
@@ -466,14 +471,25 @@ namespace four_axis
             {
                 f1 = vr[i * AXISSPACE + 5];
                 zmcaux.ZAux_Direct_SetSpeed(g_handle, i, f1);   //回零速度   
-                //f1 = vr[i * AXISSPACE + 9];
-                //zmcaux.ZAux_Direct_SetHomeWait(g_handle, i, f1);  //反找等待
-                //f1 = vr[i * AXISSPACE + 8];
-                //zmcaux.ZAux_Direct_Single_Datum(g_handle, i, f1); //回零方式
+                f1 = vr[i * AXISSPACE + 9];
+                zmcaux.ZAux_Direct_SetHomeWait(g_handle, i, int.Parse(f1.ToString()));  //反找等待
+                f1 = vr[i * AXISSPACE + 8];
+                zmcaux.ZAux_Direct_Single_Datum(g_handle, i, int.Parse(f1.ToString())); //回零方式
             }
             //等待轴停止  还没写
-            flag_home=1;	 //回零完成
-	        statename.Text ="复位完成";
+            //wait until idle(0) and idle(1) and idle(2) and idle(3)
+	            //wa 10
+            int[] p = new int[4];  
+            zmcaux.ZAux_Direct_GetIfIdle(g_handle, 0, ref p[0]);
+            zmcaux.ZAux_Direct_GetIfIdle(g_handle, 1, ref p[1]);
+            zmcaux.ZAux_Direct_GetIfIdle(g_handle, 2, ref p[2]);
+            zmcaux.ZAux_Direct_GetIfIdle(g_handle, 3, ref p[3]);
+            if (p[0] == -1 && p[1] == -1 && p[2] == -1 && p[3] == -1)
+            {
+                flag_home = 1;	 //回零完成
+                statename.Text = "复位完成";
+            }
+           
         }
 
         //任务3
@@ -881,6 +897,11 @@ namespace four_axis
             task_home();
         }
 
+        //定时器4
+        private void timer4_Tick(object sender, EventArgs e)
+        {
+            task_error();
+        }
 
         ////////////////////运行指令////////////////////////////
         public void run_jud(int num)
@@ -983,6 +1004,8 @@ namespace four_axis
             flag_abs = 0;
             run_jud(num);
         }
+
+      
         ///////////////////////////////////////////////
     }
 }
