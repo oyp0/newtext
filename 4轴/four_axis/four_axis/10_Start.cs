@@ -23,7 +23,7 @@ namespace four_axis
         public float[] paratemp = new float[150];   //临时存储，用于不保存时还原参数
         public float f1;   //中间变量
 
-       
+        public int linenum = 1;	//总行数，当前行号
         public int reg; //判断
         public int piValue;
         public int[] pi = new int[4];
@@ -56,6 +56,7 @@ namespace four_axis
 
         public int LINESPACE = 20;		//行空间
         public String[] codespace = new String[2000];	//存放数组
+        public String[] codetempspace = new String[2000];	//临时空间
         public int flag_abs;
 
         private Form1 returnForm1 = null;
@@ -394,6 +395,8 @@ namespace four_axis
                 f14.filelinepara = filelinepara;   //总行
                 f14.manulradio = manulradio;
                 f14.vr = vr;
+                f14.linenum = linenum;
+                f14.codetempspace = codetempspace;
                 this.Hide();//隐藏现在这个窗口
                 f14.Show();//新窗口显现    
             }

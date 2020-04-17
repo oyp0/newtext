@@ -34,7 +34,7 @@ namespace four_axis
         public int FILEFLASHFLAG=13941;	 //读写标志
         int asd;
 
-        public int linenum;	//总行数，当前行号
+        public int linenum=1;	//总行数，当前行号
         public int manulradio;		//初始速度比
 
         public int flag_Initialization = 1; //初始化标志 只初始化一次
@@ -473,6 +473,8 @@ namespace four_axis
         {
             this.Close();
             this.return_10Start.flag_Initialization = flag_Initialization;
+            this.return_10Start.codetempspace = codetempspace;
+            this.return_10Start.linenum = linenum;
             this.return_10Start.Visible = true;
         }
 
@@ -519,81 +521,81 @@ namespace four_axis
             }
         }
 
-        //刷新显示
-        private void show_code(int num)
-        {
-            if (num == 0)
-            {
-                codename = "无";
+        ////刷新显示
+        //private void show_code(int num)
+        //{
+        //    if (num == 0)
+        //    {
+        //        codename = "无";
 
-                //进入19界面     
+        //        //进入19界面     
          
-            }
-            else if (num == 1)
-            {
-                codename = "直线";
-                //21进入直线
-            }
-            else if (num == 2)
-            {
-                codename = "三点画弧";
-                //22进入三点画弧
-            }
-            else if (num == 3)
-            {
-                codename = "延时";
-                //23进入延时界面
-            }
-            else if (num == 4)
-            {
-                codename = "多个输出";
-                //24进入多个输出界面
-            }
-            else if (num == 5)
-            {
-                codename = "输出延时复位";
-                //25进入输出延时复位界面
-            }
-            else if (num == 6)
-            {
-                codename = "圆心画弧";
-                //26进入圆心画弧界面
-            }
-            else if (num == 7)
-            {
-                codename = "绝对模式";
-                //27进入绝对模式界面
-            }
-            else if (num == 8)
-            {
-                codename = "相对模式";
-                //28进入相对模式界面
-            }
+        //    }
+        //    else if (num == 1)
+        //    {
+        //        codename = "直线";
+        //        //21进入直线
+        //    }
+        //    else if (num == 2)
+        //    {
+        //        codename = "三点画弧";
+        //        //22进入三点画弧
+        //    }
+        //    else if (num == 3)
+        //    {
+        //        codename = "延时";
+        //        //23进入延时界面
+        //    }
+        //    else if (num == 4)
+        //    {
+        //        codename = "多个输出";
+        //        //24进入多个输出界面
+        //    }
+        //    else if (num == 5)
+        //    {
+        //        codename = "输出延时复位";
+        //        //25进入输出延时复位界面
+        //    }
+        //    else if (num == 6)
+        //    {
+        //        codename = "圆心画弧";
+        //        //26进入圆心画弧界面
+        //    }
+        //    else if (num == 7)
+        //    {
+        //        codename = "绝对模式";
+        //        //27进入绝对模式界面
+        //    }
+        //    else if (num == 8)
+        //    {
+        //        codename = "相对模式";
+        //        //28进入相对模式界面
+        //    }
 
-        }
+        //}
 
 
-        //加载
-        private void deal_lineload(int num)
-        {
-            MessageBox.Show(num.ToString());
-            MessageBox.Show(filelinepara[0].ToString());
-            if(num<=filelinepara[0])
-            {
-                templine[0] = int.Parse(codespace[(num - 1) * LINESPACE]);
-                //dmcpy templine(0),codespace((num-1)*LINESPACE),LINESPACE;	'复制到临时数组    
-                linenum=num;	//浏览界面跳转用
-                show_code(templine[0]);	//刷新显示
-            }
-            else if(num>filelinepara[0] && winnum==30)  //只有游览界面才提示
-            {
-                Console.WriteLine("超过文件总行数");
-                _52_操作提示 f52 = new _52_操作提示();
-                f52.V1 = "超过文件总行数";
-                f52.ShowDialog();
-            }
+        ////加载
+        //private void deal_lineload(int num)
+        //{
+        //    MessageBox.Show(num.ToString());
+        //    MessageBox.Show(filelinepara[0].ToString());
+        //    if(num<=filelinepara[0])
+        //    {
+        //        templine[0] = int.Parse(codespace[(num - 1) * LINESPACE]);
+        //        //dmcpy templine(0),codespace((num-1)*LINESPACE),LINESPACE;	'复制到临时数组    
+        //        linenum=num;	//浏览界面跳转用
+        //        show_code(templine[0]);	//刷新显示
+        //    }
+        //    else if(num>filelinepara[0] && winnum==30)  //只有游览界面才提示
+        //    {
+        //        Console.WriteLine("超过文件总行数");
+        //        _52_操作提示 f52 = new _52_操作提示();
+        //        f52.V1 = "超过文件总行数";
+        //        f52.ShowDialog();
+        //    }
           
-        }
+        //}
 
         private void deal_browseflash()
         { 
@@ -649,20 +651,21 @@ namespace four_axis
                     //DMCPY filejudname(0),filename(0),FILENAMELENG
 
 
-                    linenum = 1;
+                    MessageBox.Show(linenum.ToString());
+               //     linenum = 1;
                     _19_文件编辑 f19 = new _19_文件编辑(this);
                     f19.g_handle = g_handle;
                     f19.codename = codename;
                     f19.filenum = filenum;
-                    filelinepara[0] = totalfilenum;
+                    filelinepara[0] = totalfilenum;      
                     f19.filelinepara = filelinepara;
                     f19.filelintempepara = filelintempepara;
                     f19.codespace = codespace;
                     f19.codetempspace = codetempspace;
                     f19.browsepage = browsepage;
                     f19.manulradio = manulradio;	//初始速度比
-                    //f19.paratemp = paratemp;
-                    //f19.vr = vr;
+                   // f19.paratemp = paratemp;
+                    f19.vr = vr;
                     f19.pagenum = pagenum;
                     f19.filetoflash = filetoflash;
                     f19.showidlist = showidlist;
@@ -670,7 +673,7 @@ namespace four_axis
                     this.Hide();//隐藏现在这个窗口
                     f19.Show();//新窗口显现    
               //    deal_lineload(linenum);	//加载第一行
-                    filename[0] = this.dataGridView1.Rows[linenum - 1].Cells[1].Value.ToString(); //获取文件名
+               //     filename[0] = this.dataGridView1.Rows[linenum - 1].Cells[1].Value.ToString(); //获取文件名
                     Console.WriteLine("当前编辑 filenum={0}\filename={1}", filenum, filename);
                 }
                 else

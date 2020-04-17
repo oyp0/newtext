@@ -48,7 +48,10 @@ namespace four_axis
         public int change_22 = 0;
         public int change_23 = 0;
         public int change_24 = 0;
-        public int change_25 = 0; 
+        public int change_25 = 0;
+        public int change_26 = 0;
+        public int change_27 = 0;
+        public int change_28 = 0; 
 
 
         //////////////游览操作///
@@ -139,11 +142,11 @@ namespace four_axis
         //刷新显示
         private void show_code(int num)
         {
-            MessageBox.Show(num.ToString());
             if (num == 0)
             {
                 codename = "无";
                 //进入19界面
+                MessageBox.Show("正在这个界面");
             }
             else if (num == 1)
             {
@@ -173,6 +176,7 @@ namespace four_axis
             }
             else if (num == 2)
             {
+                MessageBox.Show(codetempspace[(linenum - 1) * LINESPACE + 5]);
                 if (change_22 == 0)
                 {
                     change_22 = 1;
@@ -281,18 +285,83 @@ namespace four_axis
             }
             else if (num == 6)
             {
-                codename = "圆心画弧";
-                //26进入圆心画弧界面
+                if (change_26 == 0)
+                {
+                    change_26 = 1;
+                    codename = "圆心画弧";
+                    //26进入圆心画弧界面
+                    _26_圆心圆弧指令 f26 = new _26_圆心圆弧指令(null, this, this.return_14_文件管理);
+                    f26.g_handle = g_handle;
+                    f26.vr = vr;  //数组
+                    f26.codespace = codespace; //数组
+                    f26.manulradio = manulradio; //速度比例
+                    f26.linenum = linenum;  //行号
+                    f26.filelinepara = filelinepara;
+                    f26.filelintempepara = filelintempepara;
+                    f26.codename = codename;
+                    f26.codetempspace = codetempspace;
+                    f26.linejump = linejump;
+                    f26.pagenum = pagenum;
+                    f26.filetoflash = filetoflash;
+                    f26.showidlist = showidlist;
+                    f26.change = change_26;
+                    this.Hide();//隐藏现在这个窗口
+                    f26.Show();//新窗口显现                       
+                }     
+       
             }
             else if (num == 7)
             {
-                codename = "绝对模式";
-                //27进入绝对模式界面
+                if (change_27 == 0)
+                {
+                    change_27 = 1;
+                    codename = "绝对模式";
+                    //27进入绝对模式界面
+                    _27_绝对模式 f27 = new _27_绝对模式(null, this, this.return_14_文件管理);
+                    f27.g_handle = g_handle;
+                    f27.vr = vr;  //数组
+                    f27.codespace = codespace; //数组
+                    f27.manulradio = manulradio; //速度比例
+                    f27.linenum = linenum;  //行号
+                    f27.filelinepara = filelinepara;
+                    f27.filelintempepara = filelintempepara;
+                    f27.codename = codename;
+                    f27.codetempspace = codetempspace;
+                    f27.linejump = linejump;
+                    f27.pagenum = pagenum;
+                    f27.filetoflash = filetoflash;
+                    f27.showidlist = showidlist;
+                    f27.change = change_27;
+                    this.Hide();//隐藏现在这个窗口
+                    f27.Show();//新窗口显现                       
+                }              
             }
             else if (num == 8)
             {
-                codename = "相对模式";
-                //28进入相对模式界面
+                if (change_28 == 0)
+                {
+                    change_28 = 1;
+                    codename = "相对模式";
+                    //28进入相对模式界面
+                    _28_相对模式 f28 = new _28_相对模式(null, this, this.return_14_文件管理);
+                    f28.g_handle = g_handle;
+                    f28.vr = vr;  //数组
+                    f28.codespace = codespace; //数组
+                    f28.manulradio = manulradio; //速度比例
+                    f28.linenum = linenum;  //行号
+                    f28.filelinepara = filelinepara;
+                    f28.filelintempepara = filelintempepara;
+                    f28.codename = codename;
+                    f28.codetempspace = codetempspace;
+                    f28.linejump = linejump;
+                    f28.pagenum = pagenum;
+                    f28.filetoflash = filetoflash;
+                    f28.showidlist = showidlist;
+                    f28.change = change_28;
+                    this.Hide();//隐藏现在这个窗口
+                    f28.Show();//新窗口显现                       
+                }              
+               
             }
 
         }
@@ -436,7 +505,7 @@ namespace four_axis
 
             if (flag_change == 123)   //有改动
             {
-                _50未保存提示 f50 = new _50未保存提示(null, null, null, null, null, this.return_14_文件管理,this,null,null,null,null,null,null);
+                _50未保存提示 f50 = new _50未保存提示(null, null, null, null, null, this.return_14_文件管理,this,null,null,null,null,null,null,null,null,null);
                 f50.g_handle = g_handle;   //句柄
                 //f50.vr = vr;               //存放数组
                 //f50.paratemp = paratemp;   //临时数组             
